@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
-<!-- EN-Revision: d1e3ea622e5d4f542cd36eca59a9f22aa0142633 Maintainer: hirokawa Status: ready -->
+<!-- EN-Revision: 5bc68add3da3cd18c40f851e944b15095d3a26aa Maintainer: hirokawa Status: ready -->
 <!-- CREDITS: takagi -->
 <refentry xml:id="function.openssl-pkey-export" xmlns="http://docbook.org/ns/docbook">
  <refnamediv>
@@ -12,15 +12,15 @@
   &reftitle.description;
   <methodsynopsis>
    <type>bool</type><methodname>openssl_pkey_export</methodname>
-   <methodparam><type class="union"><type>OpenSSLAsymmetricKey</type><type>OpenSSLCertificate</type><type>array</type><type>string</type></type><parameter>key</parameter></methodparam>
+   <methodparam><modifier role="attribute">#[\SensitiveParameter]</modifier><type class="union"><type>OpenSSLAsymmetricKey</type><type>OpenSSLCertificate</type><type>array</type><type>string</type></type><parameter>key</parameter></methodparam>
    <methodparam><type>string</type><parameter role="reference">output</parameter></methodparam>
-   <methodparam choice="opt"><type class="union"><type>string</type><type>null</type></type><parameter>passphrase</parameter><initializer>&null;</initializer></methodparam>
+   <methodparam choice="opt"><modifier role="attribute">#[\SensitiveParameter]</modifier><type class="union"><type>string</type><type>null</type></type><parameter>passphrase</parameter><initializer>&null;</initializer></methodparam>
    <methodparam choice="opt"><type class="union"><type>array</type><type>null</type></type><parameter>options</parameter><initializer>&null;</initializer></methodparam>
   </methodsynopsis>
   <para>
    <function>openssl_pkey_export</function> は、
-   <parameter>key</parameter> を PEM エンコードした文字列として取得し、
-   <parameter>output</parameter>（参照渡し）に格納します。
+   <parameter>key</parameter> を <acronym>PEM</acronym> エンコードした文字列として取得し、
+   <parameter>output</parameter>（リファレンス渡し）に格納します。
   </para>
   &note.openssl.cnf;
  </refsect1>

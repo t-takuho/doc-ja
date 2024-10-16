@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
-<!-- EN-Revision: 082ddc19f53e6e254010de1a1fbbe485ff744ec1 Maintainer: takagi Status: ready -->
+<!-- EN-Revision: daf4cc624df3c21d472149725feb377b1beedb04 Maintainer: takagi Status: ready -->
 <!-- CREDITS: hirokawa,mumumu -->
 <refentry xml:id="pdostatement.fetch" xmlns="http://docbook.org/ns/docbook">
  <refnamediv>
@@ -72,7 +72,7 @@
         <listitem><para>
          <literal>PDO::FETCH_LAZY</literal>:
          <literal>PDO::FETCH_BOTH</literal> と<literal>PDO::FETCH_OBJ</literal>の
-         組合せで、オブジェクト変数名を作成します。
+         組合せで、アクセスされるオブジェクトプロパティ名を作成する <classname>PDORow</classname> オブジェクトを返します。
         </para></listitem>
         <listitem><para>
          <literal>PDO::FETCH_NAMED</literal>:
@@ -162,29 +162,29 @@ $sth = $dbh->prepare("SELECT name, colour FROM fruit");
 $sth->execute();
 
 /* Exercise PDOStatement::fetch styles */
-print("PDO::FETCH_ASSOC: ");
-print("Return next row as an array indexed by column name\n");
+print "PDO::FETCH_ASSOC: ";
+print "Return next row as an array indexed by column name\n";
 $result = $sth->fetch(PDO::FETCH_ASSOC);
 print_r($result);
-print("\n");
+print "\n";
 
-print("PDO::FETCH_BOTH: ");
-print("Return next row as an array indexed by both column name and number\n");
+print "PDO::FETCH_BOTH: ";
+print "Return next row as an array indexed by both column name and number\n";
 $result = $sth->fetch(PDO::FETCH_BOTH);
 print_r($result);
-print("\n");
+print "\n";
 
-print("PDO::FETCH_LAZY: ");
-print("Return next row as an anonymous object with column names as properties\n");
+print "PDO::FETCH_LAZY: ";
+print "Return next row as a PDORow object with column names as properties\n";
 $result = $sth->fetch(PDO::FETCH_LAZY);
 print $result->name;
-print("\n");
+print "\n";
 
-print("PDO::FETCH_OBJ: ");
-print("Return next row as an anonymous object with column names as properties\n");
+print "PDO::FETCH_OBJ: ";
+print "Return next row as an anonymous object with column names as properties\n";
 $result = $sth->fetch(PDO::FETCH_OBJ);
 print $result->NAME;
-print("\n");
+print "\n";
 ?>
 ]]>
     </programlisting>
@@ -207,7 +207,7 @@ Array
     [1] => yellow
 )
 
-PDO::FETCH_LAZY: Return next row as an anonymous object with column names as properties
+PDO::FETCH_LAZY: Return next row as a PDORow object with column names as properties
 PDORow Object
 (
     [name] => orange

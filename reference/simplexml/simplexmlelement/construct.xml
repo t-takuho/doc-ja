@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
-<!-- EN-Revision: 770c6facae667218f69c8ea2715ea20f6fab32f3 Maintainer: takagi Status: ready -->
+<!-- EN-Revision: 28f0dc949d62c97698ac4a0ca814c3780d8cf318 Maintainer: takagi Status: ready -->
 <!-- Credits: mumumu -->
 <refentry xml:id="simplexmlelement.construct" xmlns="http://docbook.org/ns/docbook">
  <refnamediv>
@@ -50,8 +50,7 @@
       <note>
        <para>
         深くネストされた XML や巨大なテキストノードを処理する際には
-        <constant><link
-        linkend="constant.libxml-parsehuge">LIBXML_PARSEHUGE</link></constant>
+        <constant>LIBXML_PARSEHUGE</constant>
         を指定することになるでしょう。
        </para>
       </note>
@@ -142,7 +141,7 @@ PHP: Behind the Parser
 <![CDATA[
 <?php
 
-$sxe = new SimpleXMLElement('http://example.org/document.xml', NULL, TRUE);
+$sxe = new SimpleXMLElement('http://example.org/document.xml', 0, true);
 echo $sxe->asXML();
 
 ?>

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
-<!-- EN-Revision: cdc9d28d334bbc08386fecf8aade66080004a9dd Maintainer: hirokawa Status: ready -->
+<!-- EN-Revision: 1cdb6d04aa0d5c15c73337d0dca75d67e0f2e48e Maintainer: hirokawa Status: ready -->
 <!-- Credits: mumumu -->
 <refentry xml:id="function.ob-implicit-flush" xmlns="http://docbook.org/ns/docbook">
  <refnamediv>
   <refname>ob_implicit_flush</refname>
   <refpurpose>自動フラッシュをオンまたはオフにする</refpurpose>
  </refnamediv>
- 
+
  <refsect1 role="description">
   &reftitle.description;
   <methodsynopsis>
@@ -17,10 +17,24 @@
   <para>
    <function>ob_implicit_flush</function> は、
    自動フラッシュをオンまたはオフに切替えます。
-   自動フラッシュにより、出力関数のコールが行われるたびに
+   自動フラッシュにより、出力が行われるコードブロックが実行されるたびに
    フラッシュ操作が行われるようになります。このため、<function>flush</function>
    を明示的にコールする必要はなくなります。
   </para>
+  <note>
+   <simpara>
+    空文字列を出力したり、ヘッダを送信することは出力とはみなされないため、
+    フラッシュ操作は行われません。
+   </simpara>
+  </note>
+  <note>
+   <simpara>
+    この関数は、
+    <function>ob_start</function>
+    や <function>output_add_rewrite_var</function>
+    によって開始されたユーザーレベルの出力ハンドラには、何ら影響しません。
+   </simpara>
+  </note>
  </refsect1>
 
  <refsect1 role="parameters">

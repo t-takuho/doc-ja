@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
-<!-- EN-Revision: 9ef86d18a949522c72b0d5cf5a6bb94afd583f11 Maintainer: takagi Status: ready -->
+<!-- EN-Revision: 8bc832a464e33122e8129f5a623bd845b69fa7e0 Maintainer: takagi Status: ready -->
 <!-- Credits: mumumu -->
 
-<refentry xml:id="context.ssl" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" role="noversion">
+<refentry xml:id="context.ssl" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" annotations="verify_info:false" role="stream_context_option">
  <refnamediv>
   <refname>SSL コンテキストオプション</refname>
   <refpurpose>SSL コンテキストオプションの一覧</refpurpose>
@@ -111,7 +111,7 @@
      <listitem>
       <para>
        ファイルシステム上のローカル証明書ファイルのパス。
-       あなたの証明書とプライベートキーを含み、PEM エンコードされた
+       あなたの証明書とプライベートキーを含み、<acronym>PEM</acronym> エンコードされた
        ファイルである必要があります。オプションで、発行者の
        認証チェーンを含めることも可能です。
        プライベートキーは、

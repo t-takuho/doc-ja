@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
-<!-- EN-Revision: 86e6094e86b84a51d00ab217ac50ce8dde33d82a Maintainer: takagi Status: ready -->
+<!-- EN-Revision: 099db652feea008bbb83805f90b8717966357f7c Maintainer: takagi Status: ready -->
 
-<refentry xml:id="context.ftp" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" role="noversion">
+<refentry xml:id="context.ftp" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" annotations="verify_info:false" role="stream_context_option">
  <refnamediv>
   <refname>FTP コンテキストオプション</refname>
   <refpurpose>FTP コンテキストオプションの一覧</refpurpose>

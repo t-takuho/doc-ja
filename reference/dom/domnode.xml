@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
-<!-- EN-Revision: 4f5e2b22575131fa5e9c3004b1c874e1acb06573 Maintainer: takagi Status: ready -->
+<!-- EN-Revision: fa6a5829a0d00c24eea2ed9a270e4b56f73c032f Maintainer: takagi Status: ready -->
 <!-- Credits: mumumu -->
-<phpdoc:classref xml:id="class.domnode" xmlns:phpdoc="http://php.net/ns/phpdoc" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xi="http://www.w3.org/2001/XInclude">
+<reference xml:id="class.domnode" role="class" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xi="http://www.w3.org/2001/XInclude">
  <title>DOMNode クラス</title>
  <titleabbrev>DOMNode</titleabbrev>
  
@@ -21,16 +21,10 @@
    &reftitle.classsynopsis;
  
 <!-- {{{ Synopsis -->
-   <classsynopsis>
+   <classsynopsis class="class">
     <ooclass>
      <classname>DOMNode</classname>
     </ooclass>
-
-    <classsynopsisinfo>
-     <ooclass>
-      <classname>DOMNode</classname>
-     </ooclass>
-    </classsynopsisinfo>
 
     <classsynopsisinfo role="comment">&Properties;</classsynopsisinfo>
     <fieldsynopsis>
@@ -55,6 +49,12 @@
      <modifier>readonly</modifier>
      <type class="union"><type>DOMNode</type><type>null</type></type>
      <varname linkend="domnode.props.parentnode">parentNode</varname>
+    </fieldsynopsis>
+    <fieldsynopsis>
+     <modifier>public</modifier>
+     <modifier>readonly</modifier>
+     <type class="union"><type>DOMElement</type><type>null</type></type>
+     <varname linkend="domnode.props.parentelement">parentElement</varname>
     </fieldsynopsis>
     <fieldsynopsis>
      <modifier>public</modifier>
@@ -91,6 +91,12 @@
      <modifier>readonly</modifier>
      <type class="union"><type>DOMNamedNodeMap</type><type>null</type></type>
      <varname linkend="domnode.props.attributes">attributes</varname>
+    </fieldsynopsis>
+    <fieldsynopsis>
+     <modifier>public</modifier>
+     <modifier>readonly</modifier>
+     <type>bool</type>
+     <varname linkend="domnode.props.isconnected">isConnected</varname>
     </fieldsynopsis>
     <fieldsynopsis>
      <modifier>public</modifier>
@@ -169,6 +175,12 @@
       <para>このノードの親 (存在しない場合は &null;) を返す</para>
      </listitem>
     </varlistentry>
+    <varlistentry xml:id="domnode.props.parentelement">
+     <term><varname>parentElement</varname></term>
+     <listitem>
+      <para>この要素の親要素。存在しない場合は &null; を返す</para>
+     </listitem>
+    </varlistentry>
     <varlistentry xml:id="domnode.props.childnodes">
      <term><varname>childNodes</varname></term>
      <listitem>
@@ -216,6 +228,12 @@
        ノードの属性を含む <classname>DOMNamedNodeMap</classname>、
        それ以外の場合は &null;
       </para>
+     </listitem>
+    </varlistentry>
+    <varlistentry xml:id="domnode.props.isconnected">
+     <term><varname>isConnected</varname></term>
+     <listitem>
+      <para>ノードが Document に接続されているかどうか</para>
      </listitem>
     </varlistentry>
     <varlistentry xml:id="domnode.props.ownerdocument">
@@ -276,6 +294,13 @@
      </thead>
      <tbody>
       <row>
+       <entry>8.3.0</entry>
+       <entry>
+        プロパティ <property>DOMNode::$parentElement</property> と
+        <property>DOMNode::$isConnected</property> が追加されました。
+       </entry>
+      </row>
+      <row>
        <entry>8.0.0</entry>
        <entry>
         実装されていなかったメソッド
@@ -313,7 +338,7 @@
  
  &reference.dom.entities.domnode;
  
-</phpdoc:classref>
+</reference>
 <!-- Keep this comment at the end of the file
 Local variables:
 mode: sgml

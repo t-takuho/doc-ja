@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
-<!-- EN-Revision: 968c2bc60de3e93d7f38be0b9d2d1b9685a16ea7 Maintainer: takagi Status: ready -->
+<!-- EN-Revision: 71db1981e4ac6013592a0cad325f0136f9d57e21 Maintainer: takagi Status: ready -->
 <!-- Credits: mumumu -->
 <section xml:id="pdo-mysql.constants" xmlns="http://docbook.org/ns/docbook">
  &reftitle.constants;
@@ -193,7 +193,7 @@ foreach ($unbufferedResult as $row) {
    <listitem>
     <para>
      信頼済みのSSL認証局の証明書が入ったディレクトリパス。
-     証明書は、PEM フォーマットで格納されています。
+     証明書は、<acronym>PEM</acronym> フォーマットで格納されています。
     </para>
    </listitem>
   </varlistentry>
@@ -210,7 +210,7 @@ foreach ($unbufferedResult as $row) {
    </listitem>
   </varlistentry>
 
-  <varlistentry xml:id="pdo.constants.mysql-attr-cipher">
+  <varlistentry xml:id="pdo.constants.mysql-attr-ssl-cipher">
    <term>
     <constant>PDO::MYSQL_ATTR_SSL_CIPHER</constant>
      (<type>int</type>)
@@ -224,7 +224,7 @@ foreach ($unbufferedResult as $row) {
    </listitem>
   </varlistentry>
 
-  <varlistentry xml:id="pdo.constants.mysql-attr-key">
+  <varlistentry xml:id="pdo.constants.mysql-attr-ssl-key">
    <term>
     <constant>PDO::MYSQL_ATTR_SSL_KEY</constant>
      (<type>int</type>)
@@ -244,6 +244,7 @@ foreach ($unbufferedResult as $row) {
    <listitem>
     <para>
      サーバーの SSL 証明書の検証を無効にする方法を提供します。
+     このオプションは、mysqlnd でのみ利用可能です。
     </para>
     <para>
      &version.exists.asof; 7.0.18 および PHP 7.1.4.

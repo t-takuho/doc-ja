@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
-<!-- EN-Revision: ce3a2d381693ccbc10cc4a808c3eb853f3c85c9e Maintainer: hirokawa Status: ready -->
+<!-- EN-Revision: 4150dc92749c177758efe59eab23b6a5d32ffda2 Maintainer: hirokawa Status: ready -->
 <!-- Credits: mumumu -->
 <refentry xml:id="function.unserialize" xmlns="http://docbook.org/ns/docbook">
  <refnamediv>
@@ -58,17 +58,14 @@
       </para>
       <para>
        <note>
-        <title>unserialize_callback_func ディレクティブ</title>
+        <title>
+         <link linkend="ini.unserialize-callback-func">unserialize_callback_func</link> ディレクティブ
+        </title>
         <para>
-         コールバック関数を設定することが可能です。(不完全な
-         <type>object</type> "__PHP_Incomplete_Class"を得ることを防ぐため)
-         コールバック関数は、非シリアル化する際に未定義のクラスをインスタ
-         ンス化する必要がある場合にコールされます。
-         '<literal>unserialize_callback_func</literal>'を定義するためには、
-         &php.ini;, <function>ini_set</function>, &htaccess; を使用し
-         てください。未定義のクラスをインスタンス化する度に、コールバック関
-         数がコールされます。この機能を無効とするには、
-         単純にこの設定を空にしてください。
+         <link linkend="ini.unserialize-callback-func">unserialize_callback_func</link> 
+         ディレクティブで指定したコールバックは、未定義のクラスをアンシリアライズしようとした場合にコールされます。
+         コールバックが指定されない場合は、<classname>__PHP_Incomplete_Class</classname> 
+がインスタンス化されます。
         </para>
        </note>
       </para>
@@ -142,7 +139,7 @@
   </para>
   <para>
    渡された文字列が復元できなかった場合、&false; を返して
-   <constant>E_NOTICE</constant> を発生します。
+   <constant>E_WARNING</constant> を発生します。
   </para>
  </refsect1>
 
@@ -166,6 +163,15 @@
       </row>
      </thead>
      <tbody>
+      <row>
+       <entry>8.3.0</entry>
+       <entry>
+        渡された文字列が復元できない場合、
+        <constant>E_WARNING</constant> が発生するようになりました。
+        これより前のバージョンでは、<constant>E_NOTICE</constant>
+        が発生していました。
+       </entry>
+      </row>
       <row>
        <entry>7.4.0</entry>
        <entry>

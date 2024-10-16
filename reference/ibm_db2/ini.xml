@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
-<!-- EN-Revision: 86e6094e86b84a51d00ab217ac50ce8dde33d82a Maintainer: satoruyoshida Status: ready -->
-<section xml:id="ibm-db2.configuration" xmlns="http://docbook.org/ns/docbook">
+<!-- EN-Revision: 4697ce9633d9409e832ee765d98ce50cfcd6db67 Maintainer: mumumu Status: ready -->
+<section xml:id="ibm-db2.configuration" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
  &reftitle.runtime;
  &extension.runtime;
  <para>
@@ -13,45 +13,99 @@
       <entry>&Name;</entry>
       <entry>&Default;</entry>
       <entry>&Changeable;</entry>
-      <entry>変更履歴</entry>
+      <entry>&Changelog;</entry>
      </row>
     </thead>
     <tbody xml:id="ibm-db2.configuration.list">
      <row>
       <entry><link linkend="ini.ibm-db2.binmode">ibm_db2.binmode</link></entry>
       <entry>"1"</entry>
-      <entry>PHP_INI_ALL</entry>
+      <entry><constant>INI_ALL</constant></entry>
       <entry></entry>
      </row>
      <row>
       <entry><link linkend="ini.ibm-db2.i5-all-pconnect">ibm_db2.i5_all_pconnect</link></entry>
       <entry>"0"</entry>
-      <entry>PHP_INI_SYSTEM</entry>
-      <entry>ibm_db2 1.6.5 以降で利用可能。</entry>
+      <entry><constant>INI_SYSTEM</constant></entry>
+      <entry>ibm_db2 1.6.5 以降で利用可能</entry>
      </row>     
      <row>
       <entry><link linkend="ini.ibm-db2.i5-allow-commit">ibm_db2.i5_allow_commit</link></entry>
       <entry>"0"</entry>
-      <entry>PHP_INI_SYSTEM</entry>
-      <entry>ibm_db2 1.4.9 以降で利用可能。</entry>
+      <entry><constant>INI_SYSTEM</constant></entry>
+      <entry>ibm_db2 1.4.9 以降で利用可能</entry>
+     </row>
+     <row>
+      <entry><link linkend="ini.ibm-db2.i5-blank-userid">ibm_db2.i5_blank_userid</link></entry>
+      <entry>"0"</entry>
+      <entry><constant>INI_SYSTEM</constant></entry>
+      <entry>ibm_db2 1.9.7 以降で利用可能</entry>
+     </row>
+     <row>
+      <entry><link linkend="ini.ibm-db2.i5-char-trim">ibm_db2.i5_char_trim</link></entry>
+      <entry>"0"</entry>
+      <entry><constant>INI_SYSTEM</constant></entry>
+      <entry>ibm_db2 2.1.0 以降で利用可能</entry>
      </row>
      <row>
       <entry><link linkend="ini.ibm-db2.i5-dbcs-alloc">ibm_db2.i5_dbcs_alloc</link></entry>
       <entry>"0"</entry>
-      <entry>PHP_INI_SYSTEM</entry>
-      <entry>ibm_db2 1.5.0 以降で利用可能。</entry>
+      <entry><constant>INI_SYSTEM</constant></entry>
+      <entry>ibm_db2 1.5.0 以降で利用可能</entry>
      </row>
      <row>
-      <entry><link linkend="ini.ibm-db2.instance-name">ibm_db2.instance_name</link></entry>
-      <entry>NULL</entry>
-      <entry>PHP_INI_SYSTEM</entry>
-      <entry>ibm_db2 1.0.2 以降で利用可能。</entry>
+      <entry><link linkend="ini.ibm-db2.i5-guard-profile">ibm_db2.i5_guard_profile</link></entry>
+      <entry>"0"</entry>
+      <entry><constant>INI_SYSTEM</constant></entry>
+      <entry>ibm_db2 1.9.7 以降で利用可能</entry>
      </row>
      <row>
       <entry><link linkend="ini.ibm-db2.i5-ignore-userid">ibm_db2.i5_ignore_userid</link></entry>
       <entry>"0"</entry>
-      <entry>PHP_INI_SYSTEM</entry>
-      <entry>ibm_db2 1.8.0 以降で利用可能。</entry>
+      <entry><constant>INI_SYSTEM</constant></entry>
+      <entry>ibm_db2 1.8.0 以降で利用可能</entry>
+     </row>
+     <row>
+      <entry><link linkend="ini.ibm-db2.i5-job-sort">ibm_db2.i5_job_sort</link></entry>
+      <entry>"0"</entry>
+      <entry><constant>INI_SYSTEM</constant></entry>
+      <entry>ibm_db2 1.8.4 以降で利用可能</entry>
+     </row>
+     <row>
+      <entry><link linkend="ini.ibm-db2.i5-log-verbose">ibm_db2.i5_log_verbose</link></entry>
+      <entry>"0"</entry>
+      <entry><constant>INI_SYSTEM</constant></entry>
+      <entry>ibm_db2 1.9.7 以降で利用可能</entry>
+     </row>
+     <row>
+      <entry><link linkend="ini.ibm-db2.i5-max-pconnect">ibm_db2.i5_max_pconnect</link></entry>
+      <entry>"0"</entry>
+      <entry><constant>INI_SYSTEM</constant></entry>
+      <entry>ibm_db2 1.9.7 以降で利用可能</entry>
+     </row>
+     <row>
+      <entry><link linkend="ini.ibm-db2.i5-override-ccsid">ibm_db2.i5_override_ccsid</link></entry>
+      <entry>"0"</entry>
+      <entry><constant>INI_SYSTEM</constant></entry>
+      <entry>ibm_db2 1.9.7 以降で利用可能</entry>
+     </row>
+     <row>
+      <entry><link linkend="ini.ibm-db2.i5-servermode-subsystem">ibm_db2.i5_servermode_subsystem</link></entry>
+      <entry>NULL</entry>
+      <entry><constant>INI_SYSTEM</constant></entry>
+      <entry>ibm_db2 1.9.7 以降で利用可能</entry>
+     </row>
+     <row>
+      <entry><link linkend="ini.ibm-db2.i5-sys-naming">ibm_db2.i5_sys_naming</link></entry>
+      <entry>"0"</entry>
+      <entry><constant>INI_SYSTEM</constant></entry>
+      <entry>ibm_db2 1.9.7 以降で利用可能</entry>
+     </row>
+     <row>
+      <entry><link linkend="ini.ibm-db2.instance-name">ibm_db2.instance_name</link></entry>
+      <entry>NULL</entry>
+      <entry><constant>INI_SYSTEM</constant></entry>
+      <entry>ibm_db2 1.0.2 以降で利用可能</entry>
      </row>
     </tbody>
    </tgroup>
@@ -99,24 +153,22 @@
     </term>
     <listitem>
      <para>
-      このオプションは、PHP アプリケーションにおける
-      i5 <function>db2_connect</function> のオープンおよびクローズをオーバーライドします。
-      <parameter>ibm_db2.i5_all_pconnect</parameter> = 1 の場合は、すべての db2 接続が持続的なもの
-      (<function>db2_pconnect</function>) となります。i5/OS 上での <function>db2_pconnect</function> は、
-      <function>db2_connect</function> よりはるかによいパフォーマンスを提供します。
-      このオプションは、PHP のソースコードを変更せずに
-      <function>db2_connect</function> を <function>db2_pconnect</function>
-      として動作させられるので便利です。
+      このオプションは、IBM i 上での接続を強制的にすべて持続的接続にします。
+      基本的に、すべての <function>db2_connect</function>
+      関数のコールは透過的に <function>db2_pconnect</function>
+      のコールになります。
+      デフォルトでは、このオプションの値は <literal>0</literal> です。
+      このオプションは、持続的接続が高速な場合のために便宜上提供されています。
+      新しいアプリケーションでは、このオプションを使うべきではありません。
       <itemizedlist>
        <listitem>
         <para>
-         0 <function>db2_connect</function> のデフォルトのオープンおよびクローズです。
+         0  - 持続的接続、およびそうでない接続の両方を作成できます
         </para>
        </listitem>
        <listitem>
         <para>
-         1 <function>db2_connect</function> は <function>db2_pconnect</function>
-         でオーバーライドされ、持続的な接続のみを使用します。
+         1 - すべての接続を持続的接続にします
         </para>
        </listitem>
       </itemizedlist>
@@ -130,8 +182,13 @@
     </term>
     <listitem>
      <para>
-      このオプションは、i5 スキーマコレクションで使用するコミットモードを
-      PHP アプリケーションで使用する際のモードを制御します (オーバーライドについては (see <parameter>i5_commit</parameter> を参照ください)。
+      このオプションは、トランザクションの分離レベルを制御します。
+      デフォルトでは、このオプションの値は <literal>0</literal> です。
+      よって、コミットの制御は使いません。
+      このオプションは、配列のキー <parameter>i5_commit</parameter> 
+      を接続オプションの配列に設定し、
+      <function>db2_connect</function> や
+      <function>db2_pconnect</function> に渡すことで上書きできます。
       <itemizedlist>
        <listitem>
         <para>
@@ -158,7 +215,62 @@
          4 - serializeable。ダーティリードや非再現リードやファントムリードは発生しません。
         </para>
        </listitem>
-    </itemizedlist>
+      </itemizedlist>
+     </para>
+    </listitem>
+   </varlistentry>
+   <varlistentry xml:id="ini.ibm-db2.i5-blank-userid">
+    <term>
+     <parameter>ibm_db2.i5_blank_userid</parameter>
+     <type>int</type>
+    </term>
+    <listitem>
+     <para>
+      IBM i 上で空のユーザーIDを許可すべきかどうかを制御します。
+      デフォルトでは、このオプションの値は <literal>0</literal> です。
+      <parameter>ibm_db2.i5_ignore_userid</parameter> と異なり、
+      このオプションはすべてのユーザーIDを強制的に空にしたり、
+      ジョブの振る舞いを変えたりはしません。
+      ただ単に、Db2 に現在のユーザーとしてする際、
+      空のユーザーIDを渡すことを許可するだけです。
+      <itemizedlist>
+       <listitem>
+        <para>
+         0 - ユーザーIDを空で渡すことを許可しません
+        </para>
+       </listitem>
+       <listitem>
+        <para>
+         1 - ユーザーIDを空で渡すことを許可します。
+        </para>
+       </listitem>
+      </itemizedlist>
+     </para>
+    </listitem>
+   </varlistentry>
+   <varlistentry xml:id="ini.ibm-db2.i5-char-trim">
+    <term>
+     <parameter>ibm_db2.i5_char_trim</parameter>
+     <type>int</type>
+    </term>
+    <listitem>
+     <para>
+      このオプションは、IBM i における文字列の右端をトリム処理するかを制御します。
+      多くのテーブルは固定のカラムサイズを持ち、スペースで埋められているため、
+      このオプションが便宜のため提供されています。
+      デフォルトでは、このオプションの値は <literal>0</literal> です。
+      <itemizedlist>
+       <listitem>
+        <para>
+         0 - カラムの値はトリム処理されません。
+        </para>
+       </listitem>
+       <listitem>
+        <para>
+         1 - 返される文字カラムの右端のスペースが削除されます。
+        </para>
+       </listitem>
+      </itemizedlist>
      </para>
     </listitem>
    </varlistentry>
@@ -169,37 +281,82 @@
     </term>
     <listitem>
      <para>
-      このオプションは、ラージ DBCS カラムバッファ用の内部 ibm_db2
-      アロケーションスキームを制御します。
+      This options affects the internal buffer allocation strategy on IBM i.
+      By default, this option is <literal>0</literal>.
+      When this option is set, buffers are allocated with a much larger size,
+      in case the database underestimates a string's size when converting
+      between encodings.
+      This option uses six times as much memory for buffers (to account for
+      the largest possible UTF-8 sequences), but may be needed if truncated
+      data is returned.
       <itemizedlist>
        <listitem>
         <para>
-         0 は拡張アロケーションを使用しません (オーバーライドについては <parameter>i5_dbcs_alloc</parameter> を参照ください)。
+         0 - Minimum size buffers are allocated.
         </para>
        </listitem>
        <listitem>
         <para>
-         1 は拡張アロケーションを使用します (オーバーライドについては <parameter>i5_dbcs_alloc</parameter> を参照ください)。
+         1 - Larger size buffers are allocated.
         </para>
        </listitem>
       </itemizedlist>
      </para>
     </listitem>
    </varlistentry>
-   <varlistentry xml:id="ini.ibm-db2.instance-name">
+   <varlistentry xml:id="ini.ibm-db2.i5-guard-profile">
     <term>
-     <parameter>ibm_db2.instance_name</parameter>
-     <type>string</type>
+     <parameter>ibm_db2.i5_guard_profile</parameter>
+     <type>int</type>
     </term>
     <listitem>
      <para>
-      Linux および UNIX では、カタログデータベースへの接続に使用する
-      インスタンス名をこのオプションで指定します。
-      このオプションは、環境変数 DB2INSTANCE
-      の設定を上書きします。
+      IBM i 上のデータベースに持続的接続する際、
+      ユーザーのデータベースのプロファイルを切り替えるかどうかをチェックします。
+      切り替える場合、データベースから切断します。
+      デフォルトでは、このオプションの値は <literal>0</literal> です。
+      <itemizedlist>
+       <listitem>
+        <para>
+         0 - プロファイルの切換をチェックしません
+        </para>
+       </listitem>
+       <listitem>
+        <para>
+         1 - プロファイルの切換をチェックし、切り替える場合は切断します
+        </para>
+       </listitem>
+      </itemizedlist>
      </para>
+    </listitem>
+   </varlistentry>
+   <varlistentry xml:id="ini.ibm-db2.i5-log-verbose">
+    <term>
+     <parameter>ibm_db2.i5_log_verbose</parameter>
+     <type>int</type>
+    </term>
+    <listitem>
      <para>
-      Windows では、このオプションは無視されます。
+      This option sets if SQL diagnostic messages like warnings and errors are
+      always sent to the PHP error log on IBM i.
+      Normally, only a brief message on failure is sent (such as "statement
+      execute failed") to the PHP error log, as this option is set to
+      <literal>0</literal> by default.
+      Note that you can still and should call i.e.
+      <function>db2_stmt_errormsg</function> manually as part of checking if
+      functions fail.
+      <itemizedlist>
+       <listitem>
+        <para>
+         0 - Only logs brief messages.
+        </para>
+       </listitem>
+       <listitem>
+        <para>
+         1 - Logs the SQL diagnostic message in addition to the brief message.
+        </para>
+       </listitem>
+      </itemizedlist>
      </para>
     </listitem>
    </varlistentry>
@@ -210,30 +367,166 @@
     </term>
     <listitem>
      <para>
-      このオプションは、PHP アプリケーション内での
-      i5 db2_(p)connect のユーザー ID とパスワードをオーバーライドします。
-      <parameter>ibm_db2.i5_ignore_userid</parameter> = 1 の場合は、
-      すべての db2 (p)connections がユーザー ID とパスワードに null を使用するようになります。
-      したがって、Apache のジョブは現在のプロファイル (NOBODY) で接続するようになります。
-      このオーバーライドを使用するのは、シンプルな DB2 ベースのウェブサイトで
-      プロファイルの切り替えが不要な場合のみです。これを使用すると、
-      サーバーモードで追加の QSQSRVR ジョブを行うオーバーヘッドを回避できます。
-      これは、db2_(p)connect でユーザー ID とパスワードに null 値を設定するという作業を
-      PHP のソースコードを変更することなしに行えるようにするものです。
-      このオーバーライドは <parameter>ibm_db2.i5_all_pconnect</parameter> = 1
-      でも使用することができます。
+      IBM i 上で実行される際、かつデータベースに接続する際に、
+      このオプションはユーザーID を無視します。
+      また、別々のジョブではなく、PHPジョブの内部でSQL/CLI の機能を実行します。
+      デフォルトでは、このオプションの値は <literal>0</literal> です。
+      このオプションを有効にすると、
+      別々のデータベースサーバのジョブを使わず、
+      常に現在のユーザープロファイルを使います。
+      そして、<function>db2_connect</function> と <function>db2_pconnect</function>
+      に渡されるユーザー名とパスワードを無視します。
       <itemizedlist>
        <listitem>
         <para>
-         0 db2_(p)connect で、指定したユーザー ID とパスワードで接続します。
+         0 - 指定されたクレデンシャルを使い、SQL/CLI サーバのジョブを使います。
         </para>
        </listitem>
        <listitem>
         <para>
-         1 db2_(p)connect は、ユーザー ID とパスワードを null でオーバーライドします。
+         1 - 常に空のクレデンシャルを使い、PHP のジョブ中でSQL/CLI ジョブを実行します
         </para>
        </listitem>
       </itemizedlist>
+     </para>
+    </listitem>
+   </varlistentry>
+   <varlistentry xml:id="ini.ibm-db2.i5-job-sort">
+    <term>
+     <parameter>ibm_db2.i5_job_sort</parameter>
+     <type>int</type>
+    </term>
+    <listitem>
+     <para>
+      IBM i におけるジョブソートを制御します。
+      デフォルトでは、このオプションの値は <literal>0</literal> です。
+      これは IBM i SQL/CLI の <literal>SQL_ATTR_CONN_SORT_SEQUENCE</literal>
+      属性に対応します。
+      <itemizedlist>
+       <listitem>
+        <para>
+         0 - <literal>*HEX</literal> ソートオプションを使い、
+         バイト単位でソートを行います。
+        </para>
+       </listitem>
+       <listitem>
+        <para>
+         1 - PHP のジョブ向けにジョブソートのシーケンスを使います。
+        </para>
+       </listitem>
+       <listitem>
+        <para>
+         2 - データベースのジョブ向けにジョブソートのシーケンスを使います。
+        </para>
+       </listitem>
+      </itemizedlist>
+     </para>
+    </listitem>
+   </varlistentry>
+   <varlistentry xml:id="ini.ibm-db2.i5-max-pconnect">
+    <term>
+     <parameter>ibm_db2.i5_max_pconnect</parameter>
+     <type>int</type>
+    </term>
+    <listitem>
+     <para>
+      このオプションは、IBM i 上で実行する際、
+      何回持続的接続が再利用されるかに影響します。
+      デフォルトでは、この値は <literal>0</literal> です。
+      つまり、持続的接続は常に再利用されるということです。
+      このオプションは、
+      長時間実行されるデータベースのジョブで起こる問題
+      (つまり、プロシージャでメモリリークが起きた場合など)
+      を回避されるのに役立ちますが、明らかに長期的に役立つものではないでしょう。
+     </para>
+    </listitem>
+   </varlistentry>
+   <varlistentry xml:id="ini.ibm-db2.i5-override-ccsid">
+    <term>
+     <parameter>ibm_db2.i5_override_ccsid</parameter>
+     <type>int</type>
+    </term>
+    <listitem>
+     <para>
+      The PASE CCSID to use for character conversions from EBCDIC on IBM i.
+      By default, this is <literal>0</literal>, which will select the default
+      PASE job CCSID, which comes from the PASE locale settings.
+      For example, setting this to <literal>1208</literal> will use UTF-8.
+      This should only be modified if the PASE job CCSID isn't the expected
+      CCSID, and the locale cannot be modified.
+     </para>
+     <para>
+      To learn more about CCSIDs on IBM i, consult the
+      <link xlink:href="https://www.ibm.com/docs/en/i/7.5?topic=information-ccsid-reference">IBM documentation</link>.
+      To learn how locales on IBM i PASE are mapped to CCSIDs, consult the
+      <link xlink:href="https://www.ibm.com/docs/en/i/7.5?topic=ssw_ibm_i_75/apis/pase_locales.html">IBM documentation</link>.
+     </para>
+    </listitem>
+   </varlistentry>
+   <varlistentry xml:id="ini.ibm-db2.i5-sys-naming">
+    <term>
+     <parameter>ibm_db2.i5_sys_naming</parameter>
+     <type>int</type>
+    </term>
+    <listitem>
+     <para>
+      This option controls the naming mode when connecting to an IBM i system.
+      By default, this option is <literal>0</literal>.
+      The naming mode affects how names are resolved and the allowed syntax for
+      names.
+      When set to <literal>0</literal>, this uses periods to qualify names and
+      uses the default library or user ID to resolve names.
+      When set to <literal>1</literal>, this uses slashes to qualify names and
+      uses the job library list to resolve names.
+      <itemizedlist>
+       <listitem>
+        <para>
+         0 - Uses the SQL naming mode ("SCHEMA.TABLE").
+        </para>
+       </listitem>
+       <listitem>
+        <para>
+         1 - Uses the system naming mode ("LIBRARY/FILE").
+        </para>
+       </listitem>
+      </itemizedlist>
+     </para>
+     <para>
+      To learn more about naming modes on IBM i, consult the
+      <link xlink:href="https://www.ibm.com/docs/en/i/7.5?topic=application-naming-distributed-relational-database-objects">IBM documentation</link>.
+     </para>
+    </listitem>
+   </varlistentry>
+   <varlistentry xml:id="ini.ibm-db2.i5-servermode-subsystem">
+    <term>
+     <parameter>ibm_db2.i5_servermode-subsystem</parameter>
+     <type>string</type>
+    </term>
+    <listitem>
+     <para>
+      This option changes which subsystem database server jobs run under on
+      IBM i.
+      By default, this option is &null;, so jobs will run under the default
+      subsystem for QSQSRVR jobs.
+     </para>
+    </listitem>
+   </varlistentry>
+   <varlistentry xml:id="ini.ibm-db2.instance-name">
+    <term>
+     <parameter>ibm_db2.instance_name</parameter>
+     <type>string</type>
+    </term>
+    <listitem>
+     <para>
+      Linux や UNIX オペレーティングシステムにおいて、
+      このオプションはカタログされたデータベースへの接続で使う、
+      インスタンス名を定義します。
+      デフォルトでは、このオプションの値は &null; です。
+      このオプションを設定すると、
+      環境変数 <varname>DB2INSTANCE</varname> の値を上書きします。
+     </para>
+     <para>
+      Windows では、このオプションの値は無視されます。
      </para>
     </listitem>
    </varlistentry>

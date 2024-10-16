@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
-<!-- EN-Revision: ea62fb83196997032641b50fe44420305466195e Maintainer: hirokawa Status: ready -->
+<!-- EN-Revision: 74b2af242f2131cd43a8830fee3864f1f68ccbed Maintainer: hirokawa Status: ready -->
 <!-- CREDITS: shimooka,mumumu -->
 <refentry xmlns="http://docbook.org/ns/docbook" xml:id="function.fopen">
  <refnamediv>
@@ -52,7 +52,7 @@
        PHP が判断し、かつそのプロトコルがネットワーク URL として登録されていれば、
        PHP は <link linkend="ini.allow-url-fopen">allow_url_fopen</link>
        が有効となっているかどうかチェックします。
-       もしこれがオフになっていると、PHP は warning を発行し fopen は失敗します。
+       もしこれがオフになっていると、PHP は warning を発行し <function>fopen</function> は失敗します。
       </para>
       <note>
        <para>
@@ -256,7 +256,7 @@ $handle = fopen("c:\\folder\\resource.txt", "r");
      <term><parameter>use_include_path</parameter></term>
      <listitem>
       <para>
-       オプションの３番目の引数<parameter>use_include_path</parameter>に'1'又は
+       オプションの３番目の引数<parameter>use_include_path</parameter>に
        &true; を設定することにより、<link linkend="ini.include-path">include_path</link>
        のファイルの検索も行うこともできます。
       </para>

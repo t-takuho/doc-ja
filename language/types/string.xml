@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
-<!-- EN-Revision: 8e1ff07165796c9942b5fa9378cdd680c71cb596 Maintainer: takagi Status: ready -->
+<!-- EN-Revision: affa37e16f562d9297e83b2e21ec416aadc8b72d Maintainer: takagi Status: ready -->
 <!-- CREDITS: hirokawa,shimooka,mumumu -->
 <sect1 xml:id="language.types.string">
  <title>文字列</title>
@@ -167,22 +167,24 @@ echo 'Variables do not $expand $either';
       <row>
        <entry><literal>\[0-7]{1,3}</literal></entry>
        <entry>
+        8進数: 正規表現 <literal>[0-7]{1,3}</literal> にマッチする文字シーケンスは、8 進数表記の 1 文字 (例:. <literal>"\101" === "A"</literal>) です。
         正規表現にマッチする文字シーケンスは、8 進数表記の 1 文字です。
         1 バイトに収まらない部分は、何もメッセージを出さずにオーバーフローします
-        (そのため、"\400" === "\000" となります)。
+        (例: <literal>"\400" === "\000"</literal>) 。
        </entry>
       </row>
       <row>
        <entry><literal>\x[0-9A-Fa-f]{1,2}</literal></entry>
        <entry>
-        正規表現にマッチする文字シーケンスは、16 進数表記の 1 文字です。
+        16進数: 正規表現 <literal>[0-9A-Fa-f]{1,2}</literal> にマッチする文字シーケンスは、16 進数表記の 1 文字(例: <literal>"\x41" === "A"</literal>)です。
        </entry>
       </row>
       <row>
        <entry><literal>\u{[0-9A-Fa-f]+}</literal></entry>
        <entry>
-        正規表現にマッチする文字シーケンスは、Unicode のコードポイントです。
+        Unicode: 正規表現 <literal>[0-9A-Fa-f]+</literal> にマッチする文字シーケンスは、Unicode のコードポイントです。
         そのコードポイントの UTF-8 表現を文字列として出力します。
+        シーケンスを波括弧で囲む必要があります。例 <literal>"\u{41}" === "A"</literal>
        </entry>
       </row>
      </tbody>
@@ -724,11 +726,14 @@ EOT;
 <?php
 $juice = "apple";
 
-echo "He drank some $juice juice.".PHP_EOL;
-// 動作しません。"s" は、変数名として有効な文字ですが、実際の変数名は $juice です。
-echo "He drank some juice made of $juices.";
-// 動作します。波括弧で囲むことで、どこまでが変数名かを明示しているからです。
-echo "He drank some juice made of ${juice}s.";
+echo "He drank some $juice juice." . PHP_EOL;
+
+// 意図しない動作をします。"s" は、変数名として有効な文字です。よって、変数は $juices を参照しています。$juice ではありません。
+echo "He drank some juice made of $juices." . PHP_EOL;
+
+// 参照する変数名を波括弧で囲むことで、変数名の終端を明示的に指定しています。
+echo "He drank some juice made of {$juice}s.";
+
 ?>
 ]]>
      </programlisting>
@@ -865,9 +870,10 @@ echo "This works: {$arr[4][3]}";
 
 // これが動作しない理由は、文字列の外で $foo[bar]
 // が動作しない理由と同じです。
-// 言い換えると、これは動作するともいえます。しかし、
-// PHP はまず最初に foo という名前の定数を探すため、
-// E_NOTICE レベルのエラー(未定義の定数) となります。
+// PHP はまず最初に foo という名前の定数を探し、
+// 見つからない場合はエラーをスローします。
+// 定数が見つかった場合は、その値('foo' そのものではない)
+// を配列のインデックスとして使います。
 echo "This is wrong: {$arr[foo][3]}"; 
 
 // 動作します。多次元配列を使用する際は、

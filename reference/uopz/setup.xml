@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
-<!-- EN-Revision: 482fe6f482209ef03c55003cb7e0ea4734e82b8b Maintainer: satoruyoshida Status: ready -->
+<!-- EN-Revision: 9a157412627e3f6dbadd76daaf20fb4011393a10 Maintainer: satoruyoshida Status: ready -->
 <!-- Credits: mumumu -->
 <chapter xml:id="uopz.setup" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
  &reftitle.setup;
@@ -22,7 +22,7 @@
    <link xlink:href="&url.pecl.package;uopz">&url.pecl.package;uopz</link>
   </para>
   <para>
-    Windows ユーザーは、<link xlink:href="&url.pecl.windows.releases;uopz">PECL</link>
+    Windows ユーザーは、<link xlink:href="&url.pecl.package;uopz">PECL</link>
     Web サイトからビルド済みのリリースバイナリーをダウンロードすることができます。
   </para>
   <para>
@@ -50,19 +50,19 @@
       <row>
        <entry><link linkend="ini.uopz.disable">uopz.disable</link></entry>
        <entry>"0"</entry>
-       <entry>PHP_INI_SYSTEM</entry>
+       <entry><constant>INI_SYSTEM</constant></entry>
        <entry>uopz 5.0.2 以降で利用可能</entry>
       </row>
       <row>
        <entry><link linkend="ini.uopz.exit">uopz.exit</link></entry>
        <entry>"0"</entry>
-       <entry>PHP_INI_SYSTEM</entry>
+       <entry><constant>INI_SYSTEM</constant></entry>
        <entry>uopz 6.0.1 以降で利用可能</entry>
       </row>
       <row>
        <entry><link linkend="ini.uopz.overloads">uopz.overloads</link></entry>
        <entry>"1"</entry>
-       <entry>PHP_INI_SYSTEM</entry>
+       <entry><constant>INI_SYSTEM</constant></entry>
        <entry>uopz 2.0.2 以降で利用可能。uopz 5.0.0 以降は削除されています</entry>
       </row>
      </tbody>
@@ -121,11 +121,6 @@
     (<code>opcache.optimization_level=0</code>)
    </simpara>
   </note>
- </section>
-
- <section xml:id="uopz.resources">
-  &reftitle.resources;
-  &no.resource;
  </section>
 
 </chapter>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
-<!-- EN-Revision: e016fe67d1f58dc26592e50a244584fcfcf2604d Maintainer: takagi Status: ready -->
+<!-- EN-Revision: 5564c64a6cafa5bc7325afe8555562df469fc6a0 Maintainer: takagi Status: ready -->
 <!-- Credits: mumumu -->
 <chapter xml:id="mysqlnd.config" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
 
@@ -23,70 +23,70 @@
      <row>
       <entry><link linkend="ini.mysqlnd.collect-statistics">mysqlnd.collect_statistics</link></entry>
       <entry>"1"</entry>
-      <entry>PHP_INI_SYSTEM</entry>
+      <entry><constant>INI_SYSTEM</constant></entry>
       <entry></entry>
      </row>
      <row>
       <entry><link linkend="ini.mysqlnd.collect-memory-statistics">mysqlnd.collect_memory_statistics</link></entry>
       <entry>"0"</entry>
-      <entry>PHP_INI_SYSTEM</entry>
+      <entry><constant>INI_SYSTEM</constant></entry>
       <entry></entry>
      </row>
      <row>
       <entry><link linkend="ini.mysqlnd.debug">mysqlnd.debug</link></entry>
       <entry>""</entry>
-      <entry>PHP_INI_SYSTEM</entry>
+      <entry><constant>INI_SYSTEM</constant></entry>
       <entry></entry>
      </row>
      <row>
       <entry><link linkend="ini.mysqlnd.log-mask">mysqlnd.log_mask</link></entry>
       <entry>0</entry>
-      <entry>PHP_INI_ALL</entry>
+      <entry><constant>INI_ALL</constant></entry>
       <entry></entry>
      </row>
      <row>
       <entry><link linkend="ini.mysqlnd.mempool-default-size">mysqlnd.mempool_default_size</link></entry>
       <entry>16000</entry>
-      <entry>PHP_INI_ALL</entry>
+      <entry><constant>INI_ALL</constant></entry>
       <entry></entry>
      </row>
      <row>
       <entry><link linkend="ini.mysqlnd.net-read-timeout">mysqlnd.net_read_timeout</link></entry>
       <entry>"86400"</entry>
-      <entry>PHP_INI_ALL</entry>
+      <entry><constant>INI_ALL</constant></entry>
       <entry>
        PHP 7.2.0 より前のバージョンでは、
-       デフォルト値は "31536000" で、変更可能な範囲が <constant>PHP_INI_SYSTEM</constant> でした。
+       デフォルト値は "31536000" で、変更可能な範囲が <constant>INI_SYSTEM</constant> でした。
       </entry>
      </row>
      <row>
       <entry><link linkend="ini.mysqlnd.net-cmd-buffer-size">mysqlnd.net_cmd_buffer_size</link></entry>
       <entry>"4096"</entry>
-      <entry>PHP_INI_SYSTEM</entry>
+      <entry><constant>INI_SYSTEM</constant></entry>
       <entry></entry>
      </row>
      <row>
       <entry><link linkend="ini.mysqlnd.net-read-buffer-size">mysqlnd.net_read_buffer_size</link></entry>
       <entry>"32768"</entry>
-      <entry>PHP_INI_SYSTEM</entry>
+      <entry><constant>INI_SYSTEM</constant></entry>
       <entry></entry>
      </row>
      <row>
       <entry><link linkend="ini.mysqlnd.sha256-server-public-key">mysqlnd.sha256_server_public_key</link></entry>
       <entry>""</entry>
-      <entry>PHP_INI_PERDIR</entry>
+      <entry><constant>INI_PERDIR</constant></entry>
       <entry></entry>
      </row>
       <row>
        <entry><link linkend="ini.mysqlnd.trace-alloc">mysqlnd.trace_alloc</link></entry>
        <entry>""</entry>
-       <entry>PHP_INI_SYSTEM</entry>
+       <entry><constant>INI_SYSTEM</constant></entry>
        <entry></entry>
       </row>
      <row>
       <entry><link linkend="ini.mysqlnd.fetch_data_copy">mysqlnd.fetch_data_copy</link></entry>
       <entry>0</entry>
-      <entry>PHP_INI_ALL</entry>
+      <entry><constant>INI_ALL</constant></entry>
       <entry>PHP 8.1.0 で削除されました。</entry>
      </row>
     </tbody>
@@ -241,8 +241,6 @@ d:t:x:O,/tmp/mysqlnd.trace
      <note>
       <para>
        この機能は、デバッグビルド版の PHP でしか使えません。
-       Microsoft Windows で使う場合は、Microsoft Visual C
-       バージョン 9 以降でデバッグビルドした PHP を使わなければなりません。
       </para>
      </note>
      <para></para>

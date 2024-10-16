@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- $Revision$ -->
+<!-- EN-Revision: 07b8fdd1f2f54178f57094c12015f0f66a295901 Maintainer: mumumu Status: ready -->
+<refentry xml:id="random-randomizer.getfloat" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <refnamediv>
+  <refname>Random\Randomizer::getFloat</refname>
+  <refpurpose>等確率に選んだ float の値を取得する</refpurpose>
+ </refnamediv>
+
+ <refsect1 role="description">
+  &reftitle.description;
+  <methodsynopsis role="Random\\Randomizer">
+   <modifier>public</modifier> <type>float</type><methodname>Random\Randomizer::getFloat</methodname>
+   <methodparam><type>float</type><parameter>min</parameter></methodparam>
+   <methodparam><type>float</type><parameter>max</parameter></methodparam>
+   <methodparam choice="opt"><type>Random\IntervalBoundary</type><parameter>boundary</parameter><initializer>Random\IntervalBoundary::ClosedOpen</initializer></methodparam>
+  </methodsynopsis>
+  <para>
+   指定した区間に一様に分散した浮動小数点数の中から、等確率に選んだ値を返します。
+  </para>
+  <para>
+   精度が限られているため、
+   全ての実数が正確に浮動小数点数として表現できるとは限りません。
+
+   数値が正確に表現できない場合、値は表現できるもっとも近い値に丸められます。
+
+   さらに浮動小数点数の値は、数直線全体に均等に分布しているわけではありません。
+
+   浮動小数点数の値は 2進数の指数を使うので、隣り合うふたつの値の距離は、
+   それぞれの2のべき乗ごとに2倍になります。
+
+   つまり: <literal>1.0</literal> と <literal>2.0</literal>
+   の間で表現できる 浮動小数点数 の数は、<literal>2.0</literal> と <literal>4.0</literal>
+   の間で表現できる数、<literal>4.0</literal> と <literal>8.0</literal>
+   の間で表現できる数、<literal>8.0</literal> と <literal>16.0</literal>
+   の間で表現できる数と同じ... といった具合です。
+  </para>
+  <para>
+   こうした理由から、例えば2つの整数を割るなどして、
+   要求された区間内の任意の数をランダムサンプリングすると、
+   分布が偏る可能性があります。
+
+   必要な丸めを行うと、
+   浮動小数点数の値によっては別の値より多くの頻度で返されることがあります。
+   浮動小数点数の値の密度が変わる2のべき乗周辺の値については、特にそれが当てはまります。
+  </para>
+  <para>
+   <methodname>Random\Randomizer::getFloat</methodname> は、
+   指定した区間内で正確に表現でき、
+   かつ一様に分散した浮動小数点数の可能な限り大きな集合から、
+   等確率に値を返すアルゴリズムを実装します。
+
+   選択可能な浮動小数点数の間の距離 (ステップサイズ) は、
+   密度が最も小さい浮動小数点数の間の距離、つまり、
+   絶対値がより大きな区間境界の浮動小数点数の距離に一致します。
+
+   これは、区間が2のべき乗を1つ以上横切る場合、
+   与えられた区間内で表現可能な浮動小数点数の値がすべて返されるとは限らないということです。
+
+   ステップは、絶対値の大きい区間境界から始まります。
+   これは、ステップを正確に表現可能な浮動小数点数と一致させるためです。
+  </para>
+  <para>
+   閉区間の境界は、常に選択可能な浮動小数点数の集合に含まれます。
+
+   よって、区間のサイズがステップサイズの正確な倍数でなく、
+   かつ絶対値が小さな方の境界が閉じている場合、
+   その境界とそれにもっとも近い選択可能な浮動小数点数との間の距離は、
+   ステップサイズよりも小さくなります。
+  </para>
+  <caution>
+   <para>
+    このメソッドが返す float の値を後処理すると、
+    値の一様な分布を壊す可能性があります。なぜなら、
+    数学演算に含まれる中間的な浮動小数点数の値は暗黙のうちに丸められているからです。
+
+    指定された区間は、できるだけ望ましい区間と一致させるべきですし、
+    丸め処理はこのメソッドが選択した値をユーザーに表示させる直前に明示的に実行すべきです。
+   </para>
+  </caution>
+  <refsect2>
+   <title>サンプルの浮動小数点表現を使った、アルゴリズムの説明</title>
+   <para>
+    アルゴリズムがどのように動作するかの例を示すために、
+    3ビットの仮数を使用する浮動小数点表現を考えてみましょう。
+
+    この表現は、連続する2のべき乗の間で、8つの異なる浮動小数点数を表現することができます。
+
+    つまり、<literal>1.0</literal> と <literal>2.0</literal>
+    の間では <literal>0.125</literal> のすべてのステップサイズを正確に表現でき、
+    <literal>2.0</literal> と <literal>4.0</literal>
+    の間では <literal>0.25</literal> のすべてのステップサイズを正確に表現できるということです。
+
+    実際には、PHP の float は 52 ビットの仮数を使用しており、
+    それぞれの 2 のべき乗の間で 2<superscript>52</superscript>
+    個の異なる値を表現することができます。
+
+    つまり、以下の数が、<literal>1.0</literal> と <literal>4.0</literal>
+    の範囲で正確に表現できるということです。
+
+    <simplelist><!-- This would benefit from type="inline" -->
+     <member><literal>1.0</literal></member>
+     <member><literal>1.125</literal></member>
+     <member><literal>1.25</literal></member>
+     <member><literal>1.375</literal></member>
+     <member><literal>1.5</literal></member>
+     <member><literal>1.625</literal></member>
+     <member><literal>1.75</literal></member>
+     <member><literal>1.875</literal></member>
+     <member><literal>2.0</literal></member>
+     <member><literal>2.25</literal></member>
+     <member><literal>2.5</literal></member>
+     <member><literal>2.75</literal></member>
+     <member><literal>3.0</literal></member>
+     <member><literal>3.25</literal></member>
+     <member><literal>3.5</literal></member>
+     <member><literal>3.75</literal></member>
+     <member><literal>4.0</literal></member>
+    </simplelist>
+   </para>
+   <para>
+    さてここで、<code>$randomizer-&gt;getFloat(1.625, 2.5, IntervalBoundary::ClosedOpen)</code> がコールされた場合を考えてみましょう。
+    つまり、<literal>1.625</literal> から始まり、<literal>2.5</literal>
+    までのランダムな値 (ただし <literal>2.5</literal> そのものは含みません)
+    を要求するということです。
+
+    このメソッドのアルゴリズムは、
+    まず絶対値の大きい境界(<literal>2.5</literal>)でのステップサイズを決定します。
+    今回の境界の場合、ステップサイズは <literal>0.25</literal> です。
+   </para>
+   <para>
+    ここで、要求された区間のサイズは <literal>0.875</literal> であり、
+    <literal>0.25</literal> の正確な倍数ではないことに注意してください。
+
+    もしアルゴリズムが下界 <literal>1.625</literal>からステップを開始すると、
+    正確に表現できない <literal>2.125</literal> が現れた時点で、暗黙の丸めが発生します。
+
+    そのため、アルゴリズムは上界 <literal>2.5</literal> からステップを開始するのです。
+
+    選択可能な値は、以下のとおりです:
+
+    <simplelist>
+     <member><literal>2.25</literal></member>
+     <member><literal>2.0</literal></member>
+     <member><literal>1.75</literal></member>
+     <member><literal>1.625</literal></member>
+    </simplelist>
+
+    <literal>2.5</literal> は選択可能な値に含まれません。
+    なぜなら、要求された区間の上界が開いているからです。
+
+    <literal>1.625</literal> は選択可能な値に含まれます。
+    この値は最も近い値 <literal>1.75</literal> との距離が <literal>0.125</literal>
+    であり、以前決定したステップサイズ <literal>0.25</literal>より小さいのですが、
+    それにも関わらず、含まれます。
+
+    その理由は、要求された区間は下側の境界(<literal>1.625</literal>)で閉じており、
+    閉じた境界は常に含まれるからです。
+   </para>
+   <para>
+    最後に、アルゴリズムは4つの選択可能な値から等確率で値をランダムに選び、それを返します。
+   </para>
+   <refsect3 xml:id="random-randomizer.getfloat.affine-transformation">
+    <title>2つの整数値を割るやり方ではなぜダメなのか</title>
+    <para>
+     上の例では、2のべき乗で区切られたそれぞれの区間に、
+     表現可能な浮動小数点数が8個あります。
+
+     ランダムな浮動小数点数を生成するのに、
+     なぜ2つの整数を割る方法がうまくいかないのかを示すために、
+     <literal>0.0</literal> から <literal>1.0</literal>
+     を含まない右開きの区間に、16個の一様に分散した浮動小数点数があるとしましょう。
+
+     そのうち半分は、<literal>0.5</literal> から <literal>1.0</literal>
+     までの間で8つの値として正確に表現できますが、
+     残りの半分は <literal>0.0</literal> から <literal>1.0</literal>
+     までの間でステップサイズが <literal>0.0625</literal> の値です。
+     これらの値は、<literal>0</literal> から <literal>15</literal>
+     の間のランダムな整数を <literal>16</literal>
+     で割ることによって、以下のうちのひとつを簡単に生成することができます:
+
+     <simplelist>
+      <member><literal>0.0</literal></member>
+      <member><literal>0.0625</literal></member>
+      <member><literal>0.125</literal></member>
+      <member><literal>0.1875</literal></member>
+      <member><literal>0.25</literal></member>
+      <member><literal>0.3125</literal></member>
+      <member><literal>0.375</literal></member>
+      <member><literal>0.4375</literal></member>
+      <member><literal>0.5</literal></member>
+      <member><literal>0.5625</literal></member>
+      <member><literal>0.625</literal></member>
+      <member><literal>0.6875</literal></member>
+      <member><literal>0.75</literal></member>
+      <member><literal>0.8125</literal></member>
+      <member><literal>0.875</literal></member>
+      <member><literal>0.9375</literal></member>
+     </simplelist>
+    </para>
+    <para>
+
+     このランダムな浮動小数点の値は、
+     <literal>1.625</literal> から <literal>2.75</literal> まで
+     (<literal>2.75</literal> を含まない) の右開きの区間に、
+     区間の大きさ(<literal>0.875</literal>) を掛け合わせ、
+     最小の <literal>1.625</literal> を足すことで拡大変換できます。
+     この、いわゆるアフィン変換の結果は、以下のような値になります:
+
+     <simplelist>
+      <member><literal>1.625</literal> は、<literal>1.625</literal> に丸められます</member>
+      <member><literal>1.679</literal> は、<literal>1.625</literal> に丸められます</member>
+      <member><literal>1.734</literal> は、<literal>1.75</literal> に丸められます</member>
+      <member><literal>1.789</literal> は、<literal>1.75</literal> に丸められます</member>
+      <member><literal>1.843</literal> は、<literal>1.875</literal> に丸められます</member>
+      <member><literal>1.898</literal> は、<literal>1.875</literal> に丸められます</member>
+      <member><literal>1.953</literal> は、<literal>2.0</literal> に丸められます</member>
+      <member><literal>2.007</literal> は、<literal>2.0</literal> に丸められます</member>
+      <member><literal>2.062</literal> は、<literal>2.0</literal> に丸められます</member>
+      <member><literal>2.117</literal> は、<literal>2.0</literal> に丸められます</member>
+      <member><literal>2.171</literal> は、<literal>2.25</literal> に丸められます</member>
+      <member><literal>2.226</literal> は、<literal>2.25</literal> に丸められます</member>
+      <member><literal>2.281</literal> は、<literal>2.25</literal> に丸められます</member>
+      <member><literal>2.335</literal> は、<literal>2.25</literal> に丸められます</member>
+      <member><literal>2.390</literal> は、<literal>2.5</literal> に丸められます</member>
+      <member><literal>2.445</literal> は、<literal>2.5</literal> に丸められます</member>
+     </simplelist>
+
+     上界の値 <literal>2.5</literal> が、
+     開区間であるため除外されるべきなのに、返されてしまう点に注意してください。
+
+     また、<literal>2.0</literal> と <literal>2.25</literal> が、
+     他の値に比べて2倍の確率で返されることにも注意しましょう。
+    </para>
+   </refsect3>
+  </refsect2>
+ </refsect1>
+
+ <refsect1 role="parameters">
+  &reftitle.parameters;
+  <para>
+   <variablelist>
+    <varlistentry>
+     <term><parameter>min</parameter></term>
+     <listitem>
+      <para>
+       区間の下限
+      </para>
+     </listitem>
+    </varlistentry>
+    <varlistentry>
+     <term><parameter>max</parameter></term>
+     <listitem>
+      <para>
+       区間の上限
+      </para>
+     </listitem>
+    </varlistentry>
+    <varlistentry>
+     <term><parameter>boundary</parameter></term>
+     <listitem>
+      <para>
+       区間の境界を戻り値に含めるかどうかを指定します。
+      </para>
+     </listitem>
+    </varlistentry>
+   </variablelist>
+  </para>
+ </refsect1>
+
+ <refsect1 role="returnvalues">
+  &reftitle.returnvalues;
+  <para>
+   <parameter>min</parameter>,
+   <parameter>max</parameter>, <parameter>boundary</parameter>
+   で指定した区間に一様に分散した float の中から、等確率に選んだ値を返します。
+   <parameter>min</parameter> と <parameter>max</parameter>
+   が戻り値に含まれるかどうかは、
+   <parameter>boundary</parameter> の値次第です。
+  </para>
+ </refsect1>
+
+ <refsect1 role="errors">
+  &reftitle.errors;
+  <itemizedlist>
+   <listitem>
+    <simpara>
+     <parameter>min</parameter> の値が有限(<function>is_finite</function>)でない場合、
+     <classname>ValueError</classname> がスローされます。
+    </simpara>
+   </listitem>
+   <listitem>
+    <simpara>
+     <parameter>max</parameter> の値が有限(<function>is_finite</function>)でない場合、
+     <classname>ValueError</classname> がスローされます。
+    </simpara>
+   </listitem>
+   <listitem>
+    <simpara>
+     指定された区間に何も値が含まれない場合、
+     <classname>ValueError</classname> がスローされます。
+    </simpara>
+   </listitem>
+   &random.engineErrors;
+  </itemizedlist>
+ </refsect1>
+
+ <refsect1 role="examples">
+  &reftitle.examples;
+  <example>
+   <title><methodname>Random\Randomizer::getFloat</methodname> の例</title>
+   <programlisting role="php">
+<![CDATA[
+<?php
+$randomizer = new \Random\Randomizer();
+
+// 緯度の粒度は経度の粒度の2倍であることに注意しましょう。
+//
+// 緯度については、-90 から 90 の値をとります
+// 経度については、180 という値は取れますが、-180 は取れません。
+// なぜなら、-180 と 180 は同じ経度を指しているからです。
+printf(
+    "Lat: %+.6f Lng: %+.6f",
+    $randomizer->getFloat(-90, 90, \Random\IntervalBoundary::ClosedClosed),
+    $randomizer->getFloat(-180, 180, \Random\IntervalBoundary::OpenClosed),
+);
+?>
+]]>
+   </programlisting>
+   &example.outputs.similar;
+   <screen>
+<![CDATA[
+Lat: +69.244304 Lng: -53.548951
+]]>
+   </screen>
+  </example>
+ </refsect1>
+
+ <refsect1 role="notes">
+  &reftitle.notes;
+  <note>
+   <para>
+    このメソッドは、望ましい振る舞いを得るために
+    <link xlink:href="&url.random.gamma-section;">
+     Drawing Random Floating-Point Numbers from an Interval.
+     Frédéric Goualard, ACM Trans. Model. Comput. Simul., 32:3, 2022
+    </link>
+    に記されている γ-section アルゴリズムを実装しています。
+   </para>
+  </note>
+ </refsect1>
+
+ <refsect1 role="seealso">
+  &reftitle.seealso;
+  <simplelist>
+   <member><methodname>Random\Randomizer::nextFloat</methodname></member>
+   <member><methodname>Random\Randomizer::getInt</methodname></member>
+  </simplelist>
+ </refsect1>
+
+</refentry>
+<!--Keep this comment at the end of the file
+Local variables:
+mode: sgml
+sgml-omittag:t
+sgml-shorttag:t
+sgml-minimize-attributes:nil
+sgml-always-quote-attributes:t
+sgml-indent-step:1
+sgml-indent-data:t
+indent-tabs-mode:nil
+sgml-parent-document:nil
+sgml-default-dtd-file:"~/.phpdoc/manual.ced"
+sgml-exposed-tags:nil
+sgml-local-catalogs:nil
+sgml-local-ecat-files:nil
+End:
+vim600: syn=xml fen fdm=syntax fdl=2 si
+vim: et tw=78 syn=sgml
+vi: ts=1 sw=1
+-->

@@ -1,17 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
-<!-- EN-Revision: a56106f69198dfe88c6084593c78a71c26b24353 Maintainer: takagi Status: ready -->
+<!-- EN-Revision: 48ce43fe79fa0c9f31f187ea8ec995b4cb13037e Maintainer: takagi Status: ready -->
 <!-- CREDITS: hirokawa -->
 
 <chapter xml:id="apache.setup" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
  &reftitle.setup;
-
- <!-- {{{ Requirements -->
- <section xml:id="apache.requirements">
-  &reftitle.required;
-  &no.requirement;
- </section>
- <!-- }}} -->
 
  <!-- {{{ Installation -->
  <section xml:id="apache.installation">
@@ -25,13 +18,6 @@
 
  <!-- {{{ Configuration -->
  &reference.apache.ini;
- <!-- }}} -->
-
- <!-- {{{ Resources -->
- <section xml:id="apache.resources">
-  &reftitle.resources;
-  &no.resource;
- </section>
  <!-- }}} -->
 
 </chapter>

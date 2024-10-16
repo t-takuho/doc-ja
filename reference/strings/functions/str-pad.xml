@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
-<!-- EN-Revision: e095023e408c8cb6378ae16bb6870343a3946919 Maintainer: hirokawa Status: ready -->
+<!-- EN-Revision: 1f0319dfed1968563fe4a3445c88cfc80cf71df0 Maintainer: hirokawa Status: ready -->
 <!-- CREDITS: shimooka,mumumu -->
 <refentry xml:id="function.str-pad" xmlns="http://docbook.org/ns/docbook">
  <refnamediv>
@@ -42,6 +42,7 @@
      <term><parameter>length</parameter></term>
      <listitem>
       <para>
+       埋めた結果としての、最終的な文字列の長さ。
        <parameter>length</parameter> の値が負、
        または入力文字列の長さ以下である場合、埋める操作は行われません。
        <parameter>string</parameter> をそのまま返します。
@@ -104,6 +105,15 @@ echo str_pad($input,  3, "*");                 // 結果は "Alien"
 ]]>
     </programlisting>
    </example>
+  </para>
+ </refsect1>
+
+ <refsect1 role="seealso">
+  &reftitle.seealso;
+  <para>
+   <simplelist>
+    <member><function>mb_str_pad</function></member>
+   </simplelist>
   </para>
  </refsect1>
 

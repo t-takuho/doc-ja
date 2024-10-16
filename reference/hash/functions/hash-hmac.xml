@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
-<!-- EN-Revision: 91e303f2d27cbca485137230fa7d2e50e75f19a6 Maintainer: takagi Status: ready -->
+<!-- EN-Revision: 539a9823a805ac29cab7fa4baf3ae3a28116a2f5 Maintainer: takagi Status: ready -->
 <!-- Credits: mumumu -->
 <refentry xml:id="function.hash-hmac" xmlns="http://docbook.org/ns/docbook">
  <refnamediv>
@@ -13,7 +13,7 @@
    <type>string</type><methodname>hash_hmac</methodname>
    <methodparam><type>string</type><parameter>algo</parameter></methodparam>
    <methodparam><type>string</type><parameter>data</parameter></methodparam>
-   <methodparam><type>string</type><parameter>key</parameter></methodparam>
+   <methodparam><modifier role="attribute">#[\SensitiveParameter]</modifier><type>string</type><parameter>key</parameter></methodparam>
    <methodparam choice="opt"><type>bool</type><parameter>binary</parameter><initializer>&false;</initializer></methodparam>
   </methodsynopsis>
 
@@ -26,8 +26,13 @@
      <term><parameter>algo</parameter></term>
      <listitem>
       <para>
-       選択したアルゴリズムの名前 (すなわち "md5"、"sha256"、"haval160,4" など…)。
+       選択したアルゴリズムの名前 (例: <literal>"sha256"</literal>)。
        サポートするアルゴリズムの一覧は <function>hash_hmac_algos</function> を参照ください。
+       <note>
+        <para>
+         暗号に適さないハッシュ関数は許可されません。
+        </para>
+       </note>
       </para>
      </listitem>
     </varlistentry>
@@ -119,14 +124,14 @@
     <programlisting role="php">
 <![CDATA[
 <?php
-echo hash_hmac('ripemd160', 'The quick brown fox jumped over the lazy dog.', 'secret');
+echo hash_hmac('sha256', 'The quick brown fox jumped over the lazy dog.', 'secret');
 ?>
 ]]>
     </programlisting>
     &example.outputs;
     <screen>
 <![CDATA[
-b8e7ae12510bdfb1812e463a7f086122cf37e4f7
+9c5c42422b03f0ee32949920649445e417b2c634050833c5165704b825c2a53b
 ]]>
     </screen>
    </example>
@@ -137,10 +142,9 @@ b8e7ae12510bdfb1812e463a7f086122cf37e4f7
   &reftitle.seealso;
   <para>
    <simplelist>
-    <member><function>hash</function></member>
     <member><function>hash_hmac_algos</function></member>
-    <member><function>hash_init</function></member>
     <member><function>hash_hmac_file</function></member>
+    <member><function>hash_equals</function></member>
    </simplelist>
   </para>
  </refsect1>

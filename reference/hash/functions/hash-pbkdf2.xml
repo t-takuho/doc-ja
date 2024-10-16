@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
-<!-- EN-Revision: 2ab45105b4302f7eed510a629226956ee0ab5be3 Maintainer: masakielastic Status: ready -->
+<!-- EN-Revision: 539a9823a805ac29cab7fa4baf3ae3a28116a2f5 Maintainer: masakielastic Status: ready -->
 <!-- Reviewed: no -->
 <!-- Credits: mumumu -->
-
-<refentry xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="function.hash-pbkdf2">
+<refentry xml:id="function.hash-pbkdf2" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
  <refnamediv>
   <refname>hash_pbkdf2</refname>
   <refpurpose>PBKDF2 を使ってパスワードからキーを生成する</refpurpose>
@@ -15,11 +14,12 @@
   <methodsynopsis>
    <type>string</type><methodname>hash_pbkdf2</methodname>
    <methodparam><type>string</type><parameter>algo</parameter></methodparam>
-   <methodparam><type>string</type><parameter>password</parameter></methodparam>
+   <methodparam><modifier role="attribute">#[\SensitiveParameter]</modifier><type>string</type><parameter>password</parameter></methodparam>
    <methodparam><type>string</type><parameter>salt</parameter></methodparam>
    <methodparam><type>int</type><parameter>iterations</parameter></methodparam>
    <methodparam choice="opt"><type>int</type><parameter>length</parameter><initializer>0</initializer></methodparam>
    <methodparam choice="opt"><type>bool</type><parameter>binary</parameter><initializer>&false;</initializer></methodparam>
+   <methodparam choice="opt"><type>array</type><parameter>options</parameter><initializer>[]</initializer></methodparam>
   </methodsynopsis>
  </refsect1>
 
@@ -31,9 +31,14 @@
      <term><parameter>algo</parameter></term>
      <listitem>
       <para>
-       ハッシュアルゴリズムの名前 (たとえば <literal>md5</literal>,
-       <literal>sha256</literal>, <literal>haval160,4</literal> など)。サポートされるアルゴリズムの一覧は
-       <function>hash_algos</function> をご参照ください。
+       ハッシュアルゴリズムの名前 (例: <literal>"sha256"</literal>)。
+       サポートされるアルゴリズムの一覧は
+       <function>hash_hmac_algos</function> をご参照ください。
+       <note>
+        <para>
+         暗号に適さないハッシュ関数は許可されません。 
+        </para>
+       </note>
       </para>
      </listitem>
     </varlistentry>
@@ -77,6 +82,16 @@
      <listitem>
       <para>
        &true; にセットされている場合、名前のバイナリデータが出力されます。&false; の場合、小文字の16進数が出力されます。
+      </para>
+     </listitem>
+    </varlistentry>
+    <varlistentry>
+     <term><parameter>options</parameter></term>
+     <listitem>
+      <para>
+       様々なハッシュアルゴリズム向けの、オプションの配列。
+       現状は、MurmurHash バリアントが <literal>"seed"</literal>
+       だけをサポートしています。
       </para>
      </listitem>
     </varlistentry>
@@ -149,15 +164,15 @@
 <![CDATA[
 <?php
 $password = "password";
-$iterations = 1000;
+$iterations = 600000;
 
-// 暗号学的にセキュアな、ランダムな IV を、random_bytes() を使って生成します。
+// Generate a cryptographically secure random salt using random_bytes()
 $salt = random_bytes(16);
 
 $hash = hash_pbkdf2("sha256", $password, $salt, $iterations, 20);
 var_dump($hash);
 
-// バイナリの場合、同じ結果を得るために $length は半分にする必要があります。
+// for raw binary, the $length needs to be halved for equivalent results
 $hash = hash_pbkdf2("sha256", $password, $salt, $iterations, 10, true);
 var_dump(bin2hex($hash));?>
 ]]>
@@ -188,14 +203,9 @@ string(20) "120fb6cffcf8b32c43e7"
   &reftitle.seealso;
   <para>
    <simplelist>
-    <member><function>crypt</function></member>
     <member><function>password_hash</function></member>
-    <member><function>hash</function></member>
-    <member><function>hash_algos</function></member>
-    <member><function>hash_init</function></member>
-    <member><function>hash_hmac</function></member>
-    <member><function>hash_hmac_file</function></member>
-    <member><function>openssl_pbkdf2</function></member>
+    <member><function>hash_hkdf</function></member>
+    <member><function>sodium_crypto_pwhash</function></member>
    </simplelist>
   </para>
  </refsect1>

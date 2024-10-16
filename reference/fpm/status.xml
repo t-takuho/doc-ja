@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
-<!-- EN-Revision: fab4ea95f4fe1471be947602d0e9be32fb802265 Maintainer: mumumu Status: ready -->
+<!-- EN-Revision: 2c4f02dcf9781000405646b9b21f9182aea76496 Maintainer: mumumu Status: ready -->
 
 <sect1 xml:id="fpm.status" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
  <title>FPM の情報ページ</title>
@@ -178,7 +178,7 @@
       <entry>max children reached</entry>
       <entry>
        プロセスの最大数に達したことがあるかを示します。
-       ある場合、表示は <literal>1</literal> になります。
+       ある場合、表示は <literal>1</literal> 以上になります。
        ない場合、表示は <literal>0</literal> になります。
       </entry>
      </row>
@@ -225,7 +225,7 @@
      </row>
      <row>
       <entry>request duration</entry>
-      <entry>リクエストを処理するのに使った時間の合計</entry>
+      <entry>直近のリクエストを処理するのに使った時間の合計(ミリ秒単位)</entry>
      </row>
      <row>
       <entry>request method</entry>
@@ -259,6 +259,11 @@
        直近のリクエストの、%cpu の値。
        プロセスがアイドルでない場合、この値は0になります。
        なぜなら、リクエストの処理が終わった時にこの値は計算されるからです。
+       この値は100%を超えることがあります。
+       なぜならこのメトリクスは、
+       直近のリクエストで使われたCPU時間の合計をパーセント単位で示すからです -
+       つまりこの値はすべてのコアのプロセスを考慮しますが、
+       コアがひとつの場合は、100% になります。
       </entry>
      </row>
      <row>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
-<!-- EN-Revision: 871b71764cdca8238069f27436d96011a6a2cb36 Maintainer: takagi Status: ready -->
-<refentry xml:id="function.db2-pconnect" xmlns="http://docbook.org/ns/docbook">
+<!-- EN-Revision: 1050bbff77c424193980f6b71bd49d5799c6f0a0 Maintainer: takagi Status: ready -->
+<refentry xml:id="function.db2-pconnect" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
  <refnamediv>
   <refname>db2_pconnect</refname>
   <refpurpose>
@@ -53,7 +53,69 @@
      <term><parameter>database</parameter></term>
      <listitem>
       <para>
-       DB2 クライアントカタログ内のデータベースエイリアス。
+       データベースへのカタログ接続向けでは、
+       <parameter>database</parameter>
+       は、DB2 クライアントカタログ内のデータベースエイリアスを表します。
+      </para>
+      <para>
+       データベースへのカタログ接続向けでない場合、
+       <parameter>database</parameter>
+       は、以下のフォーマットからなる完全な接続文字列を表します:
+       <literallayout>DATABASE=<parameter>database</parameter>;HOSTNAME=<parameter>hostname</parameter>;PORT=<parameter>port</parameter>;PROTOCOL=TCPIP;UID=<parameter>username</parameter>;PWD=<parameter>password</parameter>;</literallayout>
+       <note>
+        <para>
+         IBM i 上の Db2 に接続する場合、
+         以下のシステムコール
+         <link xlink:href="https://www.ibm.com/docs/en/i/7.5?topic=functions-sqldriverconnect-connect-data-source">SQLDriverConnect</link>
+         は、DSN, UID, PWD だけを
+         <link xlink:href="https://www.ibm.com/docs/en/i/7.5?topic=functions-sqldriverconnect-connect-data-source#rzadpfndvcon__title__5">connection string</link>
+         として受け入れます。たとえば以下のようになります:
+         <literallayout>DSN=<parameter>database</parameter>;UID=<parameter>username</parameter>;PWD=<parameter>password</parameter>;</literallayout>
+        </para>
+       </note>
+       この場合、パラメータは以下の値からなります:
+       <variablelist>
+        <varlistentry>
+         <term><parameter>database</parameter></term>
+         <listitem>
+          <para>
+           データベースの名前
+          </para>
+         </listitem>
+        </varlistentry>
+        <varlistentry>
+         <term><parameter>hostname</parameter></term>
+         <listitem>
+          <para>
+           データベースサーバーのホスト名あるいは IP アドレス。
+          </para>
+         </listitem>
+        </varlistentry>
+        <varlistentry>
+         <term><parameter>port</parameter></term>
+         <listitem>
+          <para>
+           データベースが要求を待ち受ける TCP/IP ポート。
+          </para>
+         </listitem>
+        </varlistentry>
+        <varlistentry>
+         <term><parameter>username</parameter></term>
+         <listitem>
+          <para>
+           データベースに接続するユーザー名。
+          </para>
+         </listitem>
+        </varlistentry>
+        <varlistentry>
+         <term><parameter>password</parameter></term>
+         <listitem>
+          <para>
+           データベースに接続するパスワード。
+          </para>
+         </listitem>
+        </varlistentry>
+       </variablelist>
       </para>
      </listitem>
     </varlistentry>
@@ -84,11 +146,11 @@
          <term><parameter>autocommit</parameter></term>
          <listitem>
           <para>
-           <literal>DB2_AUTOCOMMIT_ON</literal> を渡すと、
+           <constant>DB2_AUTOCOMMIT_ON</constant> を渡すと、
            この接続ハンドルで自動コミットを有効にします。
           </para>
           <para>
-           <literal>DB2_AUTOCOMMIT_OFF</literal> を渡すと、
+           <constant>DB2_AUTOCOMMIT_OFF</constant> を渡すと、
            この接続ハンドルで自動コミットを無効にします。
           </para>
          </listitem>
@@ -97,15 +159,15 @@
          <term><parameter>DB2_ATTR_CASE</parameter></term>
          <listitem>
           <para>
-           <literal>DB2_CASE_NATURAL</literal> を渡すと、
+           <constant>DB2_CASE_NATURAL</constant> を渡すと、
            カラム名の大文字小文字を変換せずに返します。
           </para>
           <para>
-           <literal>DB2_CASE_LOWER</literal> を渡すと、
+           <constant>DB2_CASE_LOWER</constant> を渡すと、
            カラム名を小文字に変換して返します。
           </para>
           <para>
-           <literal>DB2_CASE_UPPER</literal> を渡すと、
+           <constant>DB2_CASE_UPPER</constant> を渡すと、
            カラム名を大文字に変換して返します。
           </para>
          </listitem>
@@ -114,13 +176,13 @@
          <term><parameter>CURSOR</parameter></term>
          <listitem>
           <para>
-           <literal>DB2_FORWARD_ONLY</literal> を渡すと、
+           <constant>DB2_FORWARD_ONLY</constant> を渡すと、
            ステートメントリソースで前進のみのカーソルを使用します。
            これはデフォルトのカーソル型であり、
            すべてのデータベースサーバーでサポートされています。
           </para>
           <para>
-           <literal>DB2_SCROLLABLE</literal> を渡すと、
+           <constant>DB2_SCROLLABLE</constant> を渡すと、
            ステートメントリソースでスクロール可能なカーソルを使用します。
            このモードでは結果セット内の行へのランダムアクセスが可能となりますが、
            現在は IBM DB2 Universal Database でしかサポートされていません。

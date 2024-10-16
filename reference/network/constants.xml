@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
-<!-- EN-Revision: 8e637eb0a08f124c25c191820069f1a5f9d18d17 Maintainer: hirokawa Status: ready -->
+<!-- EN-Revision: a6faadde38e014437de2577d995882f9d0fdbd35 Maintainer: hirokawa Status: ready -->
 <!-- CREDITS: takagi -->
 <appendix xml:id="network.constants" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
  &reftitle.constants;
@@ -86,7 +86,35 @@
       <entry>カーネルメッセージ</entry>
      </row>
      <row xml:id="constant.log-local0">
-      <entry><constant>LOG_LOCAL0 ... LOG_LOCAL7</constant></entry>
+      <entry><constant>LOG_LOCAL0</constant></entry>
+      <entry>ローカルで使用できるようリザーブされている。Windowsでは使用できない。</entry>
+     </row>
+     <row xml:id="constant.log-local1">
+      <entry><constant>LOG_LOCAL1</constant></entry>
+      <entry>ローカルで使用できるようリザーブされている。Windowsでは使用できない。</entry>
+     </row>
+     <row xml:id="constant.log-local2">
+      <entry><constant>LOG_LOCAL2</constant></entry>
+      <entry>ローカルで使用できるようリザーブされている。Windowsでは使用できない。</entry>
+     </row>
+     <row xml:id="constant.log-local3">
+      <entry><constant>LOG_LOCAL3</constant></entry>
+      <entry>ローカルで使用できるようリザーブされている。Windowsでは使用できない。</entry>
+     </row>
+     <row xml:id="constant.log-local4">
+      <entry><constant>LOG_LOCAL4</constant></entry>
+      <entry>ローカルで使用できるようリザーブされている。Windowsでは使用できない。</entry>
+     </row>
+     <row xml:id="constant.log-local5">
+      <entry><constant>LOG_LOCAL5</constant></entry>
+      <entry>ローカルで使用できるようリザーブされている。Windowsでは使用できない。</entry>
+     </row>
+     <row xml:id="constant.log-local6">
+      <entry><constant>LOG_LOCAL6</constant></entry>
+      <entry>ローカルで使用できるようリザーブされている。Windowsでは使用できない。</entry>
+     </row>
+     <row xml:id="constant.log-local7">
+      <entry><constant>LOG_LOCAL7</constant></entry>
       <entry>ローカルで使用できるようリザーブされている。Windowsでは使用できない。</entry>
      </row>
      <row xml:id="constant.log-lpr">
@@ -176,6 +204,10 @@
      <entry><constant>DNS_A</constant></entry>
      <entry>IPv4アドレスリソース</entry>
     </row>
+     <row xml:id="constant.dns-a6">
+      <entry><constant>DNS_A6</constant></entry>
+      <entry>初期のIPv6 で定義されていましたが、RFC 6563 によって歴史的な扱いに格下げされました。</entry>
+     </row>
      <row xml:id="constant.dns-caa">
       <entry><constant>DNS_CAA</constant></entry>
       <entry>Certification Authority Authorizationリソース (PHP 7.0.16 および 7.1.2 以降で使用可能)</entry>
@@ -188,6 +220,10 @@
      <entry><constant>DNS_CNAME</constant></entry>
      <entry>エイリアス(Canonical Name)リソース</entry>
     </row>
+    <row xml:id="constant.dns-naptr">
+      <entry><constant>DNS_NAPTR</constant></entry>
+      <entry>Naming Authorityポインタ</entry>
+     </row>
      <row xml:id="constant.dns-ns">
      <entry><constant>DNS_NS</constant></entry>
      <entry>Authoritative Name Serverリソース</entry>
@@ -206,6 +242,10 @@
      <entry><constant>DNS_SOA</constant></entry>
      <entry>認証リソースの開始</entry>
     </row>
+     <row xml:id="constant.dns-srv">
+      <entry><constant>DNS_SRV</constant></entry>
+      <entry>サービスロケータ</entry>
+     </row>
      <row xml:id="constant.dns-txt">
      <entry><constant>DNS_TXT</constant></entry>
      <entry>テキストリソース</entry>

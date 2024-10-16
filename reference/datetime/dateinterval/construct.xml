@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
-<!-- EN-Revision: 02ff7fef5b34cf8f5395180d9d39fb64d9398d00 Maintainer: takagi Status: ready -->
+<!-- EN-Revision: 71692b6f4cace8dca72a18ccd80d4cd7305e5d4e Maintainer: takagi Status: ready -->
 <!-- Credits: mumumu -->
 <refentry xml:id="dateinterval.construct" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
  <refnamediv>
@@ -121,8 +121,9 @@
  <refsect1 role="errors">
   &reftitle.errors;
   <para>
-   <parameter>duration</parameter> を間隔としてパースできないときに
-   <classname>Exception</classname> をスローします。
+   <parameter>duration</parameter> が間隔の値としてパースできない場合、
+   <classname>DateMalformedIntervalStringException</classname> がスローされます。
+   PHP 8.3 より前のバージョンでは、<exceptionname>Exception</exceptionname> がスローされていました。
   </para>
  </refsect1>
 
@@ -137,6 +138,14 @@
      </row>
     </thead>
     <tbody>
+     <row>
+      <entry>8.3.0</entry>
+      <entry>
+       <exceptionname>Exception</exceptionname> の代わりに、
+       <exceptionname>DateMalformedIntervalStringException</exceptionname>
+       がスローされるようになりました。
+      </entry>
+     </row>
      <row>
       <entry>8.2.0</entry>
       <entry>

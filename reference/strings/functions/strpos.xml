@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
-<!-- EN-Revision: e095023e408c8cb6378ae16bb6870343a3946919 Maintainer: takagi Status: ready -->
+<!-- EN-Revision: 7efec4c29a3cb6d6e7abe325a3c0d5b6024fa37c Maintainer: takagi Status: ready -->
 <!-- CREDITS: hirokawa,mumumu -->
 <refentry xml:id="function.strpos" xmlns="http://docbook.org/ns/docbook">
  <refnamediv>
@@ -30,13 +30,16 @@
      <term><parameter>haystack</parameter></term>
      <listitem>
       <para>
-       検索を行う文字列。
+       検索対象の文字列。
       </para>
      </listitem>
     </varlistentry>
     <varlistentry>
      <term><parameter>needle</parameter></term>
      <listitem>
+      <para>
+       検索する文字列。
+      </para>
       &strings.parameter.needle.non-string;
      </listitem>
     </varlistentry>
@@ -57,8 +60,8 @@
   &reftitle.returnvalues;
   <para>
    needle が見つかった位置を、
-   <parameter>haystack</parameter> 文字列の先頭 (offset の値とは無関係) からの相対位置で返します。
-   文字列の開始位置は 0 であり、1 ではないことに注意しましょう。
+   <parameter>haystack</parameter> 文字列の先頭 (<parameter>offset</parameter> の値とは無関係) からの相対位置で返します。
+   文字列の開始位置は <literal>0</literal> であり、<literal>1</literal> ではないことに注意しましょう。
   </para>
   <para>
    needle が見つからない場合は &false; を返します。
@@ -77,6 +80,7 @@
      </row>
     </thead>
     <tbody>
+     &strings.changelog.needle-empty;
      <row>
       <entry>8.0.0</entry>
       <entry>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
-<!-- EN-Revision: 72059f653075e1466254f4f2609859993c53f906 Maintainer: hirokawa Status: ready -->
+<!-- EN-Revision: 61374bbe228e8e9c55a24aba59a1e2bb2a871148 Maintainer: hirokawa Status: ready -->
 <!-- CREDITS: takagi -->
 <refentry xml:id="function.sqrt" xmlns="http://docbook.org/ns/docbook">
  <refnamediv>
@@ -36,7 +36,7 @@
   &reftitle.returnvalues;
   <para>
    <parameter>num</parameter> の平方根を返します。
-   負の数を指定した場合は、特別な値 <literal>NAN</literal> を返します。
+   負の数を指定した場合は、特別な値 <constant>NAN</constant> を返します。
   </para>
  </refsect1>
  <refsect1 role="examples">

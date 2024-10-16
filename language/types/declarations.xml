@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
-<!-- EN-Revision: fe4cced771b28400ad2e4651a78d65628544bbbe Maintainer: mumumu Status: ready -->
+<!-- EN-Revision: 13273912b0f773c35f05297a47daa7f76dd52669 Maintainer: mumumu Status: ready -->
 
 <sect1 xml:id="language.types.declarations">
  <title>型宣言</title>
 
  <para>
   関数のパラメータや戻り値、
-  クラスのプロパティ (PHP 7.4.0 以降) に対して型を宣言することができます。
-  これによって、その値が特定の型であることを保証できます。
+  クラスのプロパティ (PHP 7.4.0 以降)、クラス定数 (PHP 8.3.0 以降) に対して型を宣言することができます。
+  これによって、その値がコール時に特定の型であることを保証できます。
   その型でない場合は、<classname>TypeError</classname> がスローされます。
  </para>
 
@@ -41,6 +41,12 @@
      </row>
     </thead>
     <tbody>
+     <row>
+      <entry>8.3.0</entry>
+      <entry>
+       クラス、インターフェイス、トレイト、そして列挙型の定数は、新たに型宣言をサポートするようになりました。
+      </entry>
+     </row>
      <row>
       <entry>8.2.0</entry>
       <entry>
@@ -153,7 +159,7 @@
      クラスまたはインターフェイスのインスタンスであることが要求されます。
      <type>bool</type> 型ではありません。
     </para>
-    <example>
+    <informalexample>
      <programlisting role="php">
 <![CDATA[
 <?php
@@ -174,7 +180,7 @@ Stack trace:
   thrown in - on line 2
 ]]>
      </screen>
-    </example>
+    </informalexample>
    </warning>
   </sect3>
 
@@ -186,7 +192,7 @@ Stack trace:
      なぜなら、関数の定義そのものが矛盾しているからです。
      PHP 8.1.0 より前のバージョンでは、
      関数をコールした際に次のような <constant>E_NOTICE</constant> が発生していました:
-     <literal>Only variable references should be returned by reference</literal>
+     <computeroutput>Only variable references should be returned by reference</computeroutput>
      <informalexample>
       <programlisting role="php">
 <![CDATA[
@@ -273,7 +279,7 @@ Stack trace:
    <title>union 型</title>
    <warning>
     <simpara>
-     union 型の中で、リテラル型 &true; と
+     union 型の中で、Value型 &true; と
      &false; を同時に組み合わせて使うことはできません。
      <type>bool</type> 型を使ってください。
     </simpara>

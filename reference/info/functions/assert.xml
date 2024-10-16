@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
-<!-- EN-Revision: bfabdf420fa4c710ec5995480dd7cbc17abdbada Maintainer: hirokawa Status: ready -->
+<!-- EN-Revision: 27dcb487a7e9c0f04559522a6d2aacf860d622cd Maintainer: hirokawa Status: ready -->
 <!-- CREDITS: takagi,mumumu -->
 <refentry xml:id="function.assert" xmlns="http://docbook.org/ns/docbook">
  <refnamediv>
@@ -16,8 +16,7 @@
    <methodparam choice="opt"><type class="union"><type>Throwable</type><type>string</type><type>null</type></type><parameter>description</parameter><initializer>&null;</initializer></methodparam>
   </methodsynopsis>
   <para>
-   <function>assert</function> は関数ではなく、言語構造です。
-   これは、expectation の定義を満たします。すなわち、
+   <function>assert</function> は expectation の定義を満たします。すなわち、
    開発環境やテスト環境では有効であるが、
    運用環境では除去されて、まったくコストのかからないアサーションということです。
   </para>
@@ -83,32 +82,41 @@
         <function>assert</function> は expectation をチェックせず、
         無条件に &true; を返します。
        </entry>
-       <entry/>
+       <entry>
+        PHP 8.3.0 以降は非推奨
+       </entry>
       </row>
       <row>
        <entry><link linkend="ini.assert.callback">assert.callback</link></entry>
        <entry>&null;</entry>
        <entry>
-        アサーションが失敗した時にコールされるユーザー定義の関数。
-        シグネチャは以下の形であるべきです:
-        <methodsynopsis role="procedural">
-         <type>void</type><methodname>assert_callback</methodname>
-         <methodparam><type>string</type><parameter>file</parameter></methodparam>
-         <methodparam><type>int</type><parameter>line</parameter></methodparam>
-         <methodparam><type>null</type><parameter>assertion</parameter></methodparam>
-         <methodparam choice="opt"><type>string</type><parameter>description</parameter></methodparam>
-        </methodsynopsis>
+        <para>
+         アサーションが失敗した時にコールされるユーザー定義の関数。
+         シグネチャは以下の形であるべきです:
+         <methodsynopsis role="procedural">
+          <type>void</type><methodname>assert_callback</methodname>
+          <methodparam><type>string</type><parameter>file</parameter></methodparam>
+          <methodparam><type>int</type><parameter>line</parameter></methodparam>
+          <methodparam><type>null</type><parameter>assertion</parameter></methodparam>
+          <methodparam choice="opt"><type>string</type><parameter>description</parameter></methodparam>
+         </methodsynopsis>
+        </para>
        </entry>
        <entry>
-        PHP 8.0.0 より前のバージョンでは、
-        コールバックのシグネチャは以下の形であるべきでした:
-        <methodsynopsis role="procedural">
-         <type>void</type><methodname>assert_callback</methodname>
-         <methodparam><type>string</type><parameter>file</parameter></methodparam>
-         <methodparam><type>int</type><parameter>line</parameter></methodparam>
-         <methodparam><type>string</type><parameter>assertion</parameter></methodparam>
-         <methodparam choice="opt"><type>string</type><parameter>description</parameter></methodparam>
-        </methodsynopsis>
+        <para>
+         PHP 8.0.0 より前のバージョンでは、
+         コールバックのシグネチャは以下の形であるべきでした:
+         <methodsynopsis role="procedural">
+          <type>void</type><methodname>assert_callback</methodname>
+          <methodparam><type>string</type><parameter>file</parameter></methodparam>
+          <methodparam><type>int</type><parameter>line</parameter></methodparam>
+          <methodparam><type>string</type><parameter>assertion</parameter></methodparam>
+          <methodparam choice="opt"><type>string</type><parameter>description</parameter></methodparam>
+         </methodsynopsis>
+        </para>
+        <simpara>
+         PHP 8.3.0 以降は非推奨
+        </simpara>
        </entry>
       </row>
       <row>
@@ -118,7 +126,9 @@
         &true; を指定すると、expectation を満たさない場合に
         <classname>AssertionError</classname> がスローされます。
        </entry>
-       <entry/>
+       <entry>
+        PHP 8.3.0 以降は非推奨
+       </entry>
       </row>
       <row>
        <entry><link linkend="ini.assert.bail">assert.bail</link></entry>
@@ -127,7 +137,9 @@
         &true; を指定すると、expectation を満たさない場合に
         PHP スクリプトの実行を停止します。
        </entry>
-       <entry/>
+       <entry>
+        PHP 8.3.0 以降は非推奨
+       </entry>
       </row>
       <row>
        <entry><link linkend="ini.assert.warning">assert.warning</link></entry>
@@ -139,14 +151,13 @@
         <link linkend="ini.assert.exception">assert.exception</link>
         が有効な場合は意味がありません。
        </entry>
-       <entry/>
+       <entry>
+        PHP 8.3.0 以降は非推奨
+       </entry>
       </row>
      </tbody>
     </tgroup>
    </table>
-
-   <literal>assert.</literal> ではじまるオプションは、
-   <function>assert_options</function> でも設定できますが、おすすめできません。
   </para>
  </refsect1>
 
@@ -228,8 +239,19 @@
  <refsect1 role="returnvalues">
   &reftitle.returnvalues;
   <para>
-   <parameter>assertion</parameter> が &false; の場合は &false; を返します。
-   そうでない場合は、&true; を返します。
+   <function>assert</function> は、以下のうちのひとつが当てはまる場合、常に &true; を返します:
+  </para>
+  <simplelist>
+   <member><literal>zend.assertions=0</literal></member>
+   <member><literal>zend.assertions=-1</literal></member>
+   <member><literal>assert.exception=1</literal></member>
+   <member><literal>assert.bail=1</literal></member>
+   <member>カスタムの例外オブジェクトが <parameter>description</parameter> に渡された場合</member>
+  </simplelist>
+  <para>
+   上記の条件がすべて当てはまらない場合でも、
+   <parameter>assertion</parameter> が真と評価できる値であれば &true; を返します。
+   そうでない場合、&false; を返します。
   </para>
  </refsect1>
 
@@ -245,6 +267,12 @@
       </row>
      </thead>
      <tbody>
+      <row>
+       <entry>8.3.0</entry>
+       <entry>
+        すべての <literal>assert.</literal> INI 設定は、推奨されなくなりました。
+       </entry>
+      </row>
       <row>
        <entry>8.0.0</entry>
        <entry>
@@ -311,210 +339,97 @@
 
  <refsect1 role="examples">
   &reftitle.examples;
-  <refsect2>
-   <title>Expectation</title>
    <example>
+    <title><function>assert</function> の例</title>
     <programlisting role="php">
 <![CDATA[
 <?php
-assert(true == false);
+assert(1 > 2);
 echo 'Hi!';
-?>
 ]]>
     </programlisting>
     <para>
-     <link linkend="ini.zend.assertions">zend.assertions</link> が 0 の場合は、
-     上の例の結果は次のようになります:
+     アサーションが有効になっている (<link linkend="ini.zend.assertions"><literal>zend.assertions=1</literal></link>) 場合は、上の例の結果は次のようになります:
     </para>
     <screen>
 <![CDATA[
-Hi!
-]]>
-    </screen>
-    <para>
-     <link linkend="ini.zend.assertions">zend.assertions</link> が 1、
-     かつ <link linkend="ini.assert.exception">assert.exception</link>
-     が 0 の場合は、上の例の結果は次のようになります:
-    </para>
-    <screen>
-<![CDATA[
-Warning: assert(): assert(true == false) failed in - on line 2
-Hi!
-]]>
-    </screen>
-    <para>
-     <link linkend="ini.zend.assertions">zend.assertions</link> が 1、
-     かつ <link linkend="ini.assert.exception">assert.exception</link>
-     が 1 の場合は、上の例の結果は次のようになります:
-    </para>
-    <screen>
-<![CDATA[
-Fatal error: Uncaught AssertionError: assert(true == false) in -:2
+Fatal error: Uncaught AssertionError: assert(1 > 2) in example.php:2
 Stack trace:
-#0 -(2): assert(false, 'assert(true == ...')
+#0 example.php(2): assert(false, 'assert(1 > 2)')
 #1 {main}
-  thrown in - on line 2
+  thrown in example.php on line 2
+]]>
+    </screen>
+    <para>
+     アサーションが無効になっている (<literal>zend.assertions=0</literal> または <literal>zend.assertions=-1</literal>) 場合は、上の例の結果は次のようになります:
+    </para>
+    <screen>
+<![CDATA[
+Hi!
 ]]>
     </screen>
    </example>
    <example>
-    <title>自作の例外を用いた expectation</title>
+    <title>カスタムのメッセージを使う</title>
     <programlisting role="php">
 <![CDATA[
 <?php
-class CustomError extends AssertionError {}
-
-assert(true == false, new CustomError('True is not false!'));
+assert(1 > 2, "Expected one to be greater than two");
 echo 'Hi!';
-?>
 ]]>
     </programlisting>
     <para>
-     <link linkend="ini.zend.assertions">zend.assertions</link> が 0 の場合は、
-     上の例の結果は次のようになります:
+     アサーションが有効になっている場合は、上の例の結果は次のようになります:
     </para>
     <screen>
 <![CDATA[
-Hi!
-]]>
-    </screen>
-    <para>
-     <link linkend="ini.zend.assertions">zend.assertions</link> が 1、
-     かつ <link linkend="ini.assert.exception">assert.exception</link>
-     が 0 の場合は、上の例の結果は次のようになります:
-    </para>
-    <screen>
-<![CDATA[
-Warning: assert(): CustomError: True is not false! in -:4
+Fatal error: Uncaught AssertionError: Expected one to be greater than two in example.php:2
 Stack trace:
-#0 {main} failed in - on line 4
-Hi!
+#0 example.php(2): assert(false, 'Expected one to...')
+#1 {main}
+  thrown in example.php on line 2
 ]]>
     </screen>
     <para>
-     <link linkend="ini.zend.assertions">zend.assertions</link> が 1、
-     かつ <link linkend="ini.assert.exception">assert.exception</link>
-     が 1 の場合は、上の例の結果は次のようになります:
+     アサーションが無効になっている場合は、上の例の結果は次のようになります:
     </para>
     <screen>
 <![CDATA[
-Fatal error: Uncaught CustomError: True is not false! in -:4
+Hi!
+]]>
+    </screen>
+   </example>
+   <example>
+    <title>カスタムの例外クラスを使う</title>
+    <programlisting role="php">
+<![CDATA[
+<?php
+class ArithmeticAssertionError extends AssertionError {}
+
+assert(1 > 2, new ArithmeticAssertionError("Expected one to be greater than two"));
+echo 'Hi!';
+]]>
+    </programlisting>
+    <para>
+     アサーションが有効になっている場合は、上の例の結果は次のようになります:
+    </para>
+    <screen>
+<![CDATA[
+Fatal error: Uncaught ArithmeticAssertionError: Expected one to be greater than two in example.php:4
 Stack trace:
 #0 {main}
-  thrown in - on line 4
+  thrown in example.php on line 4
+]]>
+    </screen>
+    <para>
+     アサーションが無効になっている場合は、上の例の結果は次のようになります:
+    </para>
+    <screen>
+<![CDATA[
+Hi!
 ]]>
     </screen>
    </example>
-  </refsect2>
-  <refsect2>
-   <title>評価済みのコードによるアサーション (PHP 7 のみ)</title>
-
-   <para>
-    評価済みのコードを使って アサーションをチェックする場合、
-    <function>assert</function> のコールバックは特に有用です。
-    なぜなら、アサーションに使うコードが、
-    アサーションのチェックが終わったときの情報と一緒にコールバックに渡されるからです。
-   </para>
-   <para>
-    <example>
-     <title>失敗した アサーションをカスタムハンドラで処理する</title>
-     <programlisting role="php">
-<![CDATA[
-<?php
-// assertを有効にし、出力を抑制する
-assert_options(ASSERT_ACTIVE, 1);
-assert_options(ASSERT_WARNING, 0);
-assert_options(ASSERT_QUIET_EVAL, 1);
-
-// ハンドラ関数を作成する
-function my_assert_handler($file, $line, $code)
-{
-    echo "<hr>Assertion Failed:
-        File '$file'<br />
-        Line '$line'<br />
-        Code '$code'<br /><hr />";
-}
-
-// コールバックを設定する
-assert_options(ASSERT_CALLBACK, 'my_assert_handler');
-
-// 失敗するアサーションを作成
-$array = [];
-assert('count($array);');
-?>
-]]>
-     </programlisting>
-     &example.outputs.72;
-     <screen>
-<![CDATA[
-Deprecated: assert(): Calling assert() with a string argument is deprecated in test.php on line 21
-<hr>Assertion Failed:
-        File 'test.php'<br />
-        Line '21'<br />
-        Code 'count($array);'<br /><hr />
-]]>
-     </screen>
-     &example.outputs.71;
-     <screen>
-<![CDATA[
-<hr>Assertion Failed:
-        File 'test.php'<br />
-        Line '21'<br />
-        Code 'count($array);'<br /><hr />
-]]>
-     </screen>
-    </example>
-   </para>
-   <para>
-    <example>
-     <title>カスタムハンドラを使った説明の表示</title>
-     <programlisting role="php">
-<![CDATA[
-<?php
-// assertを有効にし、出力を抑制する
-assert_options(ASSERT_ACTIVE, 1);
-assert_options(ASSERT_WARNING, 0);
-assert_options(ASSERT_QUIET_EVAL, 1);
-
-// ハンドラ関数を作成する
-function my_assert_handler($file, $line, $code, $desc = null)
-{
-    echo "Assertion failed at $file:$line: $code";
-    if ($desc) {
-        echo ": $desc";
-    }
-    echo "\n";
-}
-
-// コールバックを設定する
-assert_options(ASSERT_CALLBACK, 'my_assert_handler');
-
-// 失敗するアサーションを作成
-assert('2 < 1');
-assert('2 < 1', 'Two is less than one');
-?>
-]]>
-     </programlisting>
-     &example.outputs.72;
-     <screen>
-<![CDATA[
-Deprecated: assert(): Calling assert() with a string argument is deprecated in test.php on line 21
-Assertion failed at test.php:21: 2 < 1
-
-Deprecated: assert(): Calling assert() with a string argument is deprecated in test.php on line 22
-Assertion failed at test.php:22: 2 < 1: Two is less than one
-]]>
-     </screen>
-     &example.outputs.71;
-     <screen>
-<![CDATA[
-Assertion failed at test.php:21: 2 < 1
-Assertion failed at test.php:22: 2 < 1: Two is less than one
-]]>
-     </screen>
-    </example>
-   </para>
-  </refsect2>
  </refsect1>
 
  <refsect1 role="seealso">

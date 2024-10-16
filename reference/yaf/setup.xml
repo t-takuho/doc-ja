@@ -1,16 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
-<!-- EN-Revision: 1a3ca77dfc323c017792e87742bf0044d583e849 Maintainer: mumumu Status: ready -->
+<!-- EN-Revision: 48ce43fe79fa0c9f31f187ea8ec995b4cb13037e Maintainer: mumumu Status: ready -->
 
 <chapter xml:id="yaf.setup" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
  &reftitle.setup;
-
- <!-- {{{ Requirements -->
- <section xml:id="yaf.requirements">
-  &reftitle.required;
-  &no.requirement;
- </section>
- <!-- }}} -->
 
  <!-- {{{ Installation -->
  <section xml:id="yaf.installation">
@@ -30,13 +23,6 @@
 
  <!-- {{{ Configuration -->
  &reference.yaf.ini;
- <!-- }}} -->
-
- <!-- {{{ Resources -->
- <section xml:id="yaf.resources">
-  &reftitle.resources;
-  &no.resource;
- </section>
  <!-- }}} -->
 
 </chapter>

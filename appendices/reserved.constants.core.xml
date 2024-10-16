@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
-<!-- EN-Revision: 3c18b283afac456a741f6cd5447440c6525ffc7d Maintainer: takagi Status: ready -->
+<!-- EN-Revision: 592b824dd743c3ffd5dce2eefa63628c8e64117e Maintainer: takagi Status: ready -->
 <!-- CREDITS: hirokawa,shimooka,mumumu -->
  <sect2 xml:id="reserved.constants.core" xmlns="http://docbook.org/ns/docbook">
    <title>コアの定義済みの定数</title>
@@ -83,6 +83,28 @@
       </simpara>
      </listitem>
     </varlistentry>
+    <varlistentry xml:id="constant.zend-thread-safe">
+     <term>
+      <constant>ZEND_THREAD_SAFE</constant>
+      (<type>bool</type>)
+     </term>
+     <listitem>
+      <simpara>
+       PHP の現状のビルドが、スレッドセーフ版であるかどうかを示す。
+      </simpara>
+     </listitem>
+    </varlistentry>
+    <varlistentry xml:id="constant.zend-debug-build">
+     <term>
+      <constant>ZEND_DEBUG_BUILD</constant>
+      (<type>bool</type>)
+     </term>
+     <listitem>
+      <simpara>
+       PHP の現状のビルドが、デバッグビルド版であるかどうかを示す。
+      </simpara>
+     </listitem>
+    </varlistentry>
     <varlistentry xml:id="constant.php-zts">
      <term>
       <constant>PHP_ZTS</constant> 
@@ -90,7 +112,7 @@
      </term>
      <listitem>
       <simpara>
-
+       PHP の現状のビルドが、スレッドセーフ版であるかどうかを示す。
       </simpara>
      </listitem>
     </varlistentry>
@@ -101,13 +123,34 @@
      </term>
      <listitem>
       <simpara>
-
+       PHP の現状のビルドが、デバッグビルド版であるかどうかを示す。
+      </simpara>
+     </listitem>
+    </varlistentry>
+    <varlistentry xml:id="constant.debug-backtrace-provide-object">
+     <term>
+      <constant>DEBUG_BACKTRACE_PROVIDE_OBJECT</constant>
+      (<type>int</type>)
+     </term>
+     <listitem>
+      <simpara>
+       "object" のインデックスを収集します。
+      </simpara>
+     </listitem>
+    </varlistentry>
+    <varlistentry xml:id="constant.debug-backtrace-ignore-args">
+     <term>
+      <constant>DEBUG_BACKTRACE_IGNORE_ARGS</constant>
+      (<type>int</type>)
+     </term>
+     <listitem>
+      <simpara>
+       スタックトレース中の関数の情報に、引数の情報を含めません。
       </simpara>
      </listitem>
     </varlistentry>
     <varlistentry xml:id="constant.php-maxpathlen">
      <term>
-
       <constant>PHP_MAXPATHLEN</constant> 
       (<type>int</type>)
      </term>
@@ -429,7 +472,7 @@
     <varlistentry xml:id="constant.php-fd-setsize">
      <term>
       <constant>PHP_FD_SETSIZE</constant>
-      (<type>string</type>)
+      (<type>int</type>)
      </term>
      <listitem>
       <simpara>
@@ -438,7 +481,7 @@
       </simpara>
      </listitem>
     </varlistentry>
-    <varlistentry xml:id="constant.e-error">
+    <varlistentry>
      <term>
       <constant>E_ERROR</constant> 
       (<type>int</type>)
@@ -449,7 +492,7 @@
       </simpara>
      </listitem>
     </varlistentry>
-    <varlistentry xml:id="constant.e-warning">
+    <varlistentry>
      <term>
       <constant>E_WARNING</constant> 
       (<type>int</type>)
@@ -460,7 +503,7 @@
       </simpara>
      </listitem>
     </varlistentry>
-    <varlistentry xml:id="constant.e-parse">
+    <varlistentry>
      <term>
       <constant>E_PARSE</constant> 
       (<type>int</type>)
@@ -471,7 +514,7 @@
       </simpara>
      </listitem>
     </varlistentry>
-    <varlistentry xml:id="constant.e-notice">
+    <varlistentry>
      <term>
       <constant>E_NOTICE</constant> 
       (<type>int</type>)
@@ -482,7 +525,7 @@
       </simpara>
      </listitem>
     </varlistentry>
-    <varlistentry xml:id="constant.e-core-error">
+    <varlistentry>
      <term>
       <constant>E_CORE_ERROR</constant> 
       (<type>int</type>)
@@ -493,7 +536,7 @@
       </simpara>
      </listitem>
     </varlistentry>
-    <varlistentry xml:id="constant.e-core-warning">
+    <varlistentry>
      <term>
       <constant>E_CORE_WARNING</constant> 
       (<type>int</type>)
@@ -504,7 +547,7 @@
       </simpara>
      </listitem>
     </varlistentry>
-    <varlistentry xml:id="constant.e-compile-error">
+    <varlistentry>
      <term>
       <constant>E_COMPILE_ERROR</constant> 
       (<type>int</type>)
@@ -515,7 +558,7 @@
       </simpara>
      </listitem>
     </varlistentry>
-    <varlistentry xml:id="constant.e-compile-warning">
+    <varlistentry>
      <term>
       <constant>E_COMPILE_WARNING</constant> 
       (<type>int</type>)
@@ -526,7 +569,7 @@
       </simpara>
      </listitem>
     </varlistentry>
-    <varlistentry xml:id="constant.e-user-error">
+    <varlistentry>
      <term>
       <constant>E_USER_ERROR</constant> 
       (<type>int</type>)
@@ -537,7 +580,7 @@
       </simpara>
      </listitem>
     </varlistentry>
-    <varlistentry xml:id="constant.e-user-warning">
+    <varlistentry>
      <term>
       <constant>E_USER_WARNING</constant> 
       (<type>int</type>)
@@ -548,7 +591,7 @@
       </simpara>
      </listitem>
     </varlistentry>
-    <varlistentry xml:id="constant.e-user-notice">
+    <varlistentry>
      <term>
       <constant>E_USER_NOTICE</constant> 
       (<type>int</type>)
@@ -559,7 +602,7 @@
       </simpara>
      </listitem>
     </varlistentry>
-    <varlistentry xml:id="constant.e-recoverble-error">
+    <varlistentry>
      <term>
       <constant>E_RECOVERABLE_ERROR</constant> 
       (<type>int</type>)
@@ -570,7 +613,7 @@
       </simpara>
      </listitem>
     </varlistentry>
-    <varlistentry xml:id="constant.e-deprecated">
+    <varlistentry>
      <term>
       <constant>E_DEPRECATED</constant> 
       (<type>int</type>)
@@ -581,7 +624,7 @@
       </simpara>
      </listitem>
     </varlistentry>
-    <varlistentry xml:id="constant.e-user-deprecated">
+    <varlistentry>
      <term>
       <constant>E_USER_DEPRECATED</constant> 
       (<type>int</type>)
@@ -592,7 +635,7 @@
       </simpara>
      </listitem>
     </varlistentry>
-    <varlistentry xml:id="constant.e-all">
+    <varlistentry>
      <term>
       <constant>E_ALL</constant>
       (<type>int</type>)
@@ -603,7 +646,7 @@
       </simpara>
      </listitem>
     </varlistentry>
-    <varlistentry xml:id="constant.e-strict">
+    <varlistentry>
      <term>
       <constant>E_STRICT</constant>
       (<type>int</type>)
@@ -614,7 +657,7 @@
       </simpara>
      </listitem>
     </varlistentry>
-    <varlistentry xml:id="constant.compiler-halt-offset">
+    <varlistentry>
      <term>
       <constant>__COMPILER_HALT_OFFSET__</constant>
       (<type>int</type>)
@@ -679,6 +722,57 @@
       <simpara>
        Windows の <literal>CTRL+BREAK</literal> イベント。
        PHP 7.4.0 から利用可能です。(Windows のみ)
+      </simpara>
+     </listitem>
+    </varlistentry>
+    <varlistentry xml:id="constant.php-cli-process-title">
+     <term>
+      <constant>PHP_CLI_PROCESS_TITLE</constant>
+      (<type>bool</type>)
+     </term>
+     <listitem>
+      <simpara>
+       プロセスのタイトルを設定/取得できるかどうかを示します。
+       CLI SAPI でのみ利用可能です。
+      </simpara>
+     </listitem>
+    </varlistentry>
+    <varlistentry xml:id="constant.stderr">
+     <term>
+      <constant>STDERR</constant>
+      (<type>resource</type>)
+     </term>
+     <listitem>
+      <simpara>
+       <literal>stderr</literal> に対して、
+       既にオープンされているストリーム。
+       CLI SAPI でのみ利用可能です。
+      </simpara>
+     </listitem>
+    </varlistentry>
+    <varlistentry xml:id="constant.stdin">
+     <term>
+      <constant>STDIN</constant>
+      (<type>resource</type>)
+     </term>
+     <listitem>
+      <simpara>
+       <literal>stdin</literal> に対して、
+       既にオープンされているストリーム。
+       CLI SAPI でのみ利用可能です。
+      </simpara>
+     </listitem>
+    </varlistentry>
+    <varlistentry xml:id="constant.stdout">
+     <term>
+      <constant>STDOUT</constant>
+      (<type>resource</type>)
+     </term>
+     <listitem>
+      <simpara>
+       <literal>stdout</literal> に対して、
+       既にオープンされているストリーム。
+       CLI SAPI でのみ利用可能です。
       </simpara>
      </listitem>
     </varlistentry>

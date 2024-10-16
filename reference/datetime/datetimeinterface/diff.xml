@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
-<!-- EN-Revision: 02ff7fef5b34cf8f5395180d9d39fb64d9398d00 Maintainer: takagi Status: ready -->
+<!-- EN-Revision: 52222422c00aba192c5f7fed3c4efdaa870e799e Maintainer: takagi Status: ready -->
 <!-- Credits: mumumu -->
 
 <refentry xml:id="datetime.diff" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -70,6 +70,11 @@
    ふたつの日付の差をあらわす <classname>DateInterval</classname> オブジェクトを返します。
   </para>
   <para>
+   <parameter>absolute</parameter> は、
+   <classname>DateInterval</classname> オブジェクトの
+   <parameter>invert</parameter> プロパティにのみ影響します。
+  </para>
+  <para>
    さらに厳密に言うと、戻り値はもともとのオブジェクト
    (<parameter>$this</parameter> または 
    <parameter>$originObject</parameter>) を
@@ -127,8 +132,8 @@ echo $interval->format('%R%a days');
 <![CDATA[
 <?php
 $originalTime = new DateTimeImmutable("2021-10-30 09:00:00 Europe/London");
-$targedTime = new DateTimeImmutable("2021-10-31 08:30:00 Europe/London");
-$interval = $originalTime->diff($targedTime);
+$targetTime = new DateTimeImmutable("2021-10-31 08:30:00 Europe/London");
+$interval = $originalTime->diff($targetTime);
 echo $interval->format("%H:%I:%S (Full days: %a)"), "\n";
 ?>
 ]]>
@@ -137,6 +142,33 @@ echo $interval->format("%H:%I:%S (Full days: %a)"), "\n";
    <screen>
 <![CDATA[
 24:30:00 (Full days: 0)
+]]>
+   </screen>
+  </example>
+
+  <example>
+   <title><methodname>DateTimeInterface::diff</methodname> range</title>
+   <para>
+    このメソッドが返す値は、
+    <parameter>$this</parameter> から <parameter>$targetObject</parameter>
+    までの範囲から取得した正確な時間です。
+    よって、（うるう年でない場合) 1月1日から12月31日までを比較すると、
+    365 ではなく、364 が返ってきます。
+   </para>
+   <programlisting role="php">
+<![CDATA[
+<?php
+$originalTime = new DateTimeImmutable("2023-01-01 UTC");
+$targetTime = new DateTimeImmutable("2023-12-31 UTC");
+$interval = $originalTime->diff($targetTime);
+echo "Full days: ", $interval->format("%a"), "\n";
+?>
+]]>
+   </programlisting>
+   &example.outputs;
+   <screen>
+<![CDATA[
+Full days: 364
 ]]>
    </screen>
   </example>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
-<!-- EN-Revision: a0a0165e07a83d74a66c316d52b04c1f4bf52aeb Maintainer: takagi Status: ready -->
+<!-- EN-Revision: 78d17c25eeecc78cb7098b1a01d42391e36af2c1 Maintainer: takagi Status: ready -->
 <!-- CREDITS: hirokawa -->
 <refentry xml:id="function.eval" xmlns="http://docbook.org/ns/docbook">
  <refnamediv>
@@ -17,6 +17,15 @@
   <para>
    指定した <parameter>code</parameter>
    を PHP コードとして評価します。
+  </para>
+  <para>
+   評価されるコードは、<function>eval</function> がコールされた行における
+   <link linkend="language.variables.scope">変数のスコープ</link>
+   を継承します。コールされた時点で利用可能なあらゆる変数が、
+   評価されるコード中で読み取ることができますし、変更することもできます。
+   しかし、定義されている全ての関数やクラスは、グローバル名前空間で定義されます。
+   言い換えると、コンパイラは評価されるコードを
+   <link linkend="function.include">include</link> された別のファイルのようにみなすということです。
   </para>
   <caution>
    <para>
@@ -76,7 +85,7 @@
    コールされない限り、<function>eval</function> は &null; を返します。
    <literal>return</literal> がコールされた場合は、その値を返します。
    PHP 7 以降、評価されるコードの中でパースエラーが発生した場合は、
-   <function>eval</function> は ParseError 例外をスローします。
+   <function>eval</function> は <classname>ParseError</classname> 例外をスローします。
    PHP 7 より前のバージョンでは、この場合に
    <function>eval</function> は &false; を返していました。
    それ以降のコードは通常通り実行されます。

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
-<!-- EN-Revision: d73b9709de6633d289d11d3ae4696a9d78187b53 Maintainer: hirokawa Status: ready -->
+<!-- EN-Revision: badd30777a8ce1e6ad58265e36dfa76452e90119 Maintainer: hirokawa Status: ready -->
 <!-- CREDITS: takagi,mumumu -->
 <section xml:id="openssl.installation" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
  &reftitle.install;
  <para>
   PHP の OpenSSL サポートを使用するには、<option
-  role="configure">--with-openssl[=DIR]</option> を指定して PHP を
+  role="configure">--with-openssl</option> を指定して PHP を
   コンパイルする必要があります。
  </para>
  <para>
@@ -78,6 +78,16 @@
     <filename>openssl.cnf</filename> を変更させないようにしてください。
    </simpara>
   </caution>
+  <simpara>
+   Windows 版の PHP 8.2.0 以降でデフォルトとなっている OpenSSL 3.0.0 以降、
+   いくつかのアルゴリズムがレガシーとみなされるようになっています。
+   そうしたアルゴリズムは、暗号のコミュニティは使わなくなってきており、
+   かつセキュアでないと見なされてきているものです。
+   これらのアルゴリズムはレガシープロバイダ
+   (<filename>extras/ssl/legacy.dll</filename>)
+   で利用できます。その使い方は OpenSSL マニュアルの
+   <link xlink:href="&url.openssl.config;#Provider-Configuration">provider configuration</link> で説明されています。
+  </simpara>
  </note>
 
  <simplesect role="changelog">
@@ -92,6 +102,17 @@
       </row>
      </thead>
      <tbody>
+      <row>
+       <entry>7.4.0</entry>
+       <entry>
+        <option role="configure">--with-openssl[=DIR]</option>
+        は、ディレクトリ名を引数として受け入れなくなりました。
+        代わりに、pkg-config の変数 <envar>PKG_CONFIG_PATH</envar>
+        を OpenSSL のインストールパスに設定するか、
+        環境変数 <envar>OPENSSL_LIBS</envar> と
+        <envar>OPENSSL_CFLAGS</envar> を設定するようにしてください。
+       </entry>
+      </row>
       <row>
        <entry>7.4.0</entry>
        <entry>

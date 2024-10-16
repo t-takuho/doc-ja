@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
-<!-- EN-Revision: f004f576e7329b583dd41cf7e393efd5139bd5a3 Maintainer: takagi Status: ready -->
+<!-- EN-Revision: 7cec82fec28b339913fe98e990e7b01f4bb97476 Maintainer: takagi Status: ready -->
 <!-- CREDITS: hirokawa,shimooka,mumumu -->
 <refentry xml:id="function.get-parent-class" xmlns="http://docbook.org/ns/docbook">
  <refnamediv>
@@ -26,7 +26,6 @@
      <listitem>
       <para>
        調べたいオブジェクトあるいはクラスの名前。
-       オブジェクトのメソッドからコールされた場合、このパラメータはオプションとなります。
       </para>
      </listitem>
     </varlistentry>
@@ -41,13 +40,10 @@
   </para>
   <note>
    <para>
-    オブジェクトが親を持たない場合や指定したクラスが存在しない場合は &false; を返します。
+    オブジェクトが親を持たない場合や、
+    指定したクラスが存在しない場合は &false; を返します。
    </para>
   </note>
-  <para>
-   オブジェクトの外部からこのパラメータを省略してコールすると、
-   この関数は &false; を返します
-  </para>
  </refsect1>
 
  <refsect1 role="changelog">
@@ -61,6 +57,15 @@
      </row>
     </thead>
     <tbody>
+     <row>
+      <entry>8.3.0</entry>
+      <entry>
+       <function>get_parent_class</function> を引数なしでコールすると、
+       <constant>E_DEPRECATED</constant> が発生するようになりました。
+       これより前のバージョンでは、クラスの内部でこの関数をコールすると、
+       そのクラスの名前を返していました。
+      </entry>
+     </row>
      <row>
       <entry>8.0.0</entry>
       <entry>

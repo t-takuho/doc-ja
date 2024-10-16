@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
-<!-- EN-Revision: d6eb5fda8a3c0a755b4d15cb617a09bb81d5882e Maintainer: mumumu Status: ready -->
+<!-- EN-Revision: 48ce43fe79fa0c9f31f187ea8ec995b4cb13037e Maintainer: mumumu Status: ready -->
 
 <chapter xml:id="apcu.setup" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
  &reftitle.setup;
-
- <section xml:id="apcu.requirements">
-  &reftitle.required;
-  &no.requirement;
- </section>
 
  <section xml:id="apcu.installation">
   &reftitle.install;
@@ -58,11 +53,6 @@
  </section>
 
  &reference.apcu.ini;
-
- <section xml:id="apcu.resources">
-  &reftitle.resources;
-  &no.resource;
- </section>
 
 </chapter>
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
-<!-- EN-Revision: f9c4a68ef4f89e51e6d9b905ad3ddb6492386dd3 Maintainer: takagi Status: ready -->
+<!-- EN-Revision: e50e79746736dbdfbabe9bd3566793b3ddf38f58 Maintainer: takagi Status: ready -->
 <!-- CREDITS: takagi -->
 <section xml:id="misc.configuration" xmlns="http://docbook.org/ns/docbook">
  &reftitle.runtime;
@@ -21,43 +21,43 @@
      <row>
       <entry><link linkend="ini.ignore-user-abort">ignore_user_abort</link></entry>
       <entry>"0"</entry>
-      <entry>PHP_INI_ALL</entry>
+      <entry><constant>INI_ALL</constant></entry>
       <entry></entry>
      </row>
      <row>
       <entry><link linkend="ini.syntax-highlighting">highlight.string</link></entry>
       <entry>"#DD0000"</entry>
-      <entry>PHP_INI_ALL</entry>
+      <entry><constant>INI_ALL</constant></entry>
       <entry></entry>
      </row>
      <row>
       <entry><link linkend="ini.syntax-highlighting">highlight.comment</link></entry>
       <entry>"#FF8000"</entry>
-      <entry>PHP_INI_ALL</entry>
+      <entry><constant>INI_ALL</constant></entry>
       <entry></entry>
      </row>
      <row>
       <entry><link linkend="ini.syntax-highlighting">highlight.keyword</link></entry>
       <entry>"#007700"</entry>
-      <entry>PHP_INI_ALL</entry>
+      <entry><constant>INI_ALL</constant></entry>
       <entry></entry>
      </row>
      <row>
       <entry><link linkend="ini.syntax-highlighting">highlight.default</link></entry>
       <entry>"#0000BB"</entry>
-      <entry>PHP_INI_ALL</entry>
+      <entry><constant>INI_ALL</constant></entry>
       <entry></entry>
      </row>
      <row>
       <entry><link linkend="ini.syntax-highlighting">highlight.html</link></entry>
       <entry>"#000000"</entry>
-      <entry>PHP_INI_ALL</entry>
+      <entry><constant>INI_ALL</constant></entry>
       <entry></entry>
      </row>
      <row>
       <entry><link linkend="ini.browscap">browscap</link></entry>
       <entry>NULL</entry>
-      <entry>PHP_INI_SYSTEM</entry>
+      <entry><constant>INI_SYSTEM</constant></entry>
       <entry></entry>
      </row>
     </tbody>

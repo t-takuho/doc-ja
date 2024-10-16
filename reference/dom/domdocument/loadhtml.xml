@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
-<!-- EN-Revision: 765749a26b620538117fff4425fafb3ed5834b54 Maintainer: takagi Status: ready -->
+<!-- EN-Revision: c22cca7824d96f39642b69111b31869878d195d7 Maintainer: takagi Status: ready -->
 <!-- Credits: mumumu -->
 <refentry xml:id="domdocument.loadhtml" xmlns="http://docbook.org/ns/docbook">
  <refnamediv>
@@ -21,6 +21,7 @@
    パースします。XML を読み込む場合とは異なり、妥当な HTML でなくても
    読み込むことができます。
   </para>
+  &dom.domdocument.html5;
  </refsect1>
  <refsect1 role="parameters">
   &reftitle.parameters;
@@ -37,12 +38,7 @@
     <varlistentry>
      <term><parameter>options</parameter></term>
      <listitem>
-      <para>
-       Libxml 2.6.0 以降では、
-       <parameter>options</parameter> パラメータで <link
-       linkend="libxml.constants">Libxml の追加パラメータ</link>
-       を指定できます。
-      </para>
+      &dom.parameter.options;
      </listitem>
     </varlistentry>
    </variablelist>

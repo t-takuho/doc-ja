@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
-<!-- EN-Revision: e095023e408c8cb6378ae16bb6870343a3946919 Maintainer: hirokawa Status: ready -->
+<!-- EN-Revision: 654ee5c8afdf4ee721befdd0937fa155c50dca43 Maintainer: hirokawa Status: ready -->
 <!-- CREDITS: shimooka,mumumu -->
 <refentry xml:id="function.strrchr" xmlns="http://docbook.org/ns/docbook">
  <refnamediv>
@@ -14,6 +14,7 @@
    <type class="union"><type>string</type><type>false</type></type><methodname>strrchr</methodname>
    <methodparam><type>string</type><parameter>haystack</parameter></methodparam>
    <methodparam><type>string</type><parameter>needle</parameter></methodparam>
+   <methodparam choice="opt"><type>bool</type><parameter>before_needle</parameter><initializer>&false;</initializer></methodparam>
   </methodsynopsis>
   <para>
    この関数は、文字列 <parameter>haystack</parameter> の中で
@@ -30,7 +31,7 @@
      <term><parameter>haystack</parameter></term>
      <listitem>
       <para>
-       検索を行う文字列。
+       検索対象の文字列。
       </para>
      </listitem>
     </varlistentry>
@@ -44,6 +45,17 @@
        とは異なります。
       </para>
       &strings.parameter.needle.non-string;
+     </listitem>
+    </varlistentry>
+    <varlistentry>
+     <term><parameter>before_needle</parameter></term>
+     <listitem>
+      <para>
+       &true; にすると、
+       <parameter>haystack</parameter> の中で
+       最後に <parameter>needle</parameter> が現れる箇所より前の部分を返します
+       (needle は含めません)。
+      </para>
      </listitem>
     </varlistentry>
    </variablelist>
@@ -70,6 +82,13 @@
     </thead>
     <tbody>
      <row>
+      <entry>8.3.0</entry>
+      <entry>
+       <parameter>before_needle</parameter> が追加されました。
+      </entry>
+     </row>
+     &strings.changelog.needle-empty;
+     <row>
       <entry>8.0.0</entry>
       <entry>
        <parameter>needle</parameter> に数値を渡すことはサポートされなくなりました。
@@ -94,16 +113,21 @@
     <programlisting role="php">
 <![CDATA[
 <?php
-// $PATH 中の最後のディレクトリを取得
-$dir = substr(strrchr($PATH, ":"), 1);
-
-// 最後の改行文字以降をすべて取得
-$text = "Line 1\nLine 2\nLine 3";
-$last = substr(strrchr($text, 10), 1 );
+$ext = strrchr('somefile.txt', '.');
+echo "file extension: $ext \n";
+$ext = $ext ? strtolower(substr($ext, 1)) : '';
+echo "file extension: $ext";
 ?>
 ]]>
     </programlisting>
-   </example>   
+    &example.outputs.similar;
+    <screen>
+<![CDATA[
+file extension: .txt
+file extension: txt
+]]>
+    </screen>
+   </example>
   </para>
  </refsect1>
 

@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- $Revision$ -->
+<!-- EN-Revision: 43d07782b514d0c7a8487f2c74063739f302df8d Maintainer: mumumu Status: ready -->
+<sect1 xml:id="language.operators.increment">
+ <title>加算子/減算子</title>
+ <titleabbrev>加算子/減算子</titleabbrev>
+ <para>
+  PHP は 加算子/減算子（前置・後置ともに）をサポートします。
+  これらの単項演算子は、値をインクリメント(ひとつ増や)したり、デクリメント(ひとつ減ら)したりできます。
+ </para>
+ <table>
+  <title>加算子/減算子</title>
+  <tgroup cols="3">
+   <thead>
+    <row>
+     <entry>例</entry>
+     <entry>名前</entry>
+     <entry>効果</entry>
+    </row>
+   </thead>
+   <tbody>
+    <row>
+     <entry>++$a</entry>
+     <entry>前置加算子</entry>
+     <entry><varname>$a</varname> をインクリメントし、<varname>$a</varname> を返します。</entry>
+    </row>
+    <row>
+     <entry>$a++</entry>
+     <entry>後置加算子</entry>
+     <entry><varname>$a</varname> を返し、<varname>$a</varname> をインクリメントします。</entry>
+    </row>
+    <row>
+     <entry>--$a</entry>
+     <entry>前置減算子</entry>
+     <entry><varname>$a</varname> をデクリメントし、<varname>$a</varname> を返します。</entry>
+    </row>
+    <row>
+     <entry>$a--</entry>
+     <entry>後置減算子</entry>
+     <entry><varname>$a</varname> を返し、<varname>$a</varname> をデクリメントします。</entry>
+    </row>
+   </tbody>
+  </tgroup>
+ </table>
+
+ <para>
+  以下に簡単なスクリプトの例を示します:
+  <informalexample>
+   <programlisting role="php">
+<![CDATA[
+<?php
+echo '後置加算:', PHP_EOL;
+$a = 5;
+var_dump($a++);
+var_dump($a);
+
+echo '前置加算:', PHP_EOL;
+$a = 5;
+var_dump(++$a);
+var_dump($a);
+
+echo '後置減算:', PHP_EOL;
+$a = 5;
+var_dump($a--);
+var_dump($a);
+
+echo '前置減算:', PHP_EOL;
+$a = 5;
+var_dump(--$a);
+var_dump($a);
+?>
+]]>
+   </programlisting>
+   &example.outputs;
+   <screen>
+<![CDATA[
+後置加算:
+int(5)
+int(6)
+前置加算:
+int(6)
+int(6)
+後置減算:
+int(5)
+int(4)
+前置減算:
+int(4)
+int(4)
+]]>
+   </screen>
+  </informalexample>
+
+  <warning>
+   <para>
+    <type>bool</type> 型の値に、加算子や減算子を適用しても何も起こりません。
+    PHP 8.3.0 以降では、この操作に対して <constant>E_WARNING</constant> が発生するようになりました。なぜなら、bool 型の値を暗黙のうちに数値型にキャストするように将来変更されるからです。
+   </para>
+   <para>
+    <type>null</type> 型の値に、減算子を適用しても何も起こりません。
+    PHP 8.3.0 以降では、この操作に対して <constant>E_WARNING</constant> が発生するようになりました。なぜなら、null 型の値を暗黙のうちに数値型にキャストするように将来変更されるからです。
+   </para>
+   <para>
+    <link linkend="language.types.numeric-strings">数値形式の文字列</link> でない文字列に対して、減算子を適用しても何も起こりません。
+    PHP 8.3.0 以降では、この操作に対して <constant>E_WARNING</constant> が発生するようになりました。なぜなら、こうした操作は <classname>TypeError</classname> がスローされるように将来変更されるからです。
+   </para>
+  </warning>
+  <note>
+   <para>
+    加算や減算の振る舞いをオーバーロードする機能をサポートしている内部オブジェクトも、インクリメントしたり、デクリメントしたりできます。このような内部オブジェクトの例としては、<classname>GMP</classname> が挙げられます。　
+   </para>
+  </note>
+ </para>
+
+ <sect2 xml:id="language.operators.increment.string">
+  <title>Perl 風の、文字列をインクリメントする機能</title>
+  <warning>
+   <simpara>
+    この機能は、PHP 8.3.0 以降は soft-deprecated 扱い
+    (<constant>E_DEPRECATED</constant> は発生しないものの、新しいコードではこの機能を使うべきではない) になっています。
+    <function>str_increment</function> を代わりに使いましょう。
+   </simpara>
+  </warning>
+
+  <para>
+   PHP では、<link linkend="language.types.numeric-strings">数値形式の文字列</link> でない文字列をインクリメントすることも可能です。この場合、文字列は英数字からなる、ASCII 文字列である必要があり、文字を次の文字に変更します。文字が <literal>Z</literal> に達すると、左の文字がひとつ繰り上がります。たとえば、<code>$a = 'Z'; $a++;</code> というコードは、<varname>$a</varname> を <literal>'AA'</literal> に変更します。
+  </para>
+
+  <example>
+   <title>Perl 風に、文字列をインクリメントする例</title>
+   <programlisting role="php">
+<![CDATA[
+<?php
+echo '== アルファベットからなる文字列 ==' . PHP_EOL;
+$s = 'W';
+for ($n=0; $n<6; $n++) {
+    echo ++$s . PHP_EOL;
+}
+// 英数字からなる文字列は、異なる振る舞いをします
+echo '== 英数字からなる文字列 ==' . PHP_EOL;
+$d = 'A8';
+for ($n=0; $n<6; $n++) {
+    echo ++$d . PHP_EOL;
+}
+$d = 'A08';
+for ($n=0; $n<6; $n++) {
+    echo ++$d . PHP_EOL;
+}
+?>
+]]>
+   </programlisting>
+   &example.outputs;
+   <screen>
+<![CDATA[
+== アルファベットからなる文字列 ==
+X
+Y
+Z
+AA
+AB
+AC
+== 英数字からなる文字列 ==
+A9
+B0
+B1
+B2
+B3
+B4
+A09
+A10
+A11
+A12
+A13
+A14
+]]>
+   </screen>
+  </example>
+
+  <warning>
+   <para>
+    英数字からなる文字列が、<link linkend="language.types.numeric-strings">数値形式の文字列</link> として解釈できる場合、その値は <type>int</type> または <type>float</type> にキャストされます。この挙動は、文字列が科学的記法で書かれた浮動小数点数の場合に特に問題になります。<function>str_increment</function> を使えば、こうした暗黙の型変換の影響を受けません。
+   </para>
+   <example>
+    <title>英数字が浮動小数点数にキャストされる挙動</title>
+    <programlisting role="php">
+<![CDATA[
+<?php
+$s = "5d9";
+var_dump(++$s);
+var_dump(++$s);
+?>
+]]>
+    </programlisting>
+    &example.outputs;
+    <screen>
+<![CDATA[
+string(3) "5e0"
+float(6)
+]]>
+    </screen>
+    <para>
+     上記の出力になる理由は、<literal>"5e0"</literal> という値が <type>float</type> として解釈され、インクリメントされる前に <literal>5.0</literal> にキャストされるためです。
+    </para>
+   </example>
+  </warning>
+ </sect2>
+</sect1>

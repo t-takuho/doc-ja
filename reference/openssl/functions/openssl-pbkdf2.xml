@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
-<!-- EN-Revision: d1e3ea622e5d4f542cd36eca59a9f22aa0142633 Maintainer: takagi Status: ready -->
+<!-- EN-Revision: 5bc68add3da3cd18c40f851e944b15095d3a26aa Maintainer: takagi Status: ready -->
 <!-- Credits: mumumu -->
 
 <refentry xml:id="function.openssl-pbkdf2" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -13,7 +13,7 @@
   &reftitle.description;
   <methodsynopsis>
    <type class="union"><type>string</type><type>false</type></type><methodname>openssl_pbkdf2</methodname>
-   <methodparam><type>string</type><parameter>password</parameter></methodparam>
+   <methodparam><modifier role="attribute">#[\SensitiveParameter]</modifier><type>string</type><parameter>password</parameter></methodparam>
    <methodparam><type>string</type><parameter>salt</parameter></methodparam>
    <methodparam><type>int</type><parameter>key_length</parameter></methodparam>
    <methodparam><type>int</type><parameter>iterations</parameter></methodparam>
@@ -57,9 +57,7 @@
     <listitem>
      <para>
       イテレーションの回数。 
-      <link 
-      xlink:href="https://pages.nist.gov/800-63-3/sp800-63b.html#sec5">NIST 
-      は少なくとも10000を推奨しています</link>.
+      <link xlink:href="https://pages.nist.gov/800-63-3/sp800-63b.html#sec5">NIST は少なくとも10000を推奨しています</link>.
      </para>
     </listitem>
    </varlistentry>
@@ -91,10 +89,10 @@
     <programlisting role="php">
 <![CDATA[
 <?php
-$password = 'yOuR-pAs5w0rd-hERe';
-$salt = openssl_random_pseudo_bytes(12);
-$keyLength = 40;
-$iterations = 10000;
+$password = 'password';
+$salt = openssl_random_pseudo_bytes(16);
+$keyLength = 20;
+$iterations = 600000;
 $generated_key = openssl_pbkdf2($password, $salt, $keyLength, $iterations, 'sha256');
 echo bin2hex($generated_key)."\n";
 echo base64_encode($generated_key)."\n";

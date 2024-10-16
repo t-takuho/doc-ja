@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
-<!-- EN-Revision: 6e69d9342ef5b124a62c8a255cb0d9a091d07b5e Maintainer: mumumu Status: ready -->
-<phpdoc:classref xml:id="class.allowdynamicproperties" xmlns:phpdoc="http://php.net/ns/phpdoc" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xi="http://www.w3.org/2001/XInclude">
+<!-- EN-Revision: f94d903985119d3ac00f4528551df947f57b667f Maintainer: mumumu Status: ready -->
+<reference xml:id="class.allowdynamicproperties" role="class" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xi="http://www.w3.org/2001/XInclude">
  <title>AllowDynamicProperties クラス</title>
  <titleabbrev>AllowDynamicProperties</titleabbrev>
 
@@ -20,17 +20,11 @@
   <section xml:id="allowdynamicproperties.synopsis">
    &reftitle.classsynopsis;
 
-   <classsynopsis>
+   <classsynopsis class="class">
     <ooclass>
+     <modifier>final</modifier>
      <classname>AllowDynamicProperties</classname>
     </ooclass>
-
-    <classsynopsisinfo>
-     <ooclass>
-      <modifier>final</modifier>
-      <classname>AllowDynamicProperties</classname>
-     </ooclass>
-    </classsynopsisinfo>
 
     <classsynopsisinfo role="comment">&Methods;</classsynopsisinfo>
     <xi:include xpointer="xmlns(db=http://docbook.org/ns/docbook) xpointer(id('class.allowdynamicproperties')/db:refentry/db:refsect1[@role='description']/descendant::db:constructorsynopsis[@role='AllowDynamicProperties'])">
@@ -48,7 +42,7 @@
     動的なプロパティを使うと、
     推奨されない警告が発生します。
    </para>
-   <example>
+   <informalexample>
     <programlisting role="php">
 <![CDATA[
 <?php
@@ -71,7 +65,7 @@ $o2->nonExistingProp = true;
 Deprecated: Creation of dynamic property DefaultBehaviour::$nonExistingProp is deprecated in file on line 10
 ]]>
     </screen>
-   </example>
+   </informalexample>
   </section>
 
   <section xml:id="allowdynamicproperties.seealso">
@@ -83,7 +77,7 @@ Deprecated: Creation of dynamic property DefaultBehaviour::$nonExistingProp is d
 
  &language.predefined.allowdynamicproperties.construct;
 
-</phpdoc:classref>
+</reference>
 <!-- Keep this comment at the end of the file
 Local variables:
 mode: sgml

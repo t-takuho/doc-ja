@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
-<!-- EN-Revision: 1431d18dc4ee8056f2958d2b6af559c9e5478f61 Maintainer: takagi Status: ready -->
+<!-- EN-Revision: 874f7c1266d4e4f2e1e6c79b5fb48b590caa1197 Maintainer: takagi Status: ready -->
 <!-- CREDITS: mumumu -->
 
 <chapter xml:id="language.namespaces" xmlns="http://docbook.org/ns/docbook"
@@ -9,6 +9,7 @@
 
  <sect1 xml:id="language.namespaces.rationale">
   <title>名前空間の概要</title>
+  <titleabbrev>概要</titleabbrev>
   <?phpdoc print-version-for="namespaces"?>
   <simpara>
    名前空間とは何でしょう? 広義の「名前空間」とは、項目をカプセル化するもののことです。
@@ -90,6 +91,7 @@ echo constant($d); // "名前空間および動的言語機能" を参照くだ�
 
  <sect1 xml:id="language.namespaces.definition">
   <title>名前空間の定義</title>
+  <titleabbrev>名前空間</titleabbrev>
   <?phpdoc print-version-for="namespaces"?>
   <para>
    PHP のコードならなんでも名前空間に含めることができますが、
@@ -142,6 +144,7 @@ namespace MyProject; // fatal error - namespace must be the first statement in t
  </sect1>
  <sect1 xml:id="language.namespaces.nested">
   <title>サブ名前空間の宣言</title>
+  <titleabbrev>サブ名前空間</titleabbrev>
   <?phpdoc print-version-for="namespaces"?>
   <para>
    ディレクトリやファイルと同様、PHP の名前空間においても名前空間の階層構造を指定することができます。
@@ -168,6 +171,7 @@ function connect() { /* ... */  }
  </sect1>
  <sect1 xml:id="language.namespaces.definitionmultiple">
   <title>同一ファイル内での複数の名前空間の定義</title>
+  <titleabbrev>同一ファイル内での複数の名前空間の定義</titleabbrev>
   <?phpdoc print-version-for="namespaces"?>
   <para>
    複数の名前空間を同一ファイル内で宣言することもあります。
@@ -281,6 +285,7 @@ echo MyProject\Connection::start();
  </sect1>
  <sect1 xml:id="language.namespaces.basics">
   <title>名前空間の使用法: 基本編</title>
+  <titleabbrev>基本編</titleabbrev>
   <?phpdoc print-version-for="namespaces"?>
   <para>
    名前空間の使い方についてあれこれ言う前に、まずは
@@ -292,7 +297,7 @@ echo MyProject\Connection::start();
      <simpara>
       <literal>foo.txt</literal> のような相対ファイル名を使う。これは
       <literal>currentdirectory/foo.txt</literal> と解釈されます。ここで、
-      currentdirectory は現在いるディレクトリを表します。したがって、カレントディレクトリが
+      <literal>currentdirectory</literal> は現在いるディレクトリを表します。したがって、カレントディレクトリが
       <literal>/home/foo</literal> であった場合はこれは <literal>/home/foo/foo.txt</literal>
       となります。
      </simpara>
@@ -407,7 +412,7 @@ echo \Foo\Bar\FOO; // 定数 Foo\Bar\FOO と解釈されます
   <para>
    グローバルなクラス、関数あるいは定数にアクセスするには、完全修飾名を使用して
    <function>\strlen</function>、<classname>\Exception</classname> あるいは
-   <literal>\INI_ALL</literal> などとすることができます。
+   \<constant>INI_ALL</constant> などとすることができます。
    <example>
     <title>グローバルなクラス、関数および定数への名前空間内からのアクセス</title>
     <programlisting role="php">
@@ -430,6 +435,7 @@ $c = new \Exception('error'); // グローバルクラス Exception のインス
  </sect1>
  <sect1 xml:id="language.namespaces.dynamic">
   <title>名前空間と動的言語機能</title>
+  <titleabbrev>名前空間と動的言語機能</titleabbrev>
   <?phpdoc print-version-for="namespaces"?>
   <para>
    PHP における名前空間の実装は、PHP 自身が動的プログラミング言語であるという性質に影響を受けています。
@@ -508,6 +514,7 @@ echo constant('namespacename\constname'), "\n"; // これも namespaced と表�
  </sect1>
  <sect1 xml:id="language.namespaces.nsconstants">
   <title>namespace キーワードおよび __NAMESPACE__ 定数</title>
+  <titleabbrev>namespace キーワードおよび __NAMESPACE__</titleabbrev>
   <?phpdoc print-version-for="namespaces"?>
   <para>
    PHP には、現在の名前空間内の要素へのアクセスを抽象化するための方法が 2 通りあります。
@@ -605,6 +612,7 @@ $b = namespace\CONSTANT; // 定数 CONSTANT の値を $b に代入します
 
  <sect1 xml:id="language.namespaces.importing">
   <title>名前空間の使用法: エイリアス/インポート</title>
+  <titleabbrev>エイリアス/インポート</titleabbrev>
   <?phpdoc print-version-for="namespaces"?>
   <para>
    外部の完全修飾名をエイリアスで参照したりインポートしたりする機能は、
@@ -779,6 +787,7 @@ use const some\namespace\{ConstA, ConstB, ConstC};
  </sect1>
  <sect1 xml:id="language.namespaces.global">
   <title>グローバル空間</title>
+  <titleabbrev>グローバル空間</titleabbrev>
   <?phpdoc print-version-for="namespaces"?>
   <para>
    名前空間の定義がない場合、すべてのクラスや関数の定義はグローバル空間に配置されます。
@@ -806,6 +815,7 @@ function fopen() {
  </sect1>
  <sect1 xml:id="language.namespaces.fallback">
   <title>名前空間の使用法: グローバル関数/定数への移行</title>
+  <titleabbrev>グローバル関数/定数への移行</titleabbrev>
   <?phpdoc print-version-for="namespaces"?>
   <para>
    名前空間内で、PHP が未定義のクラス名や関数、定数に出会った場合、
@@ -864,6 +874,7 @@ if (is_array('hi')) { // "is not array" と表示します
 
  <sect1 xml:id="language.namespaces.rules">
   <title>名前解決のルール</title>
+  <titleabbrev>名前解決のルール</titleabbrev>
   <?phpdoc print-version-for="namespaces"?>
   <para>
    名前解決のルールを説明するにあたって、いくつかの重要な定義を示しておきます。
@@ -957,9 +968,9 @@ if (is_array('hi')) { // "is not array" と表示します
       たとえば、<literal>use A\B\C;</literal> の後に、
       <literal>new C()</literal> のようなことをすると、
       C は <literal>A\B\C()</literal> に解決されます。
-      同じように、<literal>use function A\B\fn;</literal>
-      の後に <literal>fn()</literal> のようなことをすると、
-      <literal>A\B\fn</literal> という名前に解決されます。
+      同じように、<literal>use function A\B\foo;</literal>
+      の後に <literal>foo()</literal> のようなことをすると、
+      <literal>A\B\foo</literal> という名前に解決されます。
      </simpara>
     </listitem>
     <listitem>
@@ -1067,6 +1078,7 @@ A\B::foo();   // 名前空間 "A\A" のクラス "B" のメソッド "foo" を�
  </sect1>
  <sect1 xml:id="language.namespaces.faq">
   <title>FAQ: 名前空間について知っておくべきこと</title>
+  <titleabbrev>FAQ</titleabbrev>
   <?phpdoc print-version-for="namespaces"?>
   <para>
    この FAQ は 2 つに別れています。一般的な質問と、
@@ -1151,7 +1163,7 @@ A\B::foo();   // 名前空間 "A\A" のクラス "B" のメソッド "foo" を�
     <listitem>
      <simpara>
       <link linkend="language.namespaces.faq.builtinconst">
-      特別な定数 NULL, TRUE, FALSE, ZEND_THREAD_SAFE そして ZEND_DEBUG_BUILD は上書きできない</link>
+      特別な定数 &null;, &true;, &false; は上書きできない</link>
      </simpara>
     </listitem>
    </orderedlist>
@@ -1522,7 +1534,7 @@ $a = \Bar\FOO; // fatal error, undefined namespace constant Bar\FOO
    </para>
   </sect2>
   <sect2 xml:id="language.namespaces.faq.builtinconst">
-   <title>特別な定数 NULL, TRUE, FALSE, ZEND_THREAD_SAFE そして ZEND_DEBUG_BUILD は上書きできない</title>
+   <title>特別な定数 &null;, &true;, &false; は上書きできない</title>
    <para>
     名前空間内で特別な組み込み定数を定義しようとすると、致命的なエラーが発生します。
     <example>

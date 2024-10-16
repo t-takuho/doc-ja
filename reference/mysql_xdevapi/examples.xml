@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
-<!-- EN-Revision: dd11e151f182a2a512a62cc828af500bad8cb4a8 Maintainer: mumumu Status: ready -->
+<!-- EN-Revision: 8deee9585d9c8485493e35bcb7dde61b29c30854 Maintainer: mumumu Status: ready -->
 
 <chapter xml:id="mysql-xdevapi.examples" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
  &reftitle.examples;
@@ -8,7 +8,7 @@
   X DevAPI の中心的なエントリポイントは、
   <function>mysql_xdevapi\getSession</function> 関数です。
   これは MySQL 8.0 サーバーへの URI を受取り、
-  <classname>mysql_xdevap\Session</classname> オブジェクトを返します。
+  <classname>mysql_xdevapi\Session</classname> オブジェクトを返します。
  </para>
  <example>
   <title>MySQL Serverへの接続</title>
@@ -111,7 +111,7 @@ array(4) {
 <?php
 $result = $collection->find()->execute();
 foreach ($result as $doc) {
-  echo "${doc["name"]} is a ${doc["job"]}.\n";
+  echo "{$doc["name"]} is a {$doc["job"]}.\n";
 }
 ?>
 ]]>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
-<!-- EN-Revision: 4eeb07225f615fcde68cbefb84df2fc9bf278f1f Maintainer: hirokawa Status: ready -->
+<!-- EN-Revision: d5d10b38b4395e77827b04d5290bb137bd3872b4 Maintainer: hirokawa Status: ready -->
 <!-- CREDITS: mumumu -->
 
- <chapter xml:id="configuration" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
+<chapter xml:id="configuration" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>実行時設定</title>
 
   <sect1 xml:id="configuration.file">
@@ -230,8 +230,8 @@ $ PHP_INI_SCAN_DIR=/usr/local/etc/php.d: php
    </simpara>
    <simpara>
     .user.ini 形式の INI ファイルがサポートするのは、
-    モードが <constant>PHP_INI_PERDIR</constant> および
-    <constant>PHP_INI_USER</constant> の項目のみです。
+    モードが <constant>INI_PERDIR</constant> および
+    <constant>INI_USER</constant> の項目のみです。
    </simpara>
    
    <simpara>
@@ -268,51 +268,70 @@ $ PHP_INI_SCAN_DIR=/usr/local/etc/php.d: php
 
    <para>
     たとえば <link linkend="ini.output-buffering">output_buffering</link> は
-    <literal>PHP_INI_PERDIR</literal> なので、
+    <constant>INI_PERDIR</constant> なので、
     <function>ini_set</function> で設定することはできません。
     一方 <link linkend="ini.display-errors">display_errors</link> は
-    <literal>PHP_INI_ALL</literal> なのでどこででも設定でき、当然
+    <constant>INI_ALL</constant> なのでどこででも設定でき、当然
     <function>ini_set</function> ででも設定できます。
    </para>
 
    <para>
-    <table>
-     <title>PHP_INI_* モードの定義</title>
-     <tgroup cols="2">
-      <thead>
-       <row>
-        <entry>モード</entry>
-        <entry>意味</entry>
-       </row>
-      </thead>
-      <tbody>
-       <row>
-        <entry><literal>PHP_INI_USER</literal></entry>
-        <entry>
-         ユーザースクリプト (<function>ini_set</function> などで)
-         または <link linkend="configuration.changes.windows">Windows レジストリ</link>
-         で設定可能なエントリ。
-         &user-ini; でも設定可能です。
-        </entry>
-       </row>
-       <row>
-        <entry><literal>PHP_INI_PERDIR</literal></entry>
-       <entry>
-        &php.ini;、&htaccess;、&httpd.conf; あるいは &user-ini;
-        で設定可能なエントリ
-       </entry>
-       </row>
-       <row>
-        <entry><literal>PHP_INI_SYSTEM</literal></entry>
-        <entry>&php.ini; または &httpd.conf;で設定可能なエントリ</entry>
-       </row>
-       <row>
-        <entry><literal>PHP_INI_ALL</literal></entry>
-        <entry>どこでも設定可能なエントリ</entry>
-       </row>
-      </tbody>
-     </tgroup>
-    </table>
+    <variablelist>
+<!--
+Replace everything inside the <variablelist> element with an <xi:include>
+once libxml2 gets XInclude 1.1 attribute copying support.
+The below <xi:include> will include the appropriate elements
+but needs all top-level xml:id's removed (see XInclude 1.1 set-xml-id).
+    <xi:include xpointer="xmlns(db=http://docbook.org/ns/docbook) xpointer(id('constant.ini-mode')/*)"><xi:fallback/></xi:include>
+-->
+     <title>INI モードの定数</title>
+     <varlistentry>
+      <term>
+       <constant>INI_USER</constant>
+       (<type>int</type>)
+      </term>
+      <listitem>
+       <simpara>
+        エントリはユーザー定義のスクリプト(<function xmlns="http://docbook.org/ns/docbook">ini_set</function>)
+        や <link xmlns="http://docbook.org/ns/docbook" linkend="configuration.changes.windows">Windows レジストリ</link> を使って) で設定できます。 
+        &user-ini; でも設定できます
+       </simpara>
+      </listitem>
+     </varlistentry>
+     <varlistentry>
+      <term>
+       <constant>INI_PERDIR</constant>
+       (<type>int</type>)
+      </term>
+      <listitem>
+       <simpara>
+        エントリは &php.ini;, &htaccess;, &httpd.conf;, &user-ini; で設定できます
+       </simpara>
+      </listitem>
+     </varlistentry>
+     <varlistentry>
+      <term>
+       <constant>INI_SYSTEM</constant>
+       (<type>int</type>)
+      </term>
+      <listitem>
+       <simpara>
+        エントリは &php.ini; または &httpd.conf; で設定できます
+       </simpara>
+      </listitem>
+     </varlistentry>
+     <varlistentry>
+      <term>
+       <constant>INI_ALL</constant>
+       (<type>int</type>)
+      </term>
+      <listitem>
+       <simpara>
+        エントリはどこでも設定できます
+       </simpara>
+      </listitem>
+     </varlistentry>
+    </variablelist>
    </para>
   </sect1>
 
@@ -331,8 +350,8 @@ $ PHP_INI_SCAN_DIR=/usr/local/etc/php.d: php
     <para>
      Apache 設定ファイルから PHP の設定を変更するには、
      以下に示す Apache ディレクティブを使用します。
-     各設定オプションの変更の可否 (<constant>PHP_INI_ALL</constant>,
-     <constant>PHP_INI_PERDIR</constant>, または <constant>PHP_INI_SYSTEM</constant>)
+     各設定オプションの変更の可否 (<constant>INI_ALL</constant>,
+     <constant>INI_PERDIR</constant>, または <constant>INI_SYSTEM</constant>)
      については、付録
      <link linkend="ini.list">php.ini ディレクティブのリスト</link>
      を参照ください。
@@ -349,8 +368,8 @@ $ PHP_INI_SCAN_DIR=/usr/local/etc/php.d: php
        <listitem>
         <para>
          指定した設定オプションに値を設定します。変更の可否が、
-         <constant>PHP_INI_ALL</constant> もしくは
-         <constant>PHP_INI_PERDIR</constant> である設定オプションに対し利用できます。
+         <constant>INI_ALL</constant> もしくは
+         <constant>INI_PERDIR</constant> である設定オプションに対し利用できます。
          セット済みの値をクリアしたい場合は、<literal>none</literal> を
          値として使用してください。
         </para>
@@ -372,8 +391,8 @@ $ PHP_INI_SCAN_DIR=/usr/local/etc/php.d: php
        <listitem>
         <para>
          設定オプションに論理値を設定するために使用します。変更の可否が、
-         <constant>PHP_INI_ALL</constant> もしくは
-         <constant>PHP_INI_PERDIR</constant> である設定オプションで利用できます。
+         <constant>INI_ALL</constant> もしくは
+         <constant>INI_PERDIR</constant> である設定オプションで利用できます。
         </para>
        </listitem>
       </varlistentry>
@@ -457,9 +476,9 @@ $ PHP_INI_SCAN_DIR=/usr/local/etc/php.d: php
      およびそのサブディレクトリで実行されるすべてのスクリプトで有効となります。
      PHP 設定オプションのディレクティブを名前とする文字列値をキーに登録してください。
      また、値のデータに PHP 定数を記述しても解釈されませんので、注意してください。
-     しかし、<constant>PHP_INI_USER</constant>
+     しかし、<constant>INI_USER</constant>
      で変更可能な設定値はこの方法で設定することが可能ですが、
-     <constant>PHP_INI_PERDIR</constant> である設定値は設定できません。
+     <constant>INI_PERDIR</constant> である設定値は設定できません。
      なぜなら、これらの設定値はリクエストがあるたびに読み直されるからです。
     </simpara>
    </sect2>

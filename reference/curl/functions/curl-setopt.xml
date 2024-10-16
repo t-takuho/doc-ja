@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
-<!-- EN-Revision: 52dbbb3856a16174bfd0a96e6df8c52f236397eb Maintainer: takagi Status: ready -->
+<!-- EN-Revision: 310963ad9ab1c2ca315361ff94314a21fa65f8b8 Maintainer: takagi Status: ready -->
 <!-- CREDITS: hirokawa,mumumu -->
 <refentry xml:id="function.curl-setopt" xmlns="http://docbook.org/ns/docbook">
  <refnamediv>
@@ -81,7 +81,7 @@
            <entry valign="top"><constant>CURLOPT_CERTINFO</constant></entry>
            <entry valign="top">
             &true; を設定すると、セキュアな転送時に SSL 証明書の情報を
-            <literal>STDERR</literal> に出力します。
+            <constant>STDERR</constant> に出力します。
            </entry>
            <entry valign="top">
             cURL 7.19.1 で追加されました。
@@ -569,7 +569,7 @@
            <entry valign="top">
             &true; を設定すると、FTP 転送を ASCII モードで行います。
             LDAP の場合は、データを HTML ではなくプレーンテキストで取得します。
-            Windows システムでは <literal>STDOUT</literal>
+            Windows システムでは <constant>STDOUT</constant>
             に対してバイナリモードを設定しないでください。
            </entry>
            <entry valign="top">
@@ -597,7 +597,7 @@
            <entry valign="top"><constant>CURLOPT_VERBOSE</constant></entry>
            <entry valign="top">
             &true; を設定すると、詳細な情報を出力します。情報は
-            <literal>STDERR</literal> か、または
+            <constant>STDERR</constant> か、または
             <constant>CURLOPT_STDERR</constant>
             で指定したファイルに出力されます。
            </entry>
@@ -664,7 +664,8 @@
           <row>
            <entry valign="top"><constant>CURLOPT_EXPECT_100_TIMEOUT_MS</constant></entry>
            <entry valign="top">
-            期待するタイムアウト。連続100リクエストの時間をミリ秒で指定します。
+            <literal>Expect: 100-continue</literal> のレスポンスを待つタイムアウト。
+            ミリ秒で指定します。
             デフォルトは1000ミリ秒です。
            </entry>
            <entry valign="top">
@@ -688,9 +689,9 @@
            <entry valign="top"><constant>CURLOPT_FTPSSLAUTH</constant></entry>
            <entry valign="top">
             （使用可能な場合の）FTP 認証方法。
-            <literal>CURLFTPAUTH_SSL</literal>（まず SSL を試す）、
-            <literal>CURLFTPAUTH_TLS</literal>（まず TLS を試す）あるいは
-            <literal>CURLFTPAUTH_DEFAULT</literal>（cURL が決める）のいずれかです。
+            <constant>CURLFTPAUTH_SSL</constant>（まず SSL を試す）、
+            <constant>CURLFTPAUTH_TLS</constant>（まず TLS を試す）あるいは
+            <constant>CURLFTPAUTH_DEFAULT</constant>（cURL が決める）のいずれかです。
            </entry>
            <entry valign="top">
             cURL 7.12.2 で追加されました。
@@ -699,28 +700,40 @@
           <row>
            <entry valign="top"><constant>CURLOPT_HEADEROPT</constant></entry>
            <entry valign="top">
-            ヘッダをどう扱うかを指定します。
-            次の定数のうち、一つを指定できます:
-            <simpara>
-             <constant>CURLHEADER_UNIFIED</constant>: 
-             <constant>CURLOPT_HTTPHEADER</constant> で指定されたヘッダが、
-             サーバーとプロキシ双方のリクエストに対して使われます。
-             このオプションが有効な場合、
-             <constant>CURLOPT_PROXYHEADER</constant> は効果がありません。
-            </simpara>
-            <simpara>
-             <constant>CURLHEADER_SEPARATE</constant>:
-             <constant>CURLOPT_HTTPHEADER</constant> で指定されたヘッダは、
-             プロキシには送られず、サーバーにのみ送られます。
-             プロキシに送るヘッダは、
-             <constant>CURLOPT_PROXYHEADER</constant> を設定しなければなりません。
-             CONNECT でないリクエストがプロキシに送信された場合、
-             libcurl はサーバーとプロキシ両方にヘッダを送信することに注意してください。
-             CONNECT リクエストを送信する場合、
-             libcurl は <constant>CURLOPT_PROXYHEADER</constant> 
-             をプロキシのみに送り、
-             <constant>CURLOPT_HTTPHEADER</constant> をサーバーにのみ送信します。
-            </simpara>
+            <para>
+             ヘッダをどう扱うかを指定します。
+             次の定数のうち、一つを指定できます:
+             <variablelist>
+              <varlistentry>
+               <term>CURLHEADER_UNIFIED</term>
+               <listitem>
+                <simpara>
+                 <constant>CURLOPT_HTTPHEADER</constant> で指定されたヘッダが、
+                 サーバーとプロキシ双方のリクエストに対して使われます。
+                 このオプションが有効な場合、
+                 <constant>CURLOPT_PROXYHEADER</constant> は効果がありません。
+                </simpara>
+               </listitem>
+              </varlistentry>
+              <varlistentry>
+               <term>CURLHEADER_SEPARATE</term>
+               <listitem>
+                <simpara>
+                 <constant>CURLOPT_HTTPHEADER</constant> で指定されたヘッダは、
+                 プロキシには送られず、サーバーにのみ送られます。
+                 プロキシに送るヘッダは、
+                 <constant>CURLOPT_PROXYHEADER</constant> を設定しなければなりません。
+                 CONNECT でないリクエストがプロキシに送信された場合、
+                 libcurl はサーバーとプロキシ両方にヘッダを送信することに注意してください。
+                 CONNECT リクエストを送信する場合、
+                 libcurl は <constant>CURLOPT_PROXYHEADER</constant> 
+                 をプロキシのみに送り、
+                 <constant>CURLOPT_HTTPHEADER</constant> をサーバーにのみ送信します。
+                </simpara>
+               </listitem>
+              </varlistentry>
+             </variablelist>
+            </para>
             <simpara>
              cURL 7.42.1 以降は
              <constant>CURLHEADER_SEPARATE</constant> がデフォルトで、
@@ -740,7 +753,7 @@
             <constant>CURL_HTTP_VERSION_1_0</constant> (HTTP/1.0 を使用する)、
             あるいは <constant>CURL_HTTP_VERSION_1_1</constant> (HTTP/1.1 を使用する)
             <constant>CURL_HTTP_VERSION_2_0</constant> (HTTP 2 の使用を試みる),
-            <constant>CURL_HTTP_VERSION_2 </constant> (<constant>CURL_HTTP_VERSION_2_0</constant> のエイリアス),
+            <constant>CURL_HTTP_VERSION_2</constant> (<constant>CURL_HTTP_VERSION_2_0</constant> のエイリアス),
             <constant>CURL_HTTP_VERSION_2TLS</constant> (TLS (https) の場合のみ HTTP 2 の使用を試みる) または
             <constant>CURL_HTTP_VERSION_2_PRIOR_KNOWLEDGE</constant> (HTTP 1.1 へのアップグレードを行わず、HTTP/2 を使って TLS でないリクエストを発行する)
             のいずれかです。
@@ -757,6 +770,7 @@
              <constant>CURLAUTH_DIGEST</constant>、
              <constant>CURLAUTH_GSSNEGOTIATE</constant>、
              <constant>CURLAUTH_NTLM</constant>、
+             <constant>CURLAUTH_AWS_SIGV4</constant>、
              <constant>CURLAUTH_ANY</constant> および
              <constant>CURLAUTH_ANYSAFE</constant>。
             </para>
@@ -766,14 +780,13 @@
              問い合わせたうえで最適な方法を選択します。
             </para>
             <para>
-             <constant>CURLAUTH_ANY</constant> は
-             <literal>CURLAUTH_BASIC | CURLAUTH_DIGEST | CURLAUTH_GSSNEGOTIATE | CURLAUTH_NTLM</literal>
-             のエイリアスです。
+             <constant>CURLAUTH_ANY</constant> は、全てのビットを設定します。
+             この場合 cURL は、もっともセキュアなものを自動で選択します。
             </para>
             <para>
-              <constant>CURLAUTH_ANYSAFE</constant> は
-              <literal>CURLAUTH_DIGEST | CURLAUTH_GSSNEGOTIATE | CURLAUTH_NTLM</literal>
-              のエイリアスです。
+             <constant>CURLAUTH_ANYSAFE</constant> は、
+             <constant>CURLAUTH_BASIC</constant> 以外の全てのビットを設定します。
+             この場合 cURL は、もっともセキュアなものを自動で選択します。
             </para>
            </entry>
            <entry valign="top">
@@ -806,6 +819,57 @@
             転送速度が <constant>CURLOPT_LOW_SPEED_LIMIT</constant>
             より遅い期間がどれだけ続いた場合に転送を異常終了させるかを、
             秒単位で指定します。
+           </entry>
+           <entry valign="top">
+           </entry>
+          </row>
+          <row>
+           <entry valign="top"><constant>CURLOPT_MAIL_RCPT_ALLLOWFAILS</constant></entry>
+           <entry valign="top">
+            送信先によっては、RCPT TO コマンドが失敗することを許可します。
+           </entry>
+           <entry valign="top">
+            複数の送信先にデータを送る場合、
+            デフォルトで cURL は RCPT TO コマンドが送信先のうちひとつでも失敗すると、SMTP の通信を中止します。
+            このオプションは cURL にエラーを無視し、
+            有効な送信先の処理は続行するように指示します。
+            すべての送信先の RCPT TO コマンドが失敗した場合にこのフラグが設定されていた場合は、cURL は SMTP の通信を中止し、最後に実行された RCPT TO コマンドから受け取ったエラーを返します。
+           </entry>
+           <entry valign="top">
+           </entry>
+          </row>
+          <row>
+           <entry valign="top"><constant>CURLOPT_MAXAGE_CONN</constant></entry>
+           <entry valign="top">
+            既存の接続を再利用して良いとみなす、アイドル時間の最大値。
+            デフォルトは <literal>118</literal> 秒に設定されています。
+           </entry>
+           <entry valign="top">
+           </entry>
+          </row>
+          <row>
+           <entry valign="top"><constant>CURLOPT_MAXFILESIZE_LARGE</constant></entry>
+           <entry valign="top">
+            ダウンロードできるファイルの最大サイズをバイト単位で設定します。
+            この値より大きなファイルがリクエストされた場合、
+            通信は開始されず、<constant>CURLE_FILESIZE_EXCEEDED</constant>
+            が返されます。
+            ダウンロードが始まる前にファイルサイズが常にわかっているわけではないので、ファイルの転送量が指定された最大サイズよりも結局大きかった場合は、このオプションは意味がありません。
+           </entry>
+           <entry valign="top">
+           </entry>
+          </row>
+          <row>
+           <entry valign="top"><constant>CURLOPT_MAXLIFETIME_CONN</constant></entry>
+           <entry valign="top">
+            接続が作成されてから、
+            既存の接続を再利用してもよいと見なすまでの時間の最大値。
+            秒単位で指定します。
+            接続がキャッシュに存在し、この値より古いことがわかった場合、
+            転送中の通信が完了した場合に接続は一度クローズされます。
+            デフォルトは0です。つまり、
+            このオプションは無効になっており、
+            あらゆる接続が再利用の対象になります。
            </entry>
            <entry valign="top">
            </entry>
@@ -877,6 +941,7 @@
              <constant>CURLPROTO_DICT</constant>,
              <constant>CURLPROTO_FILE</constant>,
              <constant>CURLPROTO_TFTP</constant>,
+             <constant>CURLPROTO_MQTT</constant>,
              <constant>CURLPROTO_ALL</constant>
             </para>
            </entry>
@@ -978,16 +1043,78 @@
           <row>
            <entry valign="top"><constant>CURLOPT_SSL_OPTIONS</constant></entry>
            <entry valign="top">
-            SSL 関連の振る舞いのオプションを設定します。
-            以下に示す定数のビットマスクの組み合わせです:
-            <simpara>
-             <constant>CURLSSLOPT_ALLOW_BEAST</constant>:
-             SSL3 や TLS1.0 プロトコルのセキュリティ上の欠陥を回避するあらゆる手段を使わない。
-            </simpara>
-            <simpara>
-             <constant>CURLSSLOPT_NO_REVOKE</constant>:
-             証明書の失効チェックを行うSSLバックエンドについて、それを無効にする。
-            </simpara>
+            <para>
+             SSL 関連の振る舞いのオプションを設定します。
+             以下に示す定数のビットマスクの組み合わせです:
+             <variablelist>
+              <varlistentry>
+               <term>CURLSSLOPT_ALLOW_BEAST</term>
+               <listitem>
+                <simpara>
+                 SSL3 や TLS1.0 プロトコルのセキュリティ上の欠陥を回避するあらゆる手段を使わない。
+                </simpara>
+               </listitem>
+              </varlistentry>
+              <varlistentry>
+               <term>CURLSSLOPT_NO_REVOKE</term>
+               <listitem>
+                <simpara>
+                 証明書の失効チェックを行うSSLバックエンドについて、それを無効にする。
+                </simpara>
+               </listitem>
+              </varlistentry>
+              <varlistentry>
+               <term>CURLSSLOPT_AUTO_CLIENT_CERT</term>
+               <listitem>
+                <simpara>
+                 クライアント証明書を認証のために自動で配置し、
+                 サーバーからリクエストがあったときは利用します。
+                 このオプションは Schannel (native Windows SSL library) でのみサポートされています。
+                </simpara>
+               </listitem>
+              </varlistentry>
+              <varlistentry>
+               <term>CURLSSLOPT_NATIVE_CA</term>
+               <listitem>
+                <simpara>
+                 オペレーティングシステムのネイティブなCAストアを、
+                 証明書の検証に用います。これは OpenSSL を Windows でビルドしたときにのみ使えます。
+                </simpara>
+                <note>
+                 <simpara>
+                  このオプションは実験的なものであり、振る舞いが変更される可能性があります。
+                 </simpara>
+                </note>
+               </listitem>
+              </varlistentry>
+              <varlistentry>
+               <term>CURLSSLOPT_NO_PARTIALCHAIN</term>
+               <listitem>
+                <simpara>
+                 "部分的な" 証明書チェインを許可しません。
+                 この点以外は、cURL のデフォルトの振る舞いをします。
+                 このオプションは、OpenSSL でのみサポートされています。
+                 証明書チェインがルート証明書ではなく、
+                 中間証明書で終わっていた場合は、証明書の検証が失敗します。
+                </simpara>
+               </listitem>
+              </varlistentry>
+              <varlistentry>
+               <term>CURLSSLOPT_REVOKE_BEST_EFFORT</term>
+               <listitem>
+                <simpara>
+                 配布ポイントがオフラインであったり、存在しない場合に、証明書の失効チェックを無視します。
+                 このオプションは Schannel (native Windows SSL library) でのみサポートされています。
+                </simpara>
+                <note>
+                 <simpara>
+                  <constant>CURLSSLOPT_NO_REVOKE</constant> と組み合わせて使った場合、後に設定した方が優先されます。
+                 </simpara>
+                </note>
+               </listitem>
+              </varlistentry>
+             </variablelist>
+            </para>
            </entry>
            <entry valign="top">
             cURL 7.25.0 で追加されました。PHP 7.0.7 以降で利用可能です。
@@ -1010,28 +1137,41 @@
           <row>
            <entry valign="top"><constant>CURLOPT_SSLVERSION</constant></entry>
            <entry valign="top">
-            <constant>CURL_SSLVERSION_DEFAULT</constant> (0)、
-            <constant>CURL_SSLVERSION_TLSv1</constant> (1)、
-            <constant>CURL_SSLVERSION_SSLv2</constant> (2)、
-            <constant>CURL_SSLVERSION_SSLv3</constant> (3)、
-            <constant>CURL_SSLVERSION_TLSv1_0</constant> (4)、
-            <constant>CURL_SSLVERSION_TLSv1_1</constant> (5)、
-            <constant>CURL_SSLVERSION_TLSv1_2</constant> (6)、
-            <constant>CURL_SSLVERSION_TLSv1_3</constant> (7) のいずれかの値。
-            TLSバージョンの最大値は、定数 <constant>CURL_SSLVERSION_MAX_*</constant> で設定できます。
-            定数 <constant>CURL_SSLVERSION_MAX_*</constant> のうちのひとつと、
-            定数 <constant>CURL_SSLVERSION_*</constant> のうちのひとつを OR で設定することもできます。
-            <constant>CURL_SSLVERSION_MAX_DEFAULT</constant> (ライブラリがサポートする最大のバージョン),
-            <constant>CURL_SSLVERSION_MAX_TLSv1_0</constant>,
-            <constant>CURL_SSLVERSION_MAX_TLSv1_1</constant>,
-            <constant>CURL_SSLVERSION_MAX_TLSv1_2</constant>, または
-            <constant>CURL_SSLVERSION_MAX_TLSv1_3</constant>.
-            <note>
-             <para>
+            <para>
+             以下のうちの、いずれかの値です。
+             <simplelist type="inline">
+              <member><constant>CURL_SSLVERSION_DEFAULT</constant></member>
+              <member><constant>CURL_SSLVERSION_TLSv1</constant></member>
+              <member><constant>CURL_SSLVERSION_SSLv2</constant></member>
+              <member><constant>CURL_SSLVERSION_SSLv3</constant></member>
+              <member><constant>CURL_SSLVERSION_TLSv1_0</constant></member>
+              <member><constant>CURL_SSLVERSION_TLSv1_1</constant></member>
+              <member><constant>CURL_SSLVERSION_TLSv1_2</constant></member>
+              <member><constant>CURL_SSLVERSION_TLSv1_3</constant></member>
+             </simplelist>
+            </para>
+            <simpara>
+             TLSバージョンの最大値は、定数 <constant>CURL_SSLVERSION_MAX_<replaceable>*</replaceable></constant> で設定できます。
+            </simpara>
+            <para>
+             定数 <constant>CURL_SSLVERSION_MAX_<replaceable>*</replaceable></constant> のうちのひとつと、
+             定数 <constant>CURL_SSLVERSION_<replaceable>*</replaceable></constant> のうちのひとつを OR で設定することもできます。
+             <simplelist type="inline">
+              <member><constant>CURL_SSLVERSION_MAX_DEFAULT</constant> (the maximum version supported by the library)</member>
+              <member><constant>CURL_SSLVERSION_MAX_TLSv1_0</constant></member>
+              <member><constant>CURL_SSLVERSION_MAX_TLSv1_1</constant></member>
+              <member><constant>CURL_SSLVERSION_MAX_TLSv1_2</constant></member>
+              <member><constant>CURL_SSLVERSION_MAX_TLSv1_3</constant></member>
+             </simplelist>
+            </para>
+            <warning>
+             <simpara>
               この値は何も設定せず、デフォルトに任せるのが最適です。
-              2 や 3 を設定すると、SSLv2 および SSLv3 の既知の脆弱性の影響を受けるため、非常に危険です。
-             </para>
-            </note>
+              <constant>CURL_SSLVERSION_SSLv2</constant> や
+              <constant>CURL_SSLVERSION_SSLv3</constant> を設定すると、
+              SSLv2 および SSLv3 の既知の脆弱性の影響を受けるため、非常に危険です。
+             </simpara>
+            </warning>
            </entry>
            <entry valign="top">
            </entry>
@@ -1039,22 +1179,38 @@
           <row>
            <entry valign="top"><constant>CURLOPT_PROXY_SSL_OPTIONS</constant></entry>
            <entry valign="top">
-            HTTPSプロキシの振る舞いを設定するオプションです。
-            これは以下の定数のうち、任意のものを組み合わせたビットマスクです:
-            <simpara>
-             <constant>CURLSSLOPT_ALLOW_BEAST</constant>:
-             SSL3 と TLS1.0 プロトコルに存在する脆弱性を回避するための回避策を使いません。
-            </simpara>
-            <simpara>
-             <constant>CURLSSLOPT_NO_REVOKE</constant>:
-             SSLバックエンドの証明書の失効チェックを無効にします。
-             但し、そうした振る舞いが存在した場合に限ります(curl &gt;= 7.44.0)
-            </simpara>
-            <simpara>
-             <constant>CURLSSLOPT_NO_PARTIALCHAIN</constant>:
-             "部分的な"証明書チェインを許可しません。
-             デフォルトでは許可されています(curl &gt;= 7.68.0)
-            </simpara>
+            <para>
+             HTTPSプロキシの振る舞いを設定するオプションです。
+             これは以下の定数のうち、任意のものを組み合わせたビットマスクです:
+             <variablelist>
+              <varlistentry>
+               <term>CURLSSLOPT_ALLOW_BEAST</term>
+               <listitem>
+                <simpara>
+                 SSL3 と TLS1.0 プロトコルに存在する脆弱性を回避するための回避策を使いません。
+                </simpara>
+               </listitem>
+              </varlistentry>
+              <varlistentry>
+               <term>CURLSSLOPT_NO_REVOKE</term>
+               <listitem>
+                <simpara>
+                 SSLバックエンドの証明書の失効チェックを無効にします。
+                 但し、そうした振る舞いが存在した場合に限ります(curl &gt;= 7.44.0)
+                </simpara>
+               </listitem>
+              </varlistentry>
+              <varlistentry>
+               <term>CURLSSLOPT_NO_PARTIALCHAIN</term>
+               <listitem>
+                <simpara>
+                 "部分的な"証明書チェインを許可しません。
+                 デフォルトでは許可されています(curl &gt;= 7.68.0)
+                </simpara>
+               </listitem>
+              </varlistentry>
+             </variablelist>
+            </para>
            </entry>
            <entry valign="top">
             PHP 7.3.0 以降 および cURL &gt;= 7.52.0 をビルドした場合に使用可能です。
@@ -1079,25 +1235,30 @@
           <row>
            <entry valign="top"><constant>CURLOPT_PROXY_SSLVERSION</constant></entry>
            <entry valign="top">
-            以下のうちのひとつが指定できます: <constant>CURL_SSLVERSION_DEFAULT</constant>,
-            <constant>CURL_SSLVERSION_TLSv1</constant>,
-            <constant>CURL_SSLVERSION_TLSv1_0</constant>,
-            <constant>CURL_SSLVERSION_TLSv1_1</constant>,
-            <constant>CURL_SSLVERSION_TLSv1_2</constant>,
-            <constant>CURL_SSLVERSION_TLSv1_3</constant>,
-            <constant>CURL_SSLVERSION_MAX_DEFAULT</constant>,
-            <constant>CURL_SSLVERSION_MAX_TLSv1_0</constant>,
-            <constant>CURL_SSLVERSION_MAX_TLSv1_1</constant>,
-            <constant>CURL_SSLVERSION_MAX_TLSv1_2</constant>,
-            <constant>CURL_SSLVERSION_MAX_TLSv1_3</constant>,
-            <constant>CURL_SSLVERSION_SSLv3</constant>
-            <note>
-             <para>
+            <para>
+             以下のうちのひとつが指定できます
+             <simplelist type="inline">
+              <member><constant>CURL_SSLVERSION_DEFAULT</constant></member>
+              <member><constant>CURL_SSLVERSION_TLSv1</constant></member>
+              <member><constant>CURL_SSLVERSION_TLSv1_0</constant></member>
+              <member><constant>CURL_SSLVERSION_TLSv1_1</constant></member>
+              <member><constant>CURL_SSLVERSION_TLSv1_2</constant></member>
+              <member><constant>CURL_SSLVERSION_TLSv1_3</constant></member>
+              <member><constant>CURL_SSLVERSION_MAX_DEFAULT</constant></member>
+              <member><constant>CURL_SSLVERSION_MAX_TLSv1_0</constant></member>
+              <member><constant>CURL_SSLVERSION_MAX_TLSv1_1</constant></member>
+              <member><constant>CURL_SSLVERSION_MAX_TLSv1_2</constant></member>
+              <member><constant>CURL_SSLVERSION_MAX_TLSv1_3</constant></member>
+              <member><constant>CURL_SSLVERSION_SSLv3</constant></member>
+             </simplelist>
+            </para>
+            <warning>
+             <simpara>
               最も良い選択は、このオプションを設定せず、
               デフォルトの <constant>CURL_SSLVERSION_DEFAULT</constant> を使うことです。
               このオプションは、リモートのSSLプロトコルのバージョンを見つけようとします。
-             </para>
-            </note>
+             </simpara>
+            </warning>
            </entry>
            <entry valign="top">
             PHP 7.3.0 以降 および cURL &gt;= 7.52.0 をビルドした場合に使用可能です。
@@ -1210,6 +1371,31 @@
            </entry>
           </row>
           <row>
+           <entry valign="top"><constant>CURLOPT_UPKEEP_INTERVAL_MS</constant></entry>
+           <entry valign="top">
+            プロトコルによっては、
+            "connection upkeep" (接続を維持する) 仕組みを備えているものがあります。
+            通常、この仕組みは接続を維持するため、既存の接続に対して少量のトラフィックを送信します。
+            このオプションは、接続を維持するためのトラフィックを送信する間隔を指定します。
+            こうした接続を維持する仕組みは、現状 HTTP/2 の接続でのみ利用できます。
+            この接続を維持するための間隔を超えた場合、HTTP/2 PING フレームが送信されます。デフォルトは <literal>60</literal> 秒です。
+           </entry>
+           <entry valign="top">
+           </entry>
+          </row>
+          <row>
+           <entry valign="top"><constant>CURLOPT_UPLOAD_BUFFERSIZE</constant></entry>
+           <entry valign="top">
+            cURL のアップロードバッファの好ましいサイズを、
+            バイト単位で指定します。
+            アップロードのバッファサイズは、デフォルトでは 64キロバイトです。
+            バッファサイズの最大値は、2メガバイトになっています。
+            バッファサイズの最小値は、16キロバイトになっています。
+           </entry>
+           <entry valign="top">
+           </entry>
+          </row>
+          <row>
            <entry valign="top"><constant>CURLOPT_MAX_RECV_SPEED_LARGE</constant></entry>
            <entry valign="top">
             ダウンロード速度 (単位は「バイト/秒」) の転送中累加平均がこの値を超えると、
@@ -1263,6 +1449,7 @@
            <entry valign="top"><constant>CURLOPT_FTP_FILEMETHOD</constant></entry>
            <entry valign="top">
             FTP(S) サーバー上のファイルに到達するために使う方法を curl に伝えます。利用可能な値は
+            <constant>CURLFTPMETHOD_DEFAULT</constant>、
             <constant>CURLFTPMETHOD_MULTICWD</constant>、
             <constant>CURLFTPMETHOD_NOCWD</constant> および
             <constant>CURLFTPMETHOD_SINGLECWD</constant> です。
@@ -1304,6 +1491,51 @@
            </entry>
           </row>
           <row>
+           <entry valign="top"><constant>CURLOPT_ALTSVC</constant></entry>
+           <entry valign="top">
+            Alt-Svc キャッシュとして使うファイル名を cURL に指定します。
+            これは既存のキャッシュコンテンツを読み取る目的で使います。
+            また、通信が完了した後に書き込む可能性があります。
+            書き込むのは、<constant>CURLALTSVC_READONLYFILE</constant>
+            が <constant>CURLOPT_ALTSVC_CTRL</constant>
+            経由で設定されていない場合に限ります。
+           </entry>
+           <entry valign="top">
+           </entry>
+          </row>
+          <row>
+           <entry valign="top"><constant>CURLOPT_ALTSVC_CTRL</constant></entry>
+           <entry valign="top">
+            このハンドルを使って転送する際に、Alt-Svc をどう扱うかを
+            cURL に指示するために、有効な機能をまとめてビットマスクで指定します。
+            cURL は Alt-Svc ヘッダを HTTPS の場合にのみ受け入れます。
+            origin が HTTPS で適切にホストされている場合にのみ、cURL は別のオリジンへのリクエストも完了できます。
+            以下のいずれかのビットを設定すると、Alt-Svc エンジンは有効になります。
+            オプションは以下のとおりです:
+            <constant>CURLALTSVC_H1</constant>,
+            <constant>CURLALTSVC_H2</constant>,
+            <constant>CURLALTSVC_H3</constant> および
+            <constant>CURLALTSVC_READONLYFILE</constant>
+           </entry>
+           <entry valign="top">
+           </entry>
+          </row>
+          <row>
+           <entry valign="top"><constant>CURLOPT_AWS_SIGV4</constant></entry>
+           <entry valign="top">
+            <para>
+             AWS V4 signature authentication を、HTTP(S) ヘッダで指定します。
+            </para>
+            <para>
+             このオプションは、<constant>CURLOPT_HTTPAUTH</constant>
+             で設定されている他のあらゆる認証タイプを上書きします。
+             このメソッドは、他の認証タイプと組み合わせることができません。
+            </para>
+           </entry>
+           <entry valign="top">
+           </entry>
+          </row>
+          <row>
            <entry valign="top"><constant>CURLOPT_CAINFO</constant></entry>
            <entry valign="top">
             接続先を検証するための証明書を保持するファイル名。
@@ -1312,6 +1544,17 @@
            </entry>
            <entry valign="top">
             絶対パスで指定しなければならないでしょう。
+           </entry>
+          </row>
+          <row>
+           <entry valign="top"><constant>CURLOPT_CAINFO_BLOB</constant></entry>
+           <entry valign="top">
+            接続先を検証するための、ひとつ以上の証明書保持するPEMファイルの名前。
+            このオプションは、<constant>CURLOPT_CAINFO</constant>
+            を上書きします。
+           </entry>
+           <entry valign="top">
+            PHP 8.2.0 と、cURL 7.77.0 以降で利用可能です。
            </entry>
           </row>
           <row>
@@ -1349,8 +1592,18 @@
           <row>
            <entry valign="top"><constant>CURLOPT_COOKIEJAR</constant></entry>
            <entry valign="top">
-            ハンドルを閉じる際 (curl_close のコール後など) に、
-            すべての内部クッキーを保存するファイルの名前。
+            <simpara>
+             ハンドルのデストラクタがコールされた際に、
+             すべての内部クッキーを保存するファイルの名前。
+            </simpara>
+            <warning>
+             <simpara>
+              PHP 8.0.0 以降では、<function>curl_close</function>
+              をコールしても何もしなくなり、ハンドルを破棄<emphasis>しなくなりました。</emphasis>
+              ハンドルが自動で破棄される前にクッキーを書き込みたい場合、
+              ハンドルに対して <function>unset</function> をコールします。
+             </simpara>
+            </warning>
            </entry>
            <entry valign="top">
            </entry>
@@ -1462,6 +1715,33 @@
             接続するよう指示します。この値に設定できる内容は IP アドレス、ホスト名、
             ネットワークインターフェイス名（Unix）、あるいは単に '-' を指定する
             ことでシステムのデフォルト IP アドレスを指定します。
+           </entry>
+           <entry valign="top">
+           </entry>
+          </row>
+          <row>
+           <entry valign="top"><constant>CURLOPT_HSTS</constant></entry>
+           <entry valign="top">
+            <para>
+             HSTS (HTTP Strict Transport Security) が用いるキャッシュファイル名
+            </para>
+           </entry>
+           <entry valign="top">
+           </entry>
+          </row>
+          <row>
+           <entry valign="top"><constant>CURLOPT_HSTS_CTRL</constant></entry>
+           <entry valign="top">
+            <para>
+             HSTS (HTTP Strict Transport Security) の振る舞いを制御します。
+             このハンドルを使って転送する際に、HSTS をどう扱うかを
+             cURL に指示するために、有効な機能をまとめてビットマスクで指定します。
+             <constant>CURLHSTS_ENABLE</constant>
+             を使うと、インメモリのキャッシュが有効になります。
+             HSTS のキャッシュファイルが指定されると、
+             <constant>CURLHSTS_READONLYFILE</constant>
+             を使うことで、ファイルを読み取り専用にできます。
+            </para>
            </entry>
            <entry valign="top">
            </entry>
@@ -1603,16 +1883,26 @@
           <row>
            <entry valign="top"><constant>CURLOPT_PROXY_CAINFO</constant></entry>
            <entry valign="top">
-            証明書認証局(CA)バンドルのパス。
-            HTTPS プロキシを検証するためのひとつ以上の証明書を持つファイル名のパスを
-            <type>string</type> で設定します。
-            このオプションはHTTPSプロキシに接続するためのもので、
-            HTTPSサーバーに接続するためのものではありません。
-            デフォルトでは、libcurl の cacert バンドルが保存されていると想定されている
-            システムパスが設定されます。
+            プロキシの Certificate Authority (CA) バンドルのパスを指定します。
+            HTTPS プロキシを検証するための証明書をひとつ以上持つ、ファイルの名前を文字列で設定します。
+            このオプションは HTTPS プロキシに接続するためのものであって、
+            HTTPS サーバーに接続するためのものではありません。
+            デフォルトは、libcurl が cacert バンドルを保存していると想定しているシステムパスに設定されています。
            </entry>
            <entry valign="top">
             PHP 7.3.0 以降 および cURL &gt;= 7.52.0 をビルドした場合に使用可能です。
+           </entry>
+          </row>
+          <row>
+           <entry valign="top"><constant>CURLOPT_PROXY_CAINFO_BLOB</constant></entry>
+           <entry valign="top">
+            HTTPS プロキシを検証するための証明書をひとつ以上持つ、PEMファイルの名前を設定します。
+            このオプションは HTTPS プロキシに接続するためのものであって、
+            HTTPS サーバーに接続するためのものではありません。
+            デフォルトは、libcurl が cacert バンドルを保存していると想定しているシステムパスに設定されています。
+           </entry>
+           <entry valign="top">
+            PHP 8.2.0 以降および、cURL &gt;= 7.77.0 をビルドした場合に使用可能です。
            </entry>
           </row>
           <row>
@@ -1757,8 +2047,10 @@
           <row>
            <entry valign="top"><constant>CURLOPT_PROXY_TLSAUTH_TYPE</constant></entry>
            <entry valign="top">
-            HTTPS接続で使うTLS認証メソッド。
-            "SRP" がサポートされています。
+            <simpara>
+             HTTPS接続で使うTLS認証メソッド。
+             <literal>"SRP"</literal> がサポートされています。
+            </simpara>
             <note>
              <para>
               TLS の Secure Remote Password (SRP) 認証は、
@@ -1823,6 +2115,18 @@
            </entry>
           </row>
           <row>
+           <entry valign="top"><constant>CURLOPT_SASL_AUTHZID</constant></entry>
+           <entry valign="top">
+            通信に用いる authorization identity (authzid) を指定します。
+            PLAIN SASL 認証メカニズムの場合にのみ適用できますが、これはオプションです。
+            指定されない場合は、
+            ユーザー名のみを指定した authentication identity(authcid) のみを、パスワードと一緒にサーバーに送信します。
+            サーバーは authzid が指定されない場合、authcid から authzid を導出し、内部的に用います。
+           </entry>
+           <entry valign="top">
+           </entry>
+          </row>
+          <row>
            <entry valign="top"><constant>CURLOPT_SERVICE_NAME</constant></entry>
            <entry valign="top">
             認証サービス名
@@ -1840,6 +2144,16 @@
            </entry>
            <entry valign="top">
             cURL 7.17.1 で追加されました。
+           </entry>
+          </row>
+          <row>
+           <entry valign="top"><constant>CURLOPT_SSH_HOST_PUBLIC_KEY_SHA256</constant></entry>
+           <entry valign="top">
+            リモートホストの公開鍵を、Base64 エンコードされた SHA256 ハッシュ形式で指定します。
+            指定されたハッシュがリモートホストが提供するそれと一致しない場合、
+            通信は失敗します。
+           </entry>
+           <entry valign="top">
            </entry>
           </row>
           <row>
@@ -1872,6 +2186,19 @@
             SSL で使用する暗号のリスト。例えば
             <literal>RC4-SHA</literal> および <literal>TLSv1</literal> が
             使用可能です。
+           </entry>
+           <entry valign="top">
+           </entry>
+          </row>
+          <row>
+           <entry valign="top"><constant>CURLOPT_SSL_EC_CURVES</constant></entry>
+           <entry valign="top">
+            楕円曲線暗号のアルゴリズムの一覧を、コロンで区切って指定します。
+            たとえば、<literal>X25519:P-521</literal> は、
+            有効な楕円曲線暗号の一覧です。
+            このオプションは、
+            cURL のSSLバックエンドがそのサポートを用いるようにビルドされている場合に、
+            SSL ハンドシェイクで使われるクライアントの鍵交換アルゴリズムを定義します。
            </entry>
            <entry valign="top">
            </entry>
@@ -2149,7 +2476,7 @@
           <row>
            <entry valign="top"><constant>CURLOPT_FILE</constant></entry>
            <entry valign="top">
-            転送内容が書き込まれるファイル。デフォルトは <literal>STDOUT</literal>
+            転送内容が書き込まれるファイル。デフォルトは <constant>STDOUT</constant>
             （ブラウザウィンドウ）。
            </entry>
           </row>
@@ -2162,7 +2489,7 @@
           <row>
            <entry valign="top"><constant>CURLOPT_STDERR</constant></entry>
            <entry valign="top">
-            <literal>STDERR</literal> の代わりにエラーを出力する場所。
+            <constant>STDERR</constant> の代わりにエラーを出力する場所。
            </entry>
           </row>
           <row>

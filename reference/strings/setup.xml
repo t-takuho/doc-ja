@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
-<!-- EN-Revision: 36a894a62760104ad57aaf761a8a56e478353e87 Maintainer: takagi Status: ready -->
+<!-- EN-Revision: 48ce43fe79fa0c9f31f187ea8ec995b4cb13037e Maintainer: takagi Status: ready -->
 <!-- CREDITS: hirokawa -->
 
 <chapter xml:id="strings.setup">
  &reftitle.setup;
-
- <section xml:id="strings.requirements">
-  &reftitle.required;
-  &no.requirement;
- </section>
 
  <section xml:id="strings.installation">
   &reftitle.install;
@@ -20,16 +15,6 @@
    を指定することで、システムの crypt ライブラリを使って
    <function>crypt</function> をビルドできるようになっています。
   </simpara>
- </section>
-
- <section xml:id="strings.configuration">
-  &reftitle.runtime;
-  &no.config;
- </section>
-
- <section xml:id="strings.resources">
-  &reftitle.resources;
-  &no.resource;
  </section>
 
 </chapter>

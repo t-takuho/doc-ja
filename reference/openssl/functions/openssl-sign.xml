@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
-<!-- EN-Revision: d1e3ea622e5d4f542cd36eca59a9f22aa0142633 Maintainer: hirokawa Status: ready -->
+<!-- EN-Revision: 5bc68add3da3cd18c40f851e944b15095d3a26aa Maintainer: hirokawa Status: ready -->
 <!-- CREDITS: takagi -->
 <refentry xml:id="function.openssl-sign" xmlns="http://docbook.org/ns/docbook">
  <refnamediv>
@@ -14,7 +14,7 @@
    <type>bool</type><methodname>openssl_sign</methodname>
    <methodparam><type>string</type><parameter>data</parameter></methodparam>
    <methodparam><type>string</type><parameter role="reference">signature</parameter></methodparam>
-   <methodparam><type class="union"><type>OpenSSLAsymmetricKey</type><type>OpenSSLCertificate</type><type>array</type><type>string</type></type><parameter>private_key</parameter></methodparam>
+   <methodparam><modifier role="attribute">#[\SensitiveParameter]</modifier><type class="union"><type>OpenSSLAsymmetricKey</type><type>OpenSSLCertificate</type><type>array</type><type>string</type></type><parameter>private_key</parameter></methodparam>
    <methodparam choice="opt"><type class="union"><type>string</type><type>int</type></type><parameter>algorithm</parameter><initializer><constant>OPENSSL_ALGO_SHA1</constant></initializer></methodparam>
   </methodsynopsis>
   <para>
@@ -52,7 +52,7 @@
        <classname>OpenSSLAsymmetricKey</classname> - <function>openssl_get_privatekey</function> が返す鍵。
       </para>
       <para>
-       <type>string</type> - PEM フォーマットの鍵。
+       <type>string</type> - <acronym>PEM</acronym> フォーマットの鍵。
       </para>
      </listitem>
     </varlistentry>

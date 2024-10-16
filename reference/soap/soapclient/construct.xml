@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
-<!-- EN-Revision: fe4e8b87d18f17394e7177917c498774b062448c Maintainer: mumumu Status: ready -->
+<!-- EN-Revision: 497c40ac164d5873fd87f622dfdeb5206392b446 Maintainer: mumumu Status: ready -->
 
 <refentry xml:id="soapclient.construct" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
  <refnamediv>
@@ -227,7 +227,7 @@
            HTTPS 認証で使うクライアント証明書のパス。
            証明書ファイルは、
            証明書と秘密鍵が両方入った状態で、
-           PEMエンコードされている必要があります。
+           <acronym>PEM</acronym>エンコードされている必要があります。
           </para>
           <para>
            このファイルには、発行者のチェインも含めることができます。
@@ -673,7 +673,7 @@ $context = stream_context_create([
     'ssl' => [
         'crypto_method' => STREAM_CRYPTO_METHOD_TLSv1_3_CLIENT
      ]
-];
+]);
 $client = new SoapClient("some.wsdl", ['context' => $context]);
 ]]>
             </programlisting>

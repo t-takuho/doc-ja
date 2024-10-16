@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
-<!-- EN-Revision: 4f5e2b22575131fa5e9c3004b1c874e1acb06573 Maintainer: mumumu Status: ready -->
+<!-- EN-Revision: c1349f9574ed77c268c6312a07466f06d59e5078 Maintainer: mumumu Status: ready -->
 <refentry xml:id="domparentnode.prepend" xmlns="http://docbook.org/ns/docbook">
  <refnamediv>
   <refname>DOMParentNode::prepend</refname>
@@ -29,6 +29,7 @@
      <listitem>
       <para>
        ノードの前に追加するノード。
+       文字列は自動的にテキストノードに変換されます。
       </para>
      </listitem>
     </varlistentry>
@@ -41,6 +42,38 @@
   <para>
    &return.void;
   </para>
+ </refsect1>
+
+ <refsect1 role="errors">
+  &reftitle.errors;
+  <variablelist>
+   &dom.errors.hierarchy.self;
+   &dom.errors.wrong_document;
+  </variablelist>
+ </refsect1>
+
+ <refsect1 role="changelog">
+  &reftitle.changelog;
+  <informaltable>
+   <tgroup cols="2">
+    <thead>
+     <row>
+      <entry>&Version;</entry>
+      <entry>&Description;</entry>
+     </row>
+    </thead>
+    <tbody>
+     <row>
+      <entry>8.3.0</entry>
+      <entry>
+       オーナーとなるドキュメントがないノードに対して、
+       このメソッドをコールしても動作するようになりました。
+       &dom.changelog.previous_hierarchy_exception;
+      </entry>
+     </row>
+    </tbody>
+   </tgroup>
+  </informaltable>
  </refsect1>
 
  <refsect1 role="seealso">

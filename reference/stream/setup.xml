@@ -1,24 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- $Revision$ -->
-<!-- EN-Revision: 652367cc9d51966f31e0b85874a325ead7087c31 Maintainer: takagi Status: ready -->
+<!-- EN-Revision: 765b2d6eec7dfbaeed900b32aa91a1360d73df42 Maintainer: takagi Status: ready -->
 <!-- CREDITS: shimooka,hirokawa,mumumu -->
 <chapter xml:id="stream.setup" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
  &reftitle.setup;
-
- <section xml:id="stream.requirements">
-  &reftitle.required;
-  &no.requirement;
- </section>
-
- <section xml:id="stream.installation">
-  &reftitle.install;
-  &no.install;
- </section>
-
- <section xml:id="stream.configuration">
-  &reftitle.runtime;
-  &no.config;
- </section>
 
  <section xml:id="stream.resources">
   <title>ストリームのクラス</title>
@@ -57,4 +42,4 @@ vim600: syn=xml fen fdm=syntax fdl=2 si
 vim: et tw=78 syn=sgml
 vi: ts=1 sw=1
 -->
- 
+

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
-<!-- EN-Revision: a56dfabfa41c678c02017a2f69369b1543accb1c Maintainer: satoruyoshida Status: ready -->
+<!-- EN-Revision: 48ce43fe79fa0c9f31f187ea8ec995b4cb13037e Maintainer: satoruyoshida Status: ready -->
 <chapter xml:id="lua.setup" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
  &reftitle.setup;
 
@@ -23,18 +23,6 @@
   </para>
   <para>
    &pecl.windows.download;
-  </para>
- </section>
-
- <section xml:id="lua.configuration">
-  &reftitle.runtime;
-  &no.config;
- </section>
-
- <section xml:id="lua.resources">
-  &reftitle.resources;
-  &no.resource;
-  <para>
   </para>
  </section>
 

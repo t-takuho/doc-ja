@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
-<!-- EN-Revision: 5d6153f896f4698bc2df1a41db1271075dd3b62d Maintainer: takagi Status: ready -->
+<!-- EN-Revision: 1ad4e2d550953000e2441b663226300596962ef2 Maintainer: takagi Status: ready -->
 <!-- Credits: mumumu -->
 <refentry xml:id="function.setcookie" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
  <refnamediv>
@@ -167,6 +167,14 @@
        デフォルト値は明示的にパラメータを与えた場合のデフォルト値と同じです。
        <literal>samesite</literal> 要素が省略された場合は、SameSite クッキー属性は設定されません。
       </para>
+      <para>
+       <note>
+        <para>
+         上のリストにないキーをクッキーの属性に設定する場合、
+         <function>header</function> を使います。
+        </para>
+       </note>
+      </para>
      </listitem>
     </varlistentry>
    </variablelist>
@@ -224,11 +232,13 @@
     <programlisting role="php">
      <![CDATA[
 <?php
+
 $value = 'something from somewhere';
 
 setcookie("TestCookie", $value);
 setcookie("TestCookie", $value, time()+3600);  /* 有効期限は一時間です */
-setcookie("TestCookie", $value, time()+3600, "/~rasmus/", "example.com", 1);
+setcookie("TestCookie", $value, time()+3600, "/~rasmus/", "example.com", true);
+
 ?>
 ]]>
     </programlisting>
@@ -337,7 +347,7 @@ one : cookieone
    </para>
   </note>
   <para>
-   陥りやすい失敗
+   陥りやすい失敗:
    <itemizedlist>
     <listitem>
      <simpara>
@@ -353,7 +363,7 @@ one : cookieone
     <listitem>
      <simpara>
       クッキーは設定されたものと同じパラメータで削除する必要があります。
-      値が空文字列で、その他の全ての引数が前に setcookie
+      <parameter>value</parameter> が空文字列で、その他の全ての引数が前に <function>setcookie</function>
       をコールした時と同じである場合に、指定された名前のクッキーが
       リモートクライアント上から削除されます。
       内部的な動作として、これは値を 'deleted' に変更した上で有効期限を

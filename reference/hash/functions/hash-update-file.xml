@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
-<!-- EN-Revision: dabaf662b17f594cd536ff68ea807b0fbc99d0ee Maintainer: takagi Status: ready -->
+<!-- EN-Revision: a027e69cf7db9c535d25b423ff8543302ef7aa89 Maintainer: takagi Status: ready -->
 <!-- Credits: mumumu -->
 <refentry xml:id="function.hash-update-file" xmlns="http://docbook.org/ns/docbook">
  <refnamediv>
@@ -36,7 +36,7 @@
      <listitem>
       <para>
        ハッシュ対象となるファイルの位置を示す URL。
-       fopen ラッパーをサポートしています。
+       <function>fopen</function> ラッパーをサポートしています。
       </para>
      </listitem>
     </varlistentry>
@@ -98,7 +98,6 @@
     <member><function>hash_update</function></member>
     <member><function>hash_update_stream</function></member>
     <member><function>hash_final</function></member>
-    <member><function>hash</function></member>
     <member><function>hash_file</function></member>
    </simplelist>
   </para>
