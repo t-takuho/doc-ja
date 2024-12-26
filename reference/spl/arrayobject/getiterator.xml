@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
-<!-- EN-Revision: d51166ca16fda8e766849505b84f9306ef443f71 Maintainer: takagi Status: ready -->
+<!-- EN-Revision: ba762ce190acd0ac2f18362b59afb001bb74a65e Maintainer: takagi Status: ready -->
 <!-- CREDITS: shimooka -->
 <refentry xml:id="arrayobject.getiterator" xmlns="http://docbook.org/ns/docbook">
  <refnamediv>
@@ -15,7 +15,9 @@
    <void/>
   </methodsynopsis>
   <para>
-   新しいイテレータを <classname>ArrayObject</classname> インスタンスから作成します。
+   新しい <interfacename>Iterator</interfacename>
+   (デフォルトは <classname>ArrayIterator</classname>) を
+   <classname>ArrayObject</classname> インスタンスから作成します。
   </para>
  </refsect1>
 
@@ -39,19 +41,23 @@
     <programlisting role="php">
 <![CDATA[
 <?php
-$array = array('1' => 'one',
-               '2' => 'two',
-               '3' => 'three');
+
+$array = [
+    '1' => 'one',
+    '2' => 'two',
+    '3' => 'three',
+];
 
 $arrayobject = new ArrayObject($array);
 
 $iterator = $arrayobject->getIterator();
 
-while($iterator->valid()) {
+while ($iterator->valid()) {
     echo $iterator->key() . ' => ' . $iterator->current() . "\n";
 
     $iterator->next();
 }
+
 ?>
 ]]>
     </programlisting>

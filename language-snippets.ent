@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
-<!-- EN-Revision: 1cdefe36cdfc0e3acaff6a0db918d4b037081aa8 Maintainer: takagi Status: working -->
-<!-- Credits: hirokawa,haruki,shimooka,mumumu -->
+<!-- EN-Revision: 9cd8eb0f11edb4e59fd22f723137bbb91d6ab64f Maintainer: takagi Status: working -->
+<!-- Credits: hirokawa,haruki,shimooka,mumumu,jdkfx -->
 
 <!ENTITY installation.enabled.disable 'この拡張モジュールはデフォルトで有効になっています。無効にしたい場合は、次のオプションを指定してコンパイルします。'>
 
@@ -346,6 +346,14 @@ xmlns="http://docbook.org/ns/docbook"><simpara>この機能は PHP 8.3.0 で
 xmlns="http://docbook.org/ns/docbook"><simpara>この関数は PHP 8.3.0 で
 <emphasis>非推奨</emphasis>になります。この関数に頼らないことを強く推奨します。</simpara></warning>'>
 
+<!ENTITY warn.deprecated.feature-8-4-0 '<warning
+xmlns="http://docbook.org/ns/docbook"><simpara>この機能は PHP 8.4.0 で
+<emphasis>非推奨</emphasis>になります。この機能に頼らないことを強く推奨します。</simpara></warning>'>
+
+<!ENTITY warn.deprecated.function-8-4-0 '<warning
+xmlns="http://docbook.org/ns/docbook"><simpara>この関数は PHP 8.4.0 で
+<emphasis>非推奨</emphasis>になります。この関数に頼らないことを強く推奨します。</simpara></warning>'>
+
 <!ENTITY removed.php.future 'この非推奨の機能は、<emphasis xmlns="http://docbook.org/ns/docbook">きっと</emphasis> 
 将来 <emphasis xmlns="http://docbook.org/ns/docbook">削除</emphasis> されるでしょう。'>
 
@@ -599,6 +607,10 @@ xmlns="http://docbook.org/ns/docbook"><simpara>この関数は PHP 8.1.0 で
 <!ENTITY example.outputs.83 '<para xmlns="http://docbook.org/ns/docbook">上の例の PHP 8.3 での出力は、このようになります。:</para>'>
 
 <!ENTITY example.outputs.83.similar '<para xmlns="http://docbook.org/ns/docbook">上の例の PHP 8.3 での出力は、たとえば以下のようになります。:</para>'>
+
+<!ENTITY example.outputs.84 '<para xmlns="http://docbook.org/ns/docbook">上の例の PHP 8.4 での出力は、このようになります。:</para>'>
+
+<!ENTITY example.outputs.84.similar '<para xmlns="http://docbook.org/ns/docbook">上の例の PHP 8.4 での出力は、たとえば以下のようになります。:</para>'>
 
 <!ENTITY example.outputs.32bit '<para xmlns="http://docbook.org/ns/docbook">上の例の 32 ビットマシンでの出力は、このようになります。</para>'>
 
@@ -1028,6 +1040,18 @@ $font = 'SomeFont';
  </entry>
 </row>'>
 
+<!-- CSV -->
+<!ENTITY warning.csv.escape-parameter '<warning xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink"><simpara>
+<parameter>escape</parameter>
+が空の文字列(<literal>""</literal>)以外に設定されているとき、
+<link xlink:href="&url.rfc;4180">RFC 4180</link>
+に準拠しない CSV が生成されたり、PHP の CSV
+関数を介してラウンドトリップ(往復変換)でデータが壊れる可能性があります。
+<parameter>escape</parameter>のデフォルト値は<literal>"\\"</literal>
+なので、明示的に空の文字列を指定することを推奨します。デフォルト値は、PHP 9.0
+以降の将来のバージョンで変更予定です。
+</simpara></warning>'>
+
 <!-- DBM notes -->
 
 <!ENTITY dbm.dbm-identifier.description '<varlistentry xmlns="http://docbook.org/ns/docbook"><term><parameter>dbm_identifier</parameter></term><listitem><para><function>dbmopen</function> が返す DBM リンク識別子。</para></listitem></varlistentry>'>
@@ -1081,6 +1105,15 @@ $font = 'SomeFont';
  </entry>
 </row>'>
 
+<!-- dba notes -->
+<!ENTITY dba.parameter.dba '<function xmlns="http://docbook.org/ns/docbook">dba_open</function> または <function xmlns="http://docbook.org/ns/docbook">dba_popen</function> によって返される <classname xmlns="http://docbook.org/ns/docbook">Dba\Connection</classname> インスタンス'>
+<!ENTITY dba.changelog.dba-object '<row xmlns="http://docbook.org/ns/docbook">
+ <entry>8.4.0</entry>
+ <entry>
+  <parameter>dba</parameter> は <classname>Dba\Connection</classname> クラスのインスタンスを期待するようになりました。
+  これより前のバージョンでは、 <literal>dba</literal> &resource; を期待していました。
+ </entry>
+</row>'>
 
 <!-- dbase notes -->
 
@@ -1369,7 +1402,7 @@ STREAM モードのいくつかのアルゴリズムの初期化の際に使用�
    それぞれの要素には、
    対応するキーが削除された場合に &true; が入ります。
    対応するキーの削除が失敗した場合、
-   定数 <constant>Memcached::RES_*</constant> のうちの一つが入ります。
+   定数 <constant>Memcached::RES_<replaceable>*</replaceable></constant> のうちの一つが入ります。
    </para>
   <para xmlns="http://docbook.org/ns/docbook">
    <methodname>Memcached::getResultCode</methodname> は、
@@ -1453,6 +1486,47 @@ STREAM モードのいくつかのアルゴリズムの初期化の際に使用�
 <!ENTITY gearman.parameter.unique 'タスクを特定するために用いる一意な ID。'>
 
 <!ENTITY gearman.parameter.jobhandle 'Gearman サーバーが割り当てたジョブハンドル。'>
+
+<!ENTITY gearman.parameter.callback '<varlistentry xmlns="http://docbook.org/ns/docbook">
+ <term><parameter>callback</parameter></term>
+ <listitem>
+  <para>
+   呼び出す関数またはメソッド。有効な <link linkend="gearman.constants">Gearmanの値</link> を返す必要があります。
+  </para>
+  <para>
+   return 文が存在しない場合、デフォルトで <constant>GEARMAN_SUCCESS</constant> が返されます。
+  </para>
+  <methodsynopsis>
+   <type>int</type><methodname><replaceable>callback</replaceable></methodname>
+   <methodparam><type>GearmanTask</type><parameter>task</parameter></methodparam>
+   <methodparam><type>mixed</type><parameter>context</parameter></methodparam>
+  </methodsynopsis>
+  <variablelist>
+   <varlistentry>
+    <term><parameter>task</parameter></term>
+    <listitem>
+     <para>
+      このコールバックが呼び出されるタスク。
+     </para>
+    </listitem>
+   </varlistentry>
+   <varlistentry>
+    <term><parameter>context</parameter></term>
+    <listitem>
+     <para>
+      <methodname>GearmanClient::addTask</methodname> (または同等のメソッド) に <parameter>context</parameter> として渡されたもの。
+     </para>
+    </listitem>
+   </varlistentry>
+  </variablelist>
+ </listitem>
+</varlistentry>'>
+
+<!ENTITY gearman.note.callback '<note xmlns="http://docbook.org/ns/docbook">
+ <para>
+  このコールバックは、このメソッドを呼び出した後に追加されたタスク（例: <methodname>GearmanClient::addTask</methodname> を呼び出して追加されたタスク）に対してのみ実行されます。
+ </para>
+</note>'>
 
 <!-- Date and time entities -->
 <!ENTITY date.timezone.intro.title '<title xmlns="http://docbook.org/ns/docbook">サポートされるタイムゾーンのリスト</title>'>
@@ -1876,57 +1950,11 @@ CURSOR</literal> ステートメント ID。</para>">
 しかし、Acrobat Distiller? あるいは Ghostview
 でドキュメントを pdf に変換すると表示されます。</para>'>
 
-<!-- Notes for safe-mode limited functions: -->
-
-<!-- Not used in EN anymore -->
-<!ENTITY note.sm.disabled '<note xmlns="http://docbook.org/ns/docbook"><simpara>&sm.disabled;</simpara></note>'>
-
-<!-- Not used in EN anymore -->
-<!ENTITY note.sm.uidcheck '<note xmlns="http://docbook.org/ns/docbook"><simpara><link linkend="features.safe-mode">
-セーフモード</link> が有効の場合、PHP は操作を行うファイル／ディレクトリが実行するスクリプトと
-同じ UID (所有者)を有しているかどうかを確認します。</simpara></note>'>
-
-<!-- Not used in EN anymore -->
-<!ENTITY note.sm.uidcheck.dir '<note xmlns="http://docbook.org/ns/docbook"><simpara> <link
-linkend="features.safe-mode">セーフモード</link> が有効の場合、PHP は、
-操作を行うディレクトリが、実行するスクリプトと同じ UID (所有者)を有しているか
-どうかを確認します。</simpara></note>'>
-
 <!ENTITY note.open-basedir.func '<note xmlns="http://docbook.org/ns/docbook"><para>この関数の動作は、<link
 linkend="ini.open-basedir">open_basedir</link> の設定に依存します。</para></note>'>
 
 <!ENTITY note.language-construct '<note xmlns="http://docbook.org/ns/docbook"><simpara>これは、関数ではなく
 言語構造のため、<link linkend="functions.variable-functions">可変関数</link> や <link linkend="functions.named-arguments">名前付き引数</link> を用いてコールすることはできません。</simpara></note>'>
-
-<!-- Common pieces in features/safe-mode.xml
-     Jade doesn't allow in-line entities, so I put them here... Though they
-     should have been inline in safe-mode.xml -->
-
-<!-- Not used in EN anymore -->
-<!ENTITY sm.uidcheck '処理を行うファイル/ディレクトリが実行するスクリプトと
-同じUIDを有しているかどうかを確認します。'>
-
-<!-- Not used in EN anymore -->
-<!ENTITY warn.sm.exec '<warning xmlns="http://docbook.org/ns/docbook"><simpara><link linkend="features.safe-mode">
-セーフモード</link>が有効な場合、コマンド文字列は
-<function>escapeshellcmd</function> でエスケープされます。
-つまり、<literal>echo y | echo x</literal> は、<literal>echo y \| echo x</literal>
-となります。</simpara></warning>'>
-
-<!-- Not used in EN anymore -->
-<!ENTITY note.exec-path '<note xmlns="http://docbook.org/ns/docbook"><simpara><link linkend="features.safe-mode">
-セーフモード</link> が有効な場合、<link linkend="ini.safe-mode-exec-dir">
-safe_mode_exec_dir</link>の中にある実行プログラムのみ実行可能です。
-実際的な理由により、現在、実行プログラムへのパスに <literal>..</literal>を
-含めることはできません。</simpara></note>'>
-
-<!-- Not used in EN anymore -->
-<!ENTITY sm.uidcheck.dir '処理を行うディレクトリが実行するスクリプトと同じ UID
-を有しているかどうかを確認します。'>
-
-<!-- Not used in EN anymore -->
-<!ENTITY sm.disabled 'この関数は、PHP が <link xmlns="http://docbook.org/ns/docbook"
-linkend="features.safe-mode">safe-mode</link> で動作している場合は無効となります。'>
 
 <!-- Common pieces in partintro-sections -->
 <!ENTITY no.config '<para xmlns="http://docbook.org/ns/docbook">設定ディレクティブは定義されていません。</para>'>
@@ -1968,9 +1996,6 @@ linkend="features.safe-mode">safe-mode</link> で動作している場合は無�
 PHP 組み込みでコンパイルされているか、実行時に動的にロードされている場合のみ
 使用可能です。
 </simpara>'>
-
-<!ENTITY note.extension.php5 '<note xmlns="http://docbook.org/ns/docbook"><simpara>
-PHP 5 が必要です。</simpara></note>'>
 
 <!-- PDO entities -->
 <!ENTITY pdo.driver-constants '<simpara xmlns="http://docbook.org/ns/docbook">このドライバでは以下の定数が定義されて
@@ -2096,19 +2121,19 @@ PECL 拡張モジュールのインストール</link> という章にありま�
 
 <!ENTITY sqlsafemode '<link xmlns="http://docbook.org/ns/docbook" linkend="ini.sql.safe-mode">SQL セーフモード</link>'>
 
-<!-- APD Notes -->
-<!ENTITY apd.debug-level.description '<varlistentry xmlns="http://docbook.org/ns/docbook"><term><parameter>debug_level</parameter></term><listitem>
-<para><literal>XXX_TRACE</literal> 定数の組み合わせによる整数値。</para>
-<para><constant>MEMORY_TRACE</constant> を用いることは推奨しません。
-これは非常に低速で、またあまり正確ではないようだからです。
-<constant>ASSIGNMENT_TRACE</constant> は、まだ実装されていません。</para>
-<para>すべての機能 (TIMING, FUNCTIONS, ARGS SUMMARY (strace -c のようなもの))
-のトレースを有効にするには、値 99 を指定します。</para>
-</listitem></varlistentry>'>
-
 <!-- BCMath Notes -->
-<!ENTITY bc.scale.description '<varlistentry xmlns="http://docbook.org/ns/docbook"><term><parameter>scale</parameter></term><listitem>
-<para>このオプションパラメータを使用して、結果の小数点以下の桁数を指定します。省略した場合は、<function>bcscale</function> 関数でグローバルに設定した桁数をデフォルトとして使用します。それも設定されていない場合は <literal>0</literal> を使用します。</para></listitem></varlistentry>'>
+<!-- to be translated -->
+<!ENTITY bc.scale.description '<varlistentry xmlns="http://docbook.org/ns/docbook">
+ <term><parameter>scale</parameter></term>
+ <listitem>
+  <simpara>
+   This parameter is used to set the number of digits after the decimal place in the result.
+   If &null;, it will default to the default scale set with <function>bcscale</function>,
+   or fallback to the value of the
+   <link linkend="ini.bcmath.scale"><literal>bcmath.scale</literal></link> INI directive.
+  </simpara>
+ </listitem>
+</varlistentry>'>
 
 <!-- CTYPE Notes -->
 <!ENTITY note.ctype.parameter.integer '<note xmlns="http://docbook.org/ns/docbook"><para>
@@ -2218,14 +2243,6 @@ SimpleXML では、ほとんどのメソッドに反復処理を追加するた�
 <!ENTITY database.fetch-null '<note xmlns="http://docbook.org/ns/docbook"><simpara>この関数は、
 NULL フィールドに PHPの &null; 値を設定します。</simpara></note>'>
 
-<!-- MSQL Notes -->
-<!-- The msql.*.description entities are used in the parameters refsect1 -->
-<!ENTITY msql.linkid.description '<varlistentry xmlns="http://docbook.org/ns/docbook"><term><parameter>link_identifier</parameter></term><listitem><para>mSQL 接続。指定されない場合、<function>msql_connect</function> により直近にオープンされたリンクが指定されたと仮定されます。そのようなリンクがない場合、この関数は、<function>msql_connect</function>をコールした時と同様にリンクを確立し、使用します。</para></listitem></varlistentry>'>
-
-<!ENTITY msql.result.description '<varlistentry xmlns="http://docbook.org/ns/docbook"><term><parameter>result</parameter></term><listitem><para>評価された結果 <type>リソース</type>。この結果は、<function>msql_query</function> のコールにより得られたものです。</para></listitem></varlistentry>'>
-
-<!ENTITY msql.field-offset.req.description '<varlistentry xmlns="http://docbook.org/ns/docbook"><term><parameter>field_offset</parameter></term><listitem><para>数値フィールドオフセット。<parameter>field_offset</parameter> は、<literal>1</literal>から始まります。</para></listitem></varlistentry>'>
-
 <!-- MySQL Notes -->
 <!-- The mysql.*.description entities are used in the parameters refsect1 -->
 <!ENTITY mysql.linkid.description '<varlistentry xmlns="http://docbook.org/ns/docbook"><term><parameter>link_identifier</parameter></term><listitem><para>MySQL 接続。指定されない場合、<function>mysql_connect</function> により直近にオープンされたリンクが指定されたと仮定されます。そのようなリンクがない場合、引数を指定せずに <function>mysql_connect</function> がコールした時と同様にリンクを確立します。リンクが見付からない、または、確立できない場合、<constant>E_WARNING</constant> レベルのエラーが生成されます。</para></listitem></varlistentry>'>
@@ -2283,32 +2300,6 @@ NULL フィールドに PHPの &null; 値を設定します。</simpara></note>'
 関連する除法は
 <link linkend="language.types.resource.self-destruct">リソースの開放</link>を参照ください。</para>'>
 
-<!-- Sybase Notes -->
-<!ENTITY sybase.ct.only '<note xmlns="http://docbook.org/ns/docbook"><simpara>この関数は、Sybase の CT
-ライブラリインターフェイスでのみ使用可能で、DB ライブラリでは使用できません。
-</simpara></note>'>
-
-<!ENTITY sybase.db.only '<note xmlns="http://docbook.org/ns/docbook"><simpara>
-この関数は、Sybase の DB ライブラリインターフェイスを使用する場合のみ利用可能で、
-CT ライブラリでは利用できません。</simpara></note>'>
-
-<!ENTITY sybase.linkid.description '<varlistentry xmlns="http://docbook.org/ns/docbook"><term><parameter>link_identifier</parameter></term><listitem><para>Sybase 接続。
-このリンク ID が指定されない場合、<function>sybase_connect</function> により
-オープンされた直近のリンクが指定されたと仮定されます。
-そのようなリンクが見つからない場合、<function>sybase_connect</function>
-が引数なしでコールされた時と同様にリンクが作成されます。接続が見付かたなかったり、確立できない場合、<constant>E_WARNING</constant> レベルのエラーを発行します。</para></listitem></varlistentry>'>
-
-<!-- CPDF Notes -->
-<!ENTITY cpdf.ul '<para xmlns="http://docbook.org/ns/docbook">オプションのパラメータ
-<parameter>mode</parameter> は単位長さを定義します。この値が <literal>0</literal>
-または値が省略された場合、このページで指定されたデフォルト値が使用されます。
-それ以外の場合、現在の単位を無視して
-ポストスクリプトのポイントで座標が計測されます。</para>'>
-
-<!ENTITY cpdf.mode.description '<varlistentry xmlns="http://docbook.org/ns/docbook"><term><parameter>mode</parameter></term><listitem><para>オプションのパラメータ <parameter>mode</parameter>は単位長さを定義します。この値が <literal>0</literal> または値が省略された場合、このページで指定されたデフォルト値が使用されます。それ以外の場合、現在の単位を無視してポストスクリプトのポイントで座標が計測されます。</para></listitem></varlistentry>'>
-
-<!ENTITY cpdf.pdf-document.description '<varlistentry xmlns="http://docbook.org/ns/docbook"><term><parameter>pdf_document</parameter></term><listitem><para><function>cpdf_open</function> が返す、ドキュメントのハンドル。</para></listitem></varlistentry>'>
-
 <!-- Xattr entities -->
 <!ENTITY xattr.namespace '<para xmlns="http://docbook.org/ns/docbook">拡張属性には二種類の異なる名前空間、つまり、ユーザーとルートがあります。
 ユーザー名前空間は、すべてのユーザーで利用可能ですが、ルート名前空間は、ルート権限を有するユーザーのみ利用可能です。
@@ -2319,9 +2310,6 @@ xattr はデフォルトでユーザー名前空間で処理を行いますが�
 <!ENTITY ipv6.brackets '<note xmlns="http://docbook.org/ns/docbook"><simpara>数値で IPv6 アドレスを指定するときは、
 (例 <literal>fe80::1</literal>) アドレスを角カッコでくくらなくてはなりません。たとえば、
 <literal>tcp://[fe80::1]:80</literal>.</simpara></note>'>
-
-<!ENTITY ipv6.php5 '<note xmlns="http://docbook.org/ns/docbook"><simpara>IPv6 サポートは <literal>PHP 5.0.0
-</literal> で追加されました。</simpara></note>'>
 
 <!-- Notes for tidy -->
 <!ENTITY tidy.object '<classname xmlns="http://docbook.org/ns/docbook">Tidy</classname> オブジェクト。'>
@@ -2338,6 +2326,14 @@ xattr はデフォルトでユーザー名前空間で処理を行いますが�
 <literal>utf16</literal>, <literal>utf16le</literal>,
 <literal>utf16be</literal>, <literal>big5</literal> および
 <literal>shiftjis</literal>.</para>'>
+<!ENTITY warn.install.third-party-support '<warning xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <para>
+  サードパーティによるビルドは非公式であり、PHP プロジェクトによって
+  直接サポートされません。発生したバグは、
+  <link xlink:href="&url.php.downloads;">公式ダウンロードページ</link>
+  からのビルドで再現できなければ、非公式ビルドの提供元に報告してください。
+ </para>
+</warning>'>
 
 <!-- Snippets for the installation section -->
 <!ENTITY warn.apache2.compat '<warning xmlns="http://docbook.org/ns/docbook"><para>
@@ -2346,6 +2342,16 @@ Apache2 の MPM マルチスレッドモードを実運用環境で使用する�
 におけるデフォルトの MPM です。prefork MPM を使う理由については、
 <link linkend="faq.installation.apache2">マルチスレッド版 MPM の Apache2</link>の
 FAQ エントリを参照してください。</para></warning>'>
+<!-- to be translated -->
+<!ENTITY warn.install.third-party-support '<warning xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <para>
+  Builds from third-parties are considered unofficial and not directly
+  supported by the PHP project. Any bugs encountered should be reported to the
+  provider of those unofficial builds unless they can be reproduced using the
+  builds from <link xlink:href="&url.php.downloads;">the official download
+  area</link>.
+ </para>
+</warning>'>
 
 <!ENTITY note.apache.slashes '<note xmlns="http://docbook.org/ns/docbook"><simpara>Windows 上で
 Apache 設定ファイルにパスの値を追加する際、例えば
@@ -2381,23 +2387,10 @@ Apache 設定ファイルにパスの値を追加する際、例えば
 
 <!ENTITY listendand ' そして'>
 
-<!-- classkit and runkit entities -->
-<!ENTITY note.classkit.selfmanipulation '<note xmlns="http://docbook.org/ns/docbook"><simpara>この関数により現在実行中
-(もしくはチェーンド)のメソッドを操作することはできません。</simpara>
-</note>'>
-
+<!-- runkit entities -->
 <!ENTITY note.runkit.selfmanipulation '<note xmlns="http://docbook.org/ns/docbook"><simpara>この関数は、
 現在実行中(もしくはチェーンド)のメソッドを操作することはできません。</simpara>
 </note>'>
-
-<!ENTITY note.runkit.sandbox '<note xmlns="http://docbook.org/ns/docbook"><simpara>
-サンドボックスのサポート
-(<function>runkit_lint</function>, <function>runkit_lint_file</function>,
-および <classname>Runkit_Sandbox</classname> クラスで使用)は、
-PHP 5.1.0 以降または特別なパッチを適用した
-PHP 5.0 でのみ利用可能であり、スレッドセーフを有効にしておく必要があります。
-詳細については、runkit パッケージに含まれる <filename>README</filename>
-ファイルを参照してください。</simpara></note>'>
 
 <!ENTITY note.runkit.internal-override '<note xmlns="http://docbook.org/ns/docbook"><simpara>デフォルトでは、
 削除・リネーム・変更が可能なのはユーザー定義関数だけです。組み込み関数を
@@ -2561,14 +2554,6 @@ PHP 5.0 でのみ利用可能であり、スレッドセーフを有効にして
 </para>
 </note>
 '>
-<!ENTITY com.use-oo-instead '<note xmlns="http://docbook.org/ns/docbook">
- <simpara>
-  この関数は PHP 5 には存在しません。
-  より自然なオブジェクト指向形式の構文で、
-  プロパティにアクセスしたりメソッドをコールしたりすることになります。
- </simpara>
-</note>
-'>
 
 <!-- phar -->
 <!ENTITY phar.write '<note xmlns="http://docbook.org/ns/docbook"><para>
@@ -2576,18 +2561,6 @@ PHP 5.0 でのみ利用可能であり、スレッドセーフを有効にして
 が <literal>0</literal> でないと <classname>Phar</classname>
 オブジェクトで動作しません。それ以外の場合は
 <classname>PharException</classname> がスローされます。</para></note>'>
-
-<!ENTITY phar.removed.pharcompress '<note xmlns="http://docbook.org/ns/docbook"><para>
-このメソッドは、phar 拡張モジュールバージョン 2.0.0 で削除されました。
-今後は <function>Phar::compress</function>、
-<function>Phar::decompress</function>、<function>Phar::compressFiles</function> および
-<function>Phar::decompressFiles</function> をご利用ください。</para></note>'>
-
-<!ENTITY phar.removed.pharfileinfocompress '<note xmlns="http://docbook.org/ns/docbook"><para>
-このメソッドは、phar 拡張モジュールバージョン 2.0.0 で削除されました。
-今後は <function>PharFileInfo::isCompressed</function>、
-<function>PharFileInfo::decompress</function> および <function>PharFileInfo::compress</function>
-をご利用ください。</para></note>'>
 
 <!ENTITY phar.note.performance '<note xmlns="http://docbook.org/ns/docbook">
  <simpara>
@@ -2679,7 +2652,15 @@ PHP 7.4 以降では <option role="configure">--with-libxml</option>、それよ
 <!ENTITY spl.datastructures.intro.title '<title xmlns="http://docbook.org/ns/docbook">データ構造</title>'>
 
 <!ENTITY spl.exceptions.intro.title '<title xmlns="http://docbook.org/ns/docbook">例外</title>'>
-<!ENTITY spl.exceptions.intro '<para xmlns="http://docbook.org/ns/docbook">SPL には標準の例外が用意されています。</para><para xmlns="http://docbook.org/ns/docbook"><xref linkend="reserved.exceptions" /> も参照ください。</para>'>
+
+<!ENTITY spl.exceptions.intro '
+ <para xmlns="http://docbook.org/ns/docbook">
+  SPL には標準の例外が用意されています。
+ </para>
+ <para xmlns="http://docbook.org/ns/docbook">
+  <xref linkend="reserved.exceptions" /> も参照ください。
+ </para>
+'>
 
 <!ENTITY spl.files.intro.title '<title xmlns="http://docbook.org/ns/docbook">ファイル操作</title>'>
 <!ENTITY spl.files.intro '<partintro xmlns="http://docbook.org/ns/docbook"><para xmlns="http://docbook.org/ns/docbook">SPL にはファイルを扱うためのクラスが用意されています。</para></partintro>'>
@@ -2861,69 +2842,6 @@ xmlns="http://docbook.org/ns/docbook"><simpara xmlns="http://docbook.org/ns/docb
 <!ENTITY trader.arg.nbdevdn 'Deviation multiplier for lower band. Valid range from <link xmlns="http://docbook.org/ns/docbook" linkend="constant.trader-real-min">TRADER_REAL_MIN</link> to <link xmlns="http://docbook.org/ns/docbook" linkend="constant.trader-real-max">TRADER_REAL_MAX</link>.'>
 <!ENTITY trader.arg.fast.limit 'Upper limit use in the adaptive algorithm. Valid range from 0.01 to 0.99.'>
 <!ENTITY trader.arg.slow.limit 'Lower limit use in the adaptive algorithm. Valid range from 0.01 to 0.99.'>
-
-<!-- Mongo -->
-<!ENTITY mongo.setreadpreference.parameters '<variablelist xmlns="http://docbook.org/ns/docbook"><varlistentry><term><parameter>read_preference</parameter></term><listitem><para>The read preference mode: <constant>MongoClient::RP_PRIMARY</constant>, <constant>MongoClient::RP_PRIMARY_PREFERRED</constant>, <constant>MongoClient::RP_SECONDARY</constant>, <constant>MongoClient::RP_SECONDARY_PREFERRED</constant>, or <constant>MongoClient::RP_NEAREST</constant>.</para></listitem></varlistentry><varlistentry><term><parameter>tags</parameter></term><listitem><para>An array of zero or more tag sets, where each tag set is itself an array of criteria used to match tags on replica set members.</para></listitem></varlistentry></variablelist>'>
-<!ENTITY mongo.setreadpreference.returnvalues '<para xmlns="http://docbook.org/ns/docbook">Returns &true; on success, or &false; otherwise.</para>'>
-<!ENTITY mongo.setreadpreference.errors '<para xmlns="http://docbook.org/ns/docbook">Emits <constant>E_WARNING</constant> if either parameter is invalid, or if one or more tag sets are provided with the <constant>MongoClient::RP_PRIMARY</constant> read preference mode.</para>'>
-<!ENTITY mongo.getreadpreference.returnvalues '<para xmlns="http://docbook.org/ns/docbook">This function returns an array describing the read preference. The array contains the values <literal>type</literal> for the string read preference mode (corresponding to the <classname>MongoClient</classname> constants), and <literal>tagsets</literal> containing a list of all tag set criteria. If no tag sets were specified, <literal>tagsets</literal> will not be present in the array.</para>'>
-<!ENTITY mongo.setwriteconcern.parameters '<variablelist xmlns="http://docbook.org/ns/docbook"><varlistentry><term><parameter>w</parameter></term><listitem><para>The write concern. This may be an integer denoting the number of servers required to acknowledge the write, or a string mode (e.g. "majority").</para></listitem></varlistentry><varlistentry><term><parameter>wtimeout</parameter></term><listitem><para>The maximum number of milliseconds to wait for the server to satisfy the write concern.</para></listitem></varlistentry></variablelist>'>
-<!ENTITY mongo.setwriteconcern.returnvalues '<para xmlns="http://docbook.org/ns/docbook">Returns &true; on success, or &false; otherwise.</para>'>
-<!ENTITY mongo.setwriteconcern.errors '<para xmlns="http://docbook.org/ns/docbook">Emits <constant>E_WARNING</constant> if the <literal>w</literal> parameter is not an integer or string value.</para>'>
-<!ENTITY mongo.getwriteconcern.returnvalues '<para xmlns="http://docbook.org/ns/docbook">This function returns an array describing the write concern. The array contains the values <literal>w</literal> for an integer acknowledgement level or string mode, and <literal>wtimeout</literal> denoting the maximum number of milliseconds to wait for the server to satisfy the write concern.</para>'>
-<!ENTITY mongo.command.parameters.maxtimems '<listitem xmlns="http://docbook.org/ns/docbook"><para><literal>"maxTimeMS"</literal></para><para>Specifies a cumulative time limit in milliseconds for processing the operation on the server (does not include idle time). If the operation is not completed by the server within the timeout period, a <classname>MongoExecutionTimeoutException</classname> will be thrown.</para></listitem>'>
-<!ENTITY mongo.index.parameters.background '<listitem xmlns="http://docbook.org/ns/docbook"><para><literal>"background"</literal></para><para>Builds the index in the background so that building an index does <emphasis>not</emphasis> block other database activities. Specify &true; to build in the background. The default value is &false;.</para><warning xmlns="http://docbook.org/ns/docbook"><para>Prior to MongoDB 2.6.0, index builds on secondaries were executed as foreground operations, irrespective of this option. See <link xlink:href="&url.mongodb.dochub.indexes.rs;" xmlns:xlink="http://www.w3.org/1999/xlink">Building Indexes with Replica Sets</link> for more information.</para></warning></listitem>'>
-<!ENTITY mongo.index.parameters.dropdups '<listitem xmlns="http://docbook.org/ns/docbook"><para><literal>"dropDups"</literal></para><para>Specify &true; to force creation of a unique index where the collection may contain duplicate values for a key. MongoDB will index the first occurrence of a key and delete all subsequent documents from the collection that contain a duplicate value for that key. The default value is &false;.</para><warning xmlns="http://docbook.org/ns/docbook"><para><literal>"dropDups"</literal> may delete data from your database. Use with extreme caution.</para></warning><note xmlns="http://docbook.org/ns/docbook"><para>This option is not supported on MongoDB 2.8+. Index creation will fail if the collection contains duplicate values.</para></note></listitem>'>
-<!ENTITY mongo.index.parameters.expireafterseconds '<listitem xmlns="http://docbook.org/ns/docbook"><para><literal>"expireAfterSeconds"</literal></para><para>The value of this option should specify the number of seconds after which a document should be considered expired and automatically removed from the collection. This option is only compatible with single-field indexes where the field will contain <classname>MongoDate</classname> values.</para><note xmlns="http://docbook.org/ns/docbook"><para>This feature is available in MongoDB 2.2+. See <link xlink:href="&url.mongodb.docs.expire_data;" xmlns:xlink="http://www.w3.org/1999/xlink">Expire Data from Collections by Setting TTL</link> for more information.</para></note></listitem>'>
-<!ENTITY mongo.index.parameters.name '<listitem xmlns="http://docbook.org/ns/docbook"><para><literal>"name"</literal></para><para>A optional name that uniquely identifies the index.</para><note xmlns="http://docbook.org/ns/docbook"><para>By default, the driver will generate an index name based on the index&apos;s field(s) and ordering or type. For example, a compound index <literal>array("x" => 1, "y" => -1)</literal> would be named <literal>"x_1_y_-1"</literal> and a geospatial index <literal>array("loc" => "2dsphere")</literal> would be named <literal>"loc_2dsphere"</literal>. For indexes with many fields, it is possible that the generated name might exceed MongoDB&apos;s <link xlink:href="&url.mongodb.docs.limits;#Index-Name-Length" xmlns:xlink="http://www.w3.org/1999/xlink">limit for index names</link>. The <literal>"name"</literal> option may be used in that case to supply a shorter name.</para></note></listitem>'>
-<!ENTITY mongo.index.parameters.sparse '<listitem xmlns="http://docbook.org/ns/docbook"><para><literal>"sparse"</literal></para><para>Specify &true; to create a sparse index, which only indexes documents containing a specified field. The default value is &false;.</para></listitem>'>
-<!ENTITY mongo.index.parameters.unique '<listitem xmlns="http://docbook.org/ns/docbook"><para><literal>"unique"</literal></para><para>Specify &true; to create a unique index. The default value is &false;. This option applies only to ascending/descending indexes.</para><note xmlns="http://docbook.org/ns/docbook"><para>When MongoDB indexes a field, if a document does not have a value for the field, a &null; value is indexed. If multiple documents do not contain a field, a unique index will reject all but the first of those documents. The <literal>"sparse"</literal> option may be used to overcome this, since it will prevent documents without the field from being indexed.</para></note></listitem>'>
-<!ENTITY mongo.listcollections.note '<note xmlns="http://docbook.org/ns/docbook"><simpara>This method will use the <link xlink:href="&url.mongodb.docs.command;listCollections" xmlns:xlink="http://www.w3.org/1999/xlink">listCollections</link> database command when communicating with MongoDB 2.8+. For previous database versions, the method will query the special <literal>system.namespaces</literal> collection.</simpara></note>'>
-<!ENTITY mongo.listcollections.parameters.filter '<listitem xmlns="http://docbook.org/ns/docbook"><para><literal>"filter"</literal></para><para>Optional query criteria. If provided, this criteria will be used to filter the collections included in the result.</para><para>Relevant fields that may be queried include <literal>"name"</literal> (collection name as a string, without the database name prefix) and <literal>"options" (object containing options used to create the collection).</literal>.</para><note><simpara>MongoDB 2.6 and earlier versions require the <literal>"name"</literal> criteria, if specified, to be a string value (i.e. equality match). This is because the driver must prefix the value with the database name in order to query the <literal>system.namespaces</literal> collection. Later versions of MongoDB do not have this limitation, as the driver will use the listCollections command.</simpara></note></listitem>'>
-<!ENTITY mongo.listcollections.parameters.includesystemcollections '<listitem xmlns="http://docbook.org/ns/docbook"><para><literal>"includeSystemCollections"</literal></para><para>Boolean, defaults to &false;. Determines whether system collections should be included in the result.</para></listitem>'>
-<!ENTITY mongo.writes.parameters.writeconcern '<listitem xmlns="http://docbook.org/ns/docbook"><para><literal>"w"</literal></para><para>See <link linkend="mongo.writeconcerns">Write Concerns</link>. The default value for <classname>MongoClient</classname> is <literal>1</literal>.</para></listitem>'>
-<!ENTITY mongo.writes.parameters.writeconcerntimeout '<listitem xmlns="http://docbook.org/ns/docbook"><para><literal>"wtimeout"</literal></para><para>Deprecated alias for <literal>"wTimeoutMS"</literal>.</para></listitem>'>
-<!ENTITY mongo.writes.parameters.writeconcerntimeoutms '<listitem xmlns="http://docbook.org/ns/docbook"><para><literal>"wTimeoutMS"</literal></para><para>This option specifies the time limit, in milliseconds, for <link linkend="mongo.writeconcerns">write concern</link> acknowledgement. It is only applicable when <literal>"w"</literal> is greater than <literal>1</literal>, as the timeout pertains to replication. If the write concern is not satisfied within the time limit, a <classname>MongoCursorException</classname> will be thrown. A value of <literal>0</literal> may be specified to block indefinitely. The default value for <classname>MongoClient</classname> is <literal>10000</literal> (ten seconds).</para></listitem>'>
-<!ENTITY mongo.writes.parameters.fsync '<listitem xmlns="http://docbook.org/ns/docbook"><para><literal>"fsync"</literal></para><para>Boolean, defaults to &false;. If journaling is enabled, it works exactly like <literal>"j"</literal>. If journaling is not enabled, the write operation blocks until it is synced to database files on disk. If &true;, an acknowledged insert is implied and this option will override setting <literal>"w"</literal> to <literal>0</literal>.</para><note><simpara>If journaling is enabled, users are strongly encouraged to use the <literal>"j"</literal> option instead of <literal>"fsync"</literal>. Do not use <literal>"fsync"</literal> and <literal>"j"</literal> simultaneously, as that will result in an error.</simpara></note></listitem>'>
-<!ENTITY mongo.writes.parameters.sockettimeoutms '<listitem xmlns="http://docbook.org/ns/docbook"><para><literal>"socketTimeoutMS"</literal></para><para>This option specifies the time limit, in milliseconds, for socket communication. If the server does not respond within the timeout period, a <classname>MongoCursorTimeoutException</classname> will be thrown and there will be no way to determine if the server actually handled the write or not. A value of <literal>-1</literal> may be specified to block indefinitely. The default value for <classname>MongoClient</classname> is <literal>30000</literal> (30 seconds).</para></listitem>'>
-<!ENTITY mongo.writes.parameters.journal '<listitem xmlns="http://docbook.org/ns/docbook"><para><literal>"j"</literal></para><para>Boolean, defaults to &false;. Forces the write operation to block until it is synced to the journal on disk. If &true;, an acknowledged write is implied and this option will override setting <literal>"w"</literal> to <literal>0</literal>.</para><note><simpara>If this option is used and journaling is disabled, MongoDB 2.6+ will raise an error and the write will fail; older server versions will simply ignore the option.</simpara></note></listitem>'>
-<!ENTITY mongo.writes.parameters.safe '<listitem xmlns="http://docbook.org/ns/docbook"><para><literal>"safe"</literal></para><para>Deprecated. Please use the <link linkend="mongo.writeconcerns">write concern</link> <literal>"w"</literal> option.</para></listitem>'>
-<!ENTITY mongo.writes.parameters.timeout '<listitem xmlns="http://docbook.org/ns/docbook"><para><literal>"timeout"</literal></para><para>Deprecated alias for <literal>"socketTimeoutMS"</literal>.</para></listitem>'>
-<!ENTITY mongo.errors.exceptions.writeconcern '<para xmlns="http://docbook.org/ns/docbook">Throws <classname>MongoCursorException</classname> if the <literal>"w"</literal> option is set and the write fails.</para><para xmlns="http://docbook.org/ns/docbook">Throws <classname>MongoCursorTimeoutException</classname> if the <literal>"w"</literal> option is set to a value greater than one and the operation takes longer than <varname>MongoCursor::$timeout</varname> milliseconds to complete.  This does not kill the operation on the server, it is a client-side timeout. The operation in <varname>MongoCollection::$wtimeout</varname> is milliseconds.</para>'>
-<!ENTITY mongo.errors.deprecated '<para xmlns="http://docbook.org/ns/docbook">Issues <constant>E_DEPRECATED</constant> warning</para>'>
-<!ENTITY mongo.gridfs.store.metadata.note '<note xmlns="http://docbook.org/ns/docbook"><para>These fields may also overwrite those that would be created automatically by the driver, as described in the MongoDB core documentation for the <link xlink:href="&url.mongodb.docs.gridfs;#the-files-collection" xmlns:xlink="http://www.w3.org/1999/xlink">files collection</link>. Some practical use cases for this behavior would be to specify a custom <literal>chunkSize</literal> or <literal>_id</literal> for the file.</para></note>'>
-<!ENTITY mongo.gridfs.store.return '<para xmlns="http://docbook.org/ns/docbook">Returns the <literal>_id</literal> of the saved file document. This will be a generated <classname>MongoId</classname> unless an <literal>_id</literal> was explicitly specified in the <parameter>metadata</parameter> parameter.</para>'>
-<!ENTITY mongo.mongowritebatch.writeoptions.description '<listitem xmlns="http://docbook.org/ns/docbook"><para>An array of Write Options.<informaltable><thead><row><entry>key</entry><entry>value meaning</entry></row></thead><tbody><row><entry>w (int|string)</entry><entry><link linkend="mongo.writeconcerns">Write concern</link> value</entry></row><row><entry>wtimeout (int)</entry><entry><link linkend="mongo.writeconcerns">Maximum time to wait for replication</link></entry></row><row><entry>ordered</entry><entry>Determines if MongoDB must apply this batch in order. Ordered writes execute serially (i.e. one at a time) and execution will stop after the first error. Unordered writes may execute in parallel and execution will not stop after the first error. Defaults to &true;</entry></row><row><entry>j (bool)</entry><entry>Wait for journaling on the primary. This value is discouraged, use WriteConcern instead</entry></row><row><entry>fsync (bool)</entry><entry>Wait for fsync on the primary. This value is discouraged, use WriteConcern instead</entry></row></tbody></informaltable></para></listitem>'>
-<!ENTITY mongo.mongowritebatch.collection.description '<listitem xmlns="http://docbook.org/ns/docbook"><para>The <classname>MongoCollection</classname> to execute the batch on. Its <link linkend="mongo.writeconcerns">write concern</link> will be copied and used as the default write concern if none is given as <parameter>$write_options</parameter> or during <methodname>MongoWriteBatch::execute</methodname>.</para></listitem>'>
-<!ENTITY mongo.context.server ' <varlistentry xmlns="http://docbook.org/ns/docbook"> <term> <parameter>server</parameter> </term> <listitem> <para> An array containing the basic information about the server that was picked. <informaltable> <tgroup cols="2"> <thead> <row> <entry>key</entry> <entry>value</entry> </row> </thead> <tbody> <row> <entry>hash</entry> <entry>server hash, example: <literal>localhost:27017;-;X;56052</literal></entry> </row> <row> <entry>type</entry> <entry>Node type (primary/secondary/mongos/arbiter): <literal>2</literal></entry> </row> <row> <entry>max_bson_size</entry> <entry>The maximum BSON Size over the wire this node accepts: <literal>16777216</literal></entry> </row> <row> <entry>max_message_size</entry> <entry>The maximum Message Size over the wire this node accepts: <literal>48000000</literal></entry> </row> <row> <entry>request_id</entry> <entry>The request identifier for this message: <literal>42</literal></entry> </row> </tbody> </tgroup> </informaltable> </para> </listitem> </varlistentry>'>
-<!ENTITY mongo.context.writeoptions '<varlistentry xmlns="http://docbook.org/ns/docbook"> <term> <parameter>writeOptions</parameter> </term> <listitem> <para> <informaltable> <tgroup cols="2"> <thead> <row> <entry>key</entry> <entry>value</entry> </row> </thead> <tbody> <row> <entry>ordered</entry> <entry>boolean, if the operation (in case of batch operation) must be executed sequentually (ordered=true)</entry> </row> <row> <entry>writeConcern</entry> <entry>An array of writeConcern options (see below)</entry> </row> </tbody> </tgroup> </informaltable> <table> <title>writeConcern array values</title> <tgroup cols="2"> <thead> <row> <entry>key</entry> <entry>value</entry> </row> </thead> <tbody> <row> <entry>fsync</entry> <entry>boolean, force flushing to disk before returning</entry> </row> <row> <entry>j</entry> <entry>boolean, force journal write before returning</entry> </row> <row> <entry>wtimeout</entry> <entry>integer, milliseconds, maximum time the primary is allowed to wait to verify replication</entry> </row> <row> <entry>w</entry> <entry>integer=server count, or string=replication-tag</entry> </row> </tbody> </tgroup> </table> </para> </listitem> </varlistentry>'>
-<!ENTITY mongo.context.protocoloptions ' <varlistentry xmlns="http://docbook.org/ns/docbook"> <term> <parameter>protocolOptions</parameter> </term> <listitem> <para> <informaltable> <tgroup cols="2"> <thead> <row> <entry>key</entry> <entry>value</entry> </row> </thead> <tbody> <row> <entry>message_length</entry> <entry>The total size (in bytes) of the encoded message being sent over the wire</entry> </row> <row> <entry>request_id</entry> <entry>The request identifier for this message: <literal>42</literal></entry> </row> <row> <entry>namespace</entry> <entry>The MongoDB namespace used for the protocol message <literal>dbname.collectionname</literal></entry> </row> </tbody> </tgroup> </informaltable> </para> </listitem> </varlistentry>'>
-<!ENTITY mongo.alternative.class.note '<para
-xmlns="http://docbook.org/ns/docbook">This extension that defines this class
-is deprecated. Instead, the <link linkend="set.mongodb">MongoDB</link> extension should be used.
-Alternatives to this class include:</para>'>
-<!ENTITY mongo.noalternative.class.note '<para
-xmlns="http://docbook.org/ns/docbook">This extension that defines this class
-is deprecated. Instead, the <link linkend="set.mongodb">MongoDB</link> extension should be used.
-There is no equivalent for this class in the new extension.</para>'>
-<!ENTITY mongo.alternative.method.note '<para
-xmlns="http://docbook.org/ns/docbook">This extension that defines this method
-is deprecated. Instead, the <link linkend="set.mongodb">MongoDB</link> extension should be used.
-Alternatives to this method include:</para>'>
-<!ENTITY mongo.noalternative.method.note '<para
-xmlns="http://docbook.org/ns/docbook">This extension that defines this method
-is deprecated. Instead, the <link linkend="set.mongodb">MongoDB</link> extension should be used.
-There is no equivalent for this method in the new extension.</para>'>
-<!ENTITY mongo.alternative.phplib.note '<para
-xmlns="http://docbook.org/ns/docbook">This extension that defines this method
-is deprecated. Instead, the <link linkend="set.mongodb">MongoDB</link> extension should be used.
-There is no equivalent for this method in the new extension, but there is an
-alternative in the <link linkend="mongodb.overview">PHP library</link>:</para>'>
-
-<!ENTITY mongo.deprecated.note '<para
-xmlns="http://docbook.org/ns/docbook">This extension is deprecated. Instead,
-the <link linkend="set.mongodb">MongoDB</link> extension should be
-used.</para>'>
 
 <!-- mongodb -->
 <!ENTITY mongodb.changelog.tentative-return-types '
@@ -3469,7 +3387,7 @@ local: {
                <row>
                 <entry>sparsity</entry>
                 <entry><type>int</type></entry>
-                <entry>Required. Positive 64-bit integer.</entry>
+                <entry>Optional. Positive 64-bit integer.</entry>
                </row>
                <row>
                 <entry>precision</entry>
@@ -3483,7 +3401,7 @@ local: {
                <row>
                 <entry>trimFactor</entry>
                 <entry><type>int</type></entry>
-                <entry>Required. Positive 32-bit integer.</entry>
+                <entry>Optional. Positive 32-bit integer.</entry>
                </row>
               </tbody>
              </tgroup>
@@ -3528,7 +3446,7 @@ local: {
      </para>
      <note>
       <simpara>
-       When evaluating query criteria, MongoDB compares types and values according to its own <link xlink:href="&url.mongodb.docs;reference/bson-type-comparison-order/" xmlns:xlink="http://www.w3.org/1999/xlink">comparison rules for BSON types</link>, which differs from PHP&apos;s <link linkend="types.comparisons">comparison</link> and <link linkend="language.types.type-juggling">type juggling</link> rules. When matching a special BSON type the query criteria should use the respective <link linkend="book.bson">BSON class</link> (e.g. use <classname>MongoDB\BSON\ObjectId</classname> to match an <link xlink:href="&url.mongodb.docs.objectid;" xmlns:xlink="http://www.w3.org/1999/xlink">ObjectId</link>).
+       When evaluating query criteria, MongoDB compares types and values according to its own <link xlink:href="&url.mongodb.docs;reference/bson-type-comparison-order/" xmlns:xlink="http://www.w3.org/1999/xlink">comparison rules for BSON types</link>, which differs from PHP&apos;s <link linkend="types.comparisons">comparison</link> and <link linkend="language.types.type-juggling">type juggling</link> rules. When matching a special BSON type the query criteria should use the respective <link linkend="mongodb.bson">BSON class</link> (e.g. use <classname>MongoDB\BSON\ObjectId</classname> to match an <link xlink:href="&url.mongodb.docs.objectid;" xmlns:xlink="http://www.w3.org/1999/xlink">ObjectId</link>).
       </simpara>
      </note>
     </listitem>
@@ -3642,79 +3560,6 @@ local: {
 <!ENTITY radius.parameter.options '<varlistentry xmlns="http://docbook.org/ns/docbook"><term><parameter>options</parameter></term><listitem><para>A bitmask of the attribute options. The available options include <link linkend="constant.radius-option-tagged"><constant>RADIUS_OPTION_TAGGED</constant></link> and <link linkend="constant.radius-option-salt"><constant>RADIUS_OPTION_SALT</constant></link>.</para></listitem></varlistentry>'>
 <!ENTITY radius.parameter.tag '<varlistentry xmlns="http://docbook.org/ns/docbook"><term><parameter>tag</parameter></term><listitem><para>The attribute tag. This parameter is ignored unless the <link linkend="constant.radius-option-tagged"><constant>RADIUS_OPTION_TAGGED</constant></link> option is set.</para></listitem></varlistentry>'>
 <!ENTITY radius.parameter.vendor '<varlistentry xmlns="http://docbook.org/ns/docbook"><term><parameter>vendor</parameter></term><listitem><para>The vendor ID.</para></listitem></varlistentry>'>
-
-
-<!ENTITY mongo.setreadpreference.parameters '<variablelist xmlns="http://docbook.org/ns/docbook"><varlistentry><term><parameter>read_preference</parameter></term><listitem><para>読み込みの優先モード。<constant>MongoClient::RP_PRIMARY</constant>、<constant>MongoClient::RP_PRIMARY_PREFERRED</constant>、<constant>MongoClient::RP_SECONDARY</constant>、<constant>MongoClient::RP_SECONDARY_PREFERRED</constant> あるいは <constant>MongoClient::RP_NEAREST</constant> のいずれか。</para></listitem></varlistentry><varlistentry><term><parameter>tags</parameter></term><listitem><para>ゼロ個以上のタグセットの配列。各タグセット自体も配列で、レプリカセットのメンバーのタグにマッチさせる条件として使います。</para></listitem></varlistentry></variablelist>'>
-<!ENTITY mongo.setreadpreference.returnvalues '<para xmlns="http://docbook.org/ns/docbook">成功した場合に &true;、それ以外の場合に &false; を返します。</para>'>
-<!ENTITY mongo.setreadpreference.errors '<para xmlns="http://docbook.org/ns/docbook">パラメータが無効な場合、あるいは優先読み込みモードが <constant>MongoClient::RP_PRIMARY</constant> のときにタグセットを指定した場合に <constant>E_WARNING</constant> が発生します。</para>'>
-<!ENTITY mongo.getreadpreference.returnvalues '<para xmlns="http://docbook.org/ns/docbook">この関数は、優先読み込みに関する配列を返します。配列に含まれる内容は、<literal>type</literal> (優先読み込みモードを表す文字列。<classname>MongoClient</classname> の定数に対応)、そして <literal>tagsets</literal> (すべてのタグセット条件のリスト) です。タグセットを指定しなかった場合は、<literal>tagsets</literal> は存在しません。</para>'>
-<!ENTITY mongo.setwriteconcern.parameters '<variablelist xmlns="http://docbook.org/ns/docbook"><varlistentry><term><parameter>w</parameter></term><listitem><para>書き込み確認。何台のサーバーに書き込めたら成功とみなすのかを表す整数値、あるいは文字列 ("majority" など) でモードを指定します。</para></listitem></varlistentry><varlistentry><term><parameter>wtimeout</parameter></term><listitem><para>サーバーが書き込み確認を待つ最大ミリ秒数。</para></listitem></varlistentry></variablelist>'>
-<!ENTITY mongo.setwriteconcern.returnvalues '<para xmlns="http://docbook.org/ns/docbook">成功した場合に &true;、それ以外の場合に &false; を返します。</para>'>
-<!ENTITY mongo.setwriteconcern.errors '<para xmlns="http://docbook.org/ns/docbook"><literal>w</literal> が整数値あるいは文字列でない場合に <constant>E_WARNING</constant> が発生します。</para>'>
-<!ENTITY mongo.getwriteconcern.returnvalues '<para xmlns="http://docbook.org/ns/docbook">この関数は、書き込み確認を表す配列を返します。<literal>w</literal> の値はサーバーの台数を表す整数値かモードを表す文字列、そして <literal>wtimeout</literal> の値はサーバーが書き込み確認を待つ最大ミリ秒数です。</para>'>
-<!ENTITY mongo.command.parameters.maxtimems '<listitem xmlns="http://docbook.org/ns/docbook"><para><literal>"maxTimeMS"</literal></para><para>サーバー上で操作を行う累積時間の制限 (アイドル時間を含まない) を、ミリ秒単位で指定します。この時間内にサーバー側の操作が完了しなければ、<classname>MongoExecutionTimeoutException</classname> をスローします。</para></listitem>'>
-<!ENTITY mongo.index.parameters.background '<listitem xmlns="http://docbook.org/ns/docbook"><para><literal>"background"</literal></para><para>Builds the index in the background so that building an index does <emphasis>not</emphasis> block other database activities. Specify &true; to build in the background. The default value is &false;.</para><warning xmlns="http://docbook.org/ns/docbook"><para>Prior to MongoDB 2.6.0, index builds on secondaries were executed as foreground operations, irrespective of this option. See <link xlink:href="&url.mongodb.dochub.indexes.rs;" xmlns:xlink="http://www.w3.org/1999/xlink">Building Indexes with Replica Sets</link> for more information.</para></warning></listitem>'>
-<!ENTITY mongo.index.parameters.dropdups '<listitem xmlns="http://docbook.org/ns/docbook"><para><literal>"dropDups"</literal></para><para>&true; を指定すると、一意なインデックスを強制的に作成します。このとき、コレクション内でキーの値が重複してしまう可能性があります。MongoDB は最初に出現したキーをインデックスし、それ以降に出現する同じキーのすべてのドキュメントを削除します。デフォルト値は &false; です。</para><warning xmlns="http://docbook.org/ns/docbook"><para><literal>"dropDups"</literal> はデータベースのデータを削除することがあるので、使う際には十分な注意が必要です。</para></warning><note xmlns="http://docbook.org/ns/docbook"><para>このオプションは、MongoDB 2.8 以降には対応していません。コレクションに値の重複がある場合は、インデックスの作成に失敗します。</para></note></listitem>'>
-<!ENTITY mongo.index.parameters.expireafterseconds '<listitem xmlns="http://docbook.org/ns/docbook"><para><literal>"expireAfterSeconds"</literal></para><para>このオプションの値に指定するのは、ドキュメントを有効期限切れとみなしてコレクションから自動削除するまでの秒数です。このオプションが使えるのは、単一フィールドインデックスで、フィールドに <classname>MongoDate</classname> の値を含む場合のみです。</para><note xmlns="http://docbook.org/ns/docbook"><para>この機能が使えるのは、MongoDB 2.2 以降です。詳細は <link xlink:href="&url.mongodb.docs.expire_data;" xmlns:xlink="http://www.w3.org/1999/xlink">Expire Data from Collections by Setting TTL</link> を参照ください。</para></note></listitem>'>
-<!ENTITY mongo.index.parameters.name '<listitem xmlns="http://docbook.org/ns/docbook"><para><literal>"name"</literal></para><para>オプションの、インデックスを一意に特定するための名前。</para><note xmlns="http://docbook.org/ns/docbook"><para>ドライバーがデフォルトで生成するインデックス名は、インデックスのフィールドと、並び順あるいは型に基づくものです。たとえば、複合インデックス <literal>array("x" => 1, "y" => -1)</literal> の名前は <literal>"x_1_y_-1"</literal> であり、地理空間インデックス <literal>array("loc" => "2dsphere")</literal> の名前は <literal>"loc_2dsphere"</literal> となります。多数のフィールドからなるインデックスの場合、自動生成される名前が MongoDB の <link xlink:href="&url.mongodb.docs.limits;#Index-Name-Length" xmlns:xlink="http://www.w3.org/1999/xlink">インデックス名の制限</link> を超えてしまう可能性があります。<literal>"name"</literal> オプションは、そんな場合に短い名前を用意するときなどに使えます。</para></note></listitem>'>
-<!ENTITY mongo.index.parameters.sparse '<listitem xmlns="http://docbook.org/ns/docbook"><para><literal>"sparse"</literal></para><para>&true; を指定すると、疎なインデックスを作ります。これは、指定したフィールドを含むドキュメントだけをインデックスします。デフォルト値は &false; です。</para></listitem>'>
-<!ENTITY mongo.index.parameters.unique '<listitem xmlns="http://docbook.org/ns/docbook"><para><literal>"unique"</literal></para><para>&true; を指定すると、一意なインデックスを作ります。デフォルト値は &false; です。このオプションを使えるのは、昇順もしくは降順のインデックスだけです。</para><note xmlns="http://docbook.org/ns/docbook"><para>MongoDB がフィールドをインデックスするとき、もしそのフィールドに値を含まないドキュメントがあれば、&null; 値をインデックスします。このフィールドを含まないドキュメントが複数あった場合、一意なインデックスは、最初に出現したドキュメント以外を受け付けません。これを防ぐには <literal>"sparse"</literal> オプションを使います。このオプションを指定すれば、インデックス対象のフィールドが存在しないドキュメントはインデックスしなくなります。</para></note></listitem>'>
-<!ENTITY mongo.listcollections.note '<note xmlns="http://docbook.org/ns/docbook"><simpara>このメソッドは、MongoDB 2.8 以降と通信する際に、データベースコマンド <link xlink:href="&url.mongodb.docs.command;listCollections" xmlns:xlink="http://www.w3.org/1999/xlink">listCollections</link> を利用します。以前のバージョンのデータベースの場合は、特別なコレクション <literal>system.namespaces</literal> を問い合わせます。</simpara></note>'>
-<!ENTITY mongo.listcollections.parameters.filter '<listitem xmlns="http://docbook.org/ns/docbook"><para><literal>"filter"</literal></para><para>オプションの問い合わせ条件。これを指定すると、結果に含まれるコレクションをその条件でフィルタリングします。</para><para>問い合わせの対象となる関連フィールドには、<literal>"name"</literal> (コレクション名を表す文字列。データベース名のプレフィックスは含まない) や <literal>"options"</literal> (コレクションを作成するために用いるオプションを含むオブジェクト) があります。</para><note><simpara>MongoDB 2.6 以前のバージョンでは、<literal>"name"</literal> の条件指定には文字列しか使えませんでした (一致する文字列だけに絞り込むなど)。これは、ドライバが <literal>system.namespaces</literal> コレクションに問い合わせるときに、その値をデータベース名の先頭に付加する必要があったからです。最新版の MongoDB にはこの制約がなくなりました。listCollections コマンドを使うようになったからです。</simpara></note></listitem>'>
-<!ENTITY mongo.listcollections.parameters.includesystemcollections '<listitem xmlns="http://docbook.org/ns/docbook"><para><literal>"includeSystemCollections"</literal></para><para>Boolean で、デフォルトは &false; です。system コレクションを結果に含めるかどうかを指定します。</para></listitem>'>
-<!ENTITY mongo.writes.parameters.writeconcern '<listitem xmlns="http://docbook.org/ns/docbook">
-<para><literal>"w"</literal></para>
-<para><link linkend="mongo.writeconcerns">WriteConcerns</link> を参照ください。<classname>MongoClient</classname> でのデフォルト値は <literal>1</literal> です。
-</para></listitem>'>
-<!ENTITY mongo.writes.parameters.writeconcerntimeout '<listitem xmlns="http://docbook.org/ns/docbook"><para><literal>"wtimeout"</literal></para><para>廃止予定。<literal>"wTimeoutMS"</literal> のエイリアスです。</para></listitem>'>
-<!ENTITY mongo.writes.parameters.writeconcerntimeoutms '<listitem xmlns="http://docbook.org/ns/docbook"><para><literal>"wTimeoutMS"</literal></para><para>このオプションは、<link linkend="mongo.writeconcerns">書き込み確認</link>を待つ制限時間をミリ秒単位で指定します。これが書き込み操作に適用されるのは、<literal>"w"</literal> が <literal>1</literal> より大きい場合のみです。というのも、タイムアウトはレプリケーションに関する機能だからです。この時間内に書き込み確認ができなかった場合は <classname>MongoCursorException</classname> をスローします。<literal>0</literal> を指定すると、永遠にブロックし続けます。<classname>MongoClient</classname> でのデフォルトは <literal>10000</literal> ミリ秒 (10 秒) です。</para></listitem>'>
-<!ENTITY mongo.writes.parameters.fsync '<listitem xmlns="http://docbook.org/ns/docbook"><para><literal>"fsync"</literal></para>
-<para>Boolean 型で、デフォルトは &false; です。
-ジャーナリングが有効な場合、これは <literal>"j"</literal> とまったく同じ動きをします。
-ジャーナリングが有効でない場合は、追加をディスク上のデータベースファイルに同期させるまで成功したと見なさないようになります。
-&true; にすると確認つき書き込みが暗黙のうちに設定され、<literal>"w"</literal> の値を <literal>0</literal> にします。
-</para>
-<note><simpara>ジャーナリングが有効な場合は、<literal>"fsync"</literal> のかわりに <literal>"j"</literal> を使いましょう。
-<literal>"fsync"</literal> と <literal>"j"</literal> を同時に指定すると、エラーになります。
-</simpara></note></listitem>'>
-<!ENTITY mongo.writes.parameters.sockettimeoutms '<listitem xmlns="http://docbook.org/ns/docbook"><para><literal>"socketTimeoutMS"</literal></para><para>このオプションは、ソケット通信の制限時間を、ミリ秒単位で指定します。この時間内にサーバーからの反応がなければ、<classname>MongoCursorTimeoutException</classname> をスローします。この場合、サーバー側で書き込み処理が行われたのかどうかを判断できなくなります。<literal>-1</literal> を指定すると、永遠にブロックします。<classname>MongoClient</classname> のデフォルト値は <literal>30000</literal> (30 秒) です。</para></listitem>'>
-<!ENTITY mongo.writes.parameters.journal '<listitem xmlns="http://docbook.org/ns/docbook"><para><literal>"j"</literal></para><para>デフォルトは &false; です。これを指定すると、追加をジャーナルに同期させるまで成功したと見なさないようになります。&true; にすると確認付き書き込みと見なされ、<literal>"w"</literal> の設定を <literal>0</literal> に上書きします。</para><note><simpara>このオプションを使っているときにジャーナリングを無効にすると、MongoDB 2.6 以降ではエラーが発生して書き込みに失敗します。古いバージョンのサーバーでは、単純にオプションの指定を無視します。</simpara></note></listitem>'>
-<!ENTITY mongo.writes.parameters.safe '<listitem xmlns="http://docbook.org/ns/docbook"><para><literal>"safe"</literal></para><para>非推奨。<link linkend="mongo.writeconcerns">write concern</link> の <literal>w</literal> オプションを使いましょう。</para></listitem>'>
-<!ENTITY mongo.writes.parameters.timeout '<listitem xmlns="http://docbook.org/ns/docbook"><para><literal>"timeout"</literal></para><para>非推奨。<literal>"socketTimeoutMS"</literal> のエイリアス。</para></listitem>'>
-<!ENTITY mongo.errors.exceptions.writeconcern '<para xmlns="http://docbook.org/ns/docbook"><literal>"w"</literal> オプションが設定されていて書き込みが失敗した場合に <classname>MongoCursorException</classname> をスローします。</para><para xmlns="http://docbook.org/ns/docbook"><literal>"w"</literal> オプションの値が 1 より大きく設定されていて、操作の完了までの時間が <varname>MongoCursor::$timeout</varname> ミリ秒をこえた場合に <classname>MongoCursorTimeoutException</classname> をスローします。サーバー上での操作は止めません。これはクライアント側でのタイムアウトです。<varname>MongoCollection::$wtimeout</varname> はミリ秒です。</para>'>
-<!ENTITY mongo.errors.deprecated '<para xmlns="http://docbook.org/ns/docbook"><constant>E_DEPRECATED</constant> が発生します。</para>'>
-<!ENTITY mongo.gridfs.store.metadata.note '<note xmlns="http://docbook.org/ns/docbook"><para>これらのフィールドは、ドライバが自動生成したフィールドも上書きします。詳しい説明は、MongoDB コアドキュメントの <link xlink:href="&url.mongodb.docs.gridfs;#the-files-collection" xmlns:xlink="http://www.w3.org/1999/xlink">files collection</link> を参照ください。この挙動の現実的な使い道としては、ファイルの <literal>chunkSize</literal> や <literal>_id</literal> を独自に指定する場合などがあります。</para></note>'>
-<!ENTITY mongo.gridfs.store.return '<para xmlns="http://docbook.org/ns/docbook">格納したファイルドキュメントの <literal>_id</literal> を返します。<parameter>metadata</parameter> パラメータで <literal>_id</literal> を明示的に指定していない場合は、自動生成した <classname>MongoId</classname> となります。</para>'>
-<!ENTITY mongo.mongowritebatch.writeoptions.description '<listitem xmlns="http://docbook.org/ns/docbook"><para>書き込みオプションの配列。<informaltable><thead><row><entry>キー</entry><entry>値</entry></row></thead><tbody><row><entry>w (int|string)</entry><entry><link linkend="mongo.writeconcerns">WriteConcern</link> の値</entry></row><row><entry>wtimeout (int)</entry><entry><link linkend="mongo.writeconcerns">レプリケーションを待つ時間の最大値</link></entry></row><row><entry>ordered</entry><entry>MongoDB にこのバッチを順番どおりに実行させるのかどうかを指定する。順番どおりの書き込みはシリアルに (一度に一行ずつ) 実行され、最初にエラーが発生した時点で実行は中断する。順番どおりでない書き込みはパラレルに実行され、エラーが発生しても処理は中断しない。デフォルトは &true;</entry></row><row><entry>j (bool)</entry><entry>プライマリーへのジャーナリングを待つかどうか。これは非推奨なので、かわりに確認付き書き込みを使うこと</entry></row><row><entry>fsync (bool)</entry><entry>プライマリーへの fsync を待つかどうか。これは非推奨なので、かわりに確認付き書き込みを使うこと</entry></row></tbody></informaltable></para></listitem>'>
-<!ENTITY mongo.mongowritebatch.collection.description '<listitem xmlns="http://docbook.org/ns/docbook"><para>バッチを実行する <classname>MongoCollection</classname>。<link linkend="mongo.writeconcerns">確認付き書き込み</link> をコピーして、デフォルトとして使います。<parameter>$write_options</parameter> で指定したり、<methodname>MongoWriteBatch::execute</methodname> で指定したりすることもできます。</para></listitem>'>
-<!ENTITY mongo.context.server ' <varlistentry xmlns="http://docbook.org/ns/docbook"> <term> <parameter>server</parameter> </term> <listitem><para>選んだサーバーについての基本情報を含む配列。<informaltable><tgroup cols="2"><thead><row><entry>キー</entry><entry>値</entry></row></thead><tbody><row><entry>hash</entry><entry>ハーバーハッシュ。例：<literal>localhost:27017;-;X;56052</literal></entry></row><row><entry>type</entry><entry>ノード型 (primary/secondary/mongos/arbiter)。例：<literal>2</literal></entry></row><row><entry>max_bson_size</entry><entry>このノードがネットワーク越しに受け付ける BSON の最大サイズ。例：<literal>16777216</literal></entry></row><row><entry>max_message_size</entry><entry>このノードがネットワーク越しに受け入れるメッセージの最大サイズ。例：<literal>48000000</literal></entry></row><row><entry>request_id</entry><entry>このメッセージのリクエスト識別子。例：<literal>42</literal></entry></row></tbody></tgroup></informaltable></para></listitem></varlistentry>'>
-<!ENTITY mongo.context.writeoptions '<varlistentry xmlns="http://docbook.org/ns/docbook"> <term> <parameter>writeOptions</parameter> </term> <listitem><para><informaltable><tgroup cols="2"><thead><row><entry>キー</entry><entry>値</entry></row></thead><tbody><row><entry>ordered</entry><entry>boolean で、バッチ操作をシーケンシャルに行う必要がある (orderd = true) かどうかを表します。</entry></row><row><entry>writeConcern</entry><entry>書き込み確認のオプションの配列 (以下を参照ください)</entry></row></tbody></tgroup></informaltable><table><title>書き込み確認の配列の値</title><tgroup cols="2"><thead><row><entry>キー</entry><entry>値</entry></row></thead><tbody><row><entry>fsync</entry><entry>boolean で、強制的にディスクへのフラッシュをしてから返します。</entry></row><row><entry>j</entry><entry>boolean で、強制的にジャーナルに書き出してから返します。</entry></row><row><entry>wtimeout</entry><entry>integer で、プライマリがレプリケーションの検証までに待つ最大の時間をミリ秒で指定します。</entry></row><row><entry>w</entry><entry>integer でサーバー数、あるいは文字列でレプリケーションタグを指定します。</entry></row></tbody></tgroup></table></para></listitem></varlistentry>'>
-<!ENTITY mongo.context.protocoloptions ' <varlistentry xmlns="http://docbook.org/ns/docbook"> <term> <parameter>protocolOptions</parameter> </term> <listitem> <para><informaltable><tgroup cols="2"><thead><row><entry>キー</entry><entry>値</entry></row></thead><tbody><row><entry>message_length</entry><entry>ネットワーク越しに送信するエンコード済みメッセージのサイズ (バイト数)。</entry></row><row><entry>request_id</entry><entry>このメッセージのリクエスト識別子。例：<literal>42</literal></entry></row><row><entry>namespace</entry><entry>プロトコルメッセージに使う、MongoDB 名前空間。例：<literal>dbname.collectionname</literal></entry></row></tbody></tgroup></informaltable></para></listitem></varlistentry>'>
-<!ENTITY mongo.alternative.class.note '<para
-xmlns="http://docbook.org/ns/docbook">このクラスを定義している拡張モジュールは非推奨です。
-かわりに <link linkend="set.mongodb">MongoDB</link> 拡張モジュールを使うべきです。
-このクラスの代替として、以下が使えます。</para>'>
-<!ENTITY mongo.noalternative.class.note '<para
-xmlns="http://docbook.org/ns/docbook">このクラスを定義している拡張モジュールは非推奨です。
-かわりに <link linkend="set.mongodb">MongoDB</link> 拡張モジュールを使うべきです。
-このクラスの代替は、新しい拡張モジュールには存在しません。</para>'>
-<!ENTITY mongo.alternative.method.note '<para
-xmlns="http://docbook.org/ns/docbook">このメソッドを定義している拡張モジュールは非推奨です。
-かわりに <link linkend="set.mongodb">MongoDB</link> 拡張モジュールを使うべきです。
-このメソッドの代替として、以下が使えます。</para>'>
-<!ENTITY mongo.noalternative.method.note '<para
-xmlns="http://docbook.org/ns/docbook">このメソッドを定義している拡張モジュールは非推奨です。
-かわりに <link linkend="set.mongodb">MongoDB</link> 拡張モジュールを使うべきです。
-このメソッドの代替は、新しい拡張モジュールには存在しません。</para>'>
-<!ENTITY mongo.alternative.phplib.note '<para
-xmlns="http://docbook.org/ns/docbook">このメソッドを定義している拡張モジュールは非推奨です。
-かわりに <link linkend="set.mongodb">MongoDB</link> 拡張モジュールを使うべきです。
-このメソッドの代替は、新しい拡張モジュールには存在しません。しかし、かわりに使える
-<link linkend="mongodb.overview">PHP ライブラリ</link> があります。</para>'>
-
-<!ENTITY mongo.deprecated.note '<para
-xmlns="http://docbook.org/ns/docbook">この拡張モジュールは非推奨です。
-かわりに <link linkend="set.mongodb">MongoDB</link> 拡張モジュールを使うべきです。</para>'>
 
 <!-- mongodb -->
 <!ENTITY mongodb.changelog.tentative-return-types '
@@ -4148,7 +3993,7 @@ local: {
      </para>
      <note>
       <simpara>
-       When evaluating query criteria, MongoDB compares types and values according to its own <link xlink:href="&url.mongodb.docs;reference/bson-type-comparison-order/" xmlns:xlink="http://www.w3.org/1999/xlink">comparison rules for BSON types</link>, which differs from PHP&apos;s <link linkend="types.comparisons">comparison</link> and <link linkend="language.types.type-juggling">type juggling</link> rules. When matching a special BSON type the query criteria should use the respective <link linkend="book.bson">BSON class</link> (e.g. use <classname>MongoDB\BSON\ObjectId</classname> to match an <link xlink:href="&url.mongodb.docs.objectid;" xmlns:xlink="http://www.w3.org/1999/xlink">ObjectId</link>).
+       When evaluating query criteria, MongoDB compares types and values according to its own <link xlink:href="&url.mongodb.docs;reference/bson-type-comparison-order/" xmlns:xlink="http://www.w3.org/1999/xlink">comparison rules for BSON types</link>, which differs from PHP&apos;s <link linkend="types.comparisons">comparison</link> and <link linkend="language.types.type-juggling">type juggling</link> rules. When matching a special BSON type the query criteria should use the respective <link linkend="mongodb.bson">BSON class</link> (e.g. use <classname>MongoDB\BSON\ObjectId</classname> to match an <link xlink:href="&url.mongodb.docs.objectid;" xmlns:xlink="http://www.w3.org/1999/xlink">ObjectId</link>).
       </simpara>
      </note>
     </listitem>
@@ -4277,7 +4122,203 @@ local: {
 </para>
 '>
 
+<!ENTITY strings.parameter.unicode.optional '
+ <simpara xmlns="http://docbook.org/ns/docbook">
+  <parameter>characters</parameter> パラメータにより、
+  削除する文字を指定することも可能です。
+  削除したい全ての文字をリストにしてください。
+ </simpara>
+'>
+
 <!-- strings snippets -->
+<!ENTITY strings.stripped.characters '
+ <itemizedlist xmlns="http://docbook.org/ns/docbook">
+    <listitem>
+     <simpara>
+      <literal>" "</literal>: <acronym>ASCII</acronym> の <acronym>SP</acronym> 文字
+      <literal>0x20</literal> 、通常のスペース。
+     </simpara>
+    </listitem>
+    <listitem>
+     <simpara>
+      <literal>"\t"</literal>: <acronym>ASCII</acronym> の <acronym>HT</acronym> 文字
+      <literal>0x09</literal> 、タブ。
+     </simpara>
+    </listitem>
+    <listitem>
+     <simpara>
+      <literal>"\n"</literal>: <acronym>ASCII</acronym> の <acronym>LF</acronym> 文字
+      <literal>0x0A</literal> 、改行（ラインフィード）。
+     </simpara>
+    </listitem>
+    <listitem>
+     <simpara>
+      <literal>"\r"</literal>: <acronym>ASCII</acronym> の <acronym>CR</acronym> 文字
+      <literal>0x0D</literal> 、キャリッジリターン。
+     </simpara>
+    </listitem>
+    <listitem>
+     <simpara>
+      <literal>"\0"</literal>: <acronym>ASCII</acronym> の <acronym>NUL</acronym> 文字
+      <literal>0x00</literal> 、NULバイト。
+     </simpara>
+    </listitem>
+    <listitem>
+     <simpara>
+      <literal>"\v"</literal>: <acronym>ASCII</acronym> <acronym>VT</acronym> 文字
+      <literal>0x0B</literal> 、垂直タブ。
+     </simpara>
+    </listitem>
+   </itemizedlist>
+'>
+
+<!ENTITY strings.stripped.unicode '
+ <itemizedlist xmlns="http://docbook.org/ns/docbook">
+    <listitem>
+     <simpara>
+      <literal>" "</literal> (<acronym>Unicode</acronym> U+0020)、通常のスペース。
+     </simpara>
+    </listitem>
+    <listitem>
+     <simpara>
+      <literal>"\t"</literal> (<acronym>Unicode</acronym> U+0009)、タブ。
+     </simpara>
+    </listitem>
+    <listitem>
+     <simpara>
+      <literal>"\n"</literal> (<acronym>Unicode</acronym> U+000A)、改行（ラインフィード）。
+     </simpara>
+    </listitem>
+    <listitem>
+     <simpara>
+      <literal>"\r"</literal> (<acronym>Unicode</acronym> U+000D)、キャリッジリターン。
+     </simpara>
+    </listitem>
+    <listitem>
+     <simpara>
+      <literal>"\0"</literal> (<acronym>Unicode</acronym> U+0000)、NULバイト。
+     </simpara>
+    </listitem>
+    <listitem>
+     <simpara>
+      <literal>"\v"</literal> (<acronym>Unicode</acronym> U+000B)、垂直タブ。
+     </simpara>
+    </listitem>
+    <listitem>
+     <simpara>
+      <literal>"\f"</literal> (<acronym>Unicode</acronym> U+000C)、フォームフィード。
+     </simpara>
+    </listitem>
+    <listitem>
+     <simpara>
+      <literal>"\u00A0"</literal> (<acronym>Unicode</acronym> U+00A0)、ノーブレークスペース。もしくは、非分割スペース。
+     </simpara>
+    </listitem>
+    <listitem>
+     <simpara>
+      <literal>"\u1680"</literal> (<acronym>Unicode</acronym> U+1680)、オガム文字（古代アイルランド語）用のスペース。
+     </simpara>
+    </listitem>
+    <listitem>
+     <simpara>
+      <literal>"\u2000"</literal> (<acronym>Unicode</acronym> U+2000)、エンクアッド。アルファベット1文字分の幅を持つスペース。
+     </simpara>
+    </listitem>
+    <listitem>
+     <simpara>
+      <literal>"\u2001"</literal> (<acronym>Unicode</acronym> U+2001)、エムクアッド。エンクアッドの2倍の幅を持つスペース。
+     </simpara>
+    </listitem>
+    <listitem>
+     <simpara>
+      <literal>"\u2002"</literal> (<acronym>Unicode</acronym> U+2002)、エンスペース。エンクアッドと同じ幅のスペース。
+     </simpara>
+    </listitem>
+    <listitem>
+     <simpara>
+      <literal>"\u2003"</literal> (<acronym>Unicode</acronym> U+2003)、エムスペース。エムクアッドと同じ幅のスペース。
+     </simpara>
+    </listitem>
+    <listitem>
+     <simpara>
+      <literal>"\u2004"</literal> (<acronym>Unicode</acronym> U+2004)、エムスペースの3分の1の幅を持つスペース。
+     </simpara>
+    </listitem>
+    <listitem>
+     <simpara>
+      <literal>"\u2005"</literal> (<acronym>Unicode</acronym> U+2005)、エムスペースの4分の1の幅を持つスペース。
+     </simpara>
+    </listitem>
+    <listitem>
+     <simpara>
+      <literal>"\u2006"</literal> (<acronym>Unicode</acronym> U+2006)、エムスペースの6分の1の幅を持つスペース。
+     </simpara>
+    </listitem>
+    <listitem>
+     <simpara>
+      <literal>"\u2007"</literal> (<acronym>Unicode</acronym> U+2007)、数字や図の間隔を整えるために使われるスペース。
+     </simpara>
+    </listitem>
+    <listitem>
+     <simpara>
+      <literal>"\u2008"</literal> (<acronym>Unicode</acronym> U+2008)、句読点のためにデザインされたスペース。
+     </simpara>
+    </listitem>
+    <listitem>
+     <simpara>
+      <literal>"\u2009"</literal> (<acronym>Unicode</acronym> U+2009)、シンスペース。非常に狭いスペース。
+     </simpara>
+    </listitem>
+    <listitem>
+     <simpara>
+      <literal>"\u200A"</literal> (<acronym>Unicode</acronym> U+200A)、ヘアスペース。シンスペースよりもさらに細いスペース。
+     </simpara>
+    </listitem>
+    <listitem>
+     <simpara>
+      <literal>"\u2028"</literal> (<acronym>Unicode</acronym> U+2028)、ラインセパレーター。行の区切りとして使用。
+     </simpara>
+    </listitem>
+    <listitem>
+     <simpara>
+      <literal>"\u2029"</literal> (<acronym>Unicode</acronym> U+2029)、パラグラフセパレーター。段落の区切りとして使用。
+     </simpara>
+    </listitem>
+    <listitem>
+     <simpara>
+      <literal>"\u202F"</literal> (<acronym>Unicode</acronym> U+202F)、ナローノーブレークスペース。通常の非分割スペースよりも狭く、ラテン文字や句読点の間で使用。
+     </simpara>
+    </listitem>
+    <listitem>
+     <simpara>
+      <literal>"\u205F"</literal> (<acronym>Unicode</acronym> U+205F)、数式などで使われるスペース。
+     </simpara>
+    </listitem>
+    <listitem>
+     <simpara>
+      <literal>"\u3000"</literal> (<acronym>Unicode</acronym> U+3000)、全角文字用のスペース。
+     </simpara>
+    </listitem>
+    <listitem>
+     <simpara>
+      <literal>"\u0085"</literal> (<acronym>Unicode</acronym> U+0085)、次行（NEL）。
+     </simpara>
+    </listitem>
+    <listitem>
+     <simpara>
+      <literal>"\u180E"</literal> (<acronym>Unicode</acronym> U+180E)、モンゴル語のテキスト内で母音を区切るために使用されるスペース。
+     </simpara>
+    </listitem>
+   </itemizedlist>
+'>
+<!ENTITY strings.parameter.characters.optional '
+ <simpara xmlns="http://docbook.org/ns/docbook">
+  必要に応じて、削除する文字を <parameter>characters</parameter> パラメータで指定することもできます。
+  削除が必要なすべての文字を単純にリストとして記述してください。
+  <literal>..</literal> を使用することで、連続する文字の範囲を指定することも可能です。
+ </simpara>
+'>
+
 <!ENTITY strings.parameter.encoding '
  <para xmlns="http://docbook.org/ns/docbook">
   オプションの引数。文字を変換するときに使うエンコーディングを定義します。
@@ -5034,14 +5075,32 @@ xmlns="http://docbook.org/ns/docbook"><simpara>この関数は、PECL uopz 5.0.0
 </varlistentry>'>
 
 <!ENTITY xml.handler.description '<para xmlns="http://docbook.org/ns/docbook">
- &null; や空文字列を渡すと、ハンドラはデフォルトの状態にリセットされます。
+ &null; が渡されると、ハンドラはデフォルトの状態にリセットされます。
+ <warning>
+  <simpara>
+   空文字列を渡すことでもハンドラはリセットされますが、これは PHP 8.4.0 以降非推奨となっています。
+  </simpara>
+ </warning>
 </para>
 <para xmlns="http://docbook.org/ns/docbook">
  <parameter>handler</parameter> が <type>callable</type> の場合、その callable がハンドラとして設定されます。
 </para>
 <para xmlns="http://docbook.org/ns/docbook">
  <parameter>handler</parameter> が文字列の場合、<function>xml_set_object</function> で設定されたオブジェクトのメソッド名になります。
-</para>'>
+ <warning>
+  <simpara>
+   PHP 8.4.0 以降、非推奨となっています。
+  </simpara>
+ </warning>
+</para>
+<warning xmlns="http://docbook.org/ns/docbook">
+ <simpara>
+  PHP 8.4.0 以降では、実際に呼び出されるときではなく、ハンドラを設定する際に callable であるかがチェックされます。
+  従って、コールバックとしてメソッド文字列を指定する場合、それより前に、 <function>xml_set_object</function> を呼び出しておく必要があります。
+  しかし、この動作も PHP 8.4.0 以降非推奨となっているため、メソッドには適切な <type>callable</type> を使用することが推奨されます。
+ </simpara>
+</warning>
+'>
 
 <!ENTITY xml.handler.parser.param '<varlistentry xmlns="http://docbook.org/ns/docbook">
  <term><parameter>parser</parameter></term>
@@ -5051,6 +5110,21 @@ xmlns="http://docbook.org/ns/docbook"><simpara>この関数は、PECL uopz 5.0.0
   </simpara>
  </listitem>
 </varlistentry>'>
+
+<!ENTITY xml.changelog.handler-param '<row xmlns="http://docbook.org/ns/docbook">
+ <entry>8.4.0</entry>
+ <entry>
+  非 <type>callable</type> な <type>string</type> を <parameter>handler</parameter> に渡すことは、現在非推奨となっています。
+  メソッドには適切な callable を使用するか、ハンドラをリセットする場合は &null; を使用してください。
+ </entry>
+</row>
+<row xmlns="http://docbook.org/ns/docbook">
+ <entry>8.4.0</entry>
+ <entry>
+  <parameter>handler</parameter> が <type>callable</type> として有効であるかどうかは、
+  呼び出し時ではなく、ハンドラーを設定する際にチェックされるようになりました。
+ </entry>
+</row>'>
 
 <!ENTITY xml.changelog.parser-param '<row xmlns="http://docbook.org/ns/docbook">
  <entry>8.0.0</entry>

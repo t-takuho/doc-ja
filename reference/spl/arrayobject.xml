@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
-<!-- EN-Revision: 2a8b2f1c53edae923b5bb196183e476e5cca46a3 Maintainer: mumumu Status: ready -->
+<!-- EN-Revision: eff22719b03a83400103686b87d5b470c1d5c785 Maintainer: mumumu Status: ready -->
 <reference xml:id="class.arrayobject" role="class" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xi="http://www.w3.org/2001/XInclude">
  <title>ArrayObject クラス</title>
  <titleabbrev>ArrayObject</titleabbrev>
@@ -13,6 +13,12 @@
    <para>
     このクラスは、オブジェクトを配列として動作させます。
    </para>
+   <note>
+    <simpara>
+     このクラスをオブジェクトにラップして使うことは、基本的に間違いです。
+     そのため、オブジェクトと一緒に使うべきではありません。
+    </simpara>
+   </note>
   </section>
 <!-- }}} -->
  

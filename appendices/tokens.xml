@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
-<!-- EN-Revision: 270a871223343be9280a3e8a133a5467a3e82908 Maintainer: hirokawa Status: ready -->
+<!-- EN-Revision: 349f6f64ec46a288c376c868721fdad21929fdb2 Maintainer: hirokawa Status: ready -->
 <!-- CREDITS: takagi,mumumu -->
 
 <appendix xml:id="tokens" xmlns="http://docbook.org/ns/docbook">
@@ -205,8 +205,9 @@ defined('T_FN') || define('T_FN', 10001);
     <row xml:id="constant.t-curly-open">
      <entry><constant>T_CURLY_OPEN</constant></entry>
      <entry>{$</entry>
-     <entry><link linkend="language.types.string.parsing.complex">
-     複雑な (波括弧) 構文</link></entry>
+     <entry>
+      <link linkend="language.types.string.parsing.advanced">高度な</link>文字列補間
+     </entry>
     </row>
     <row xml:id="constant.t-dec">
      <entry><constant>T_DEC</constant></entry>
@@ -254,8 +255,10 @@ defined('T_FN') || define('T_FN', 10001);
     <row xml:id="constant.t-dollar-open-curly-braces">
      <entry><constant>T_DOLLAR_OPEN_CURLY_BRACES</constant></entry>
      <entry>${</entry>
-     <entry><link linkend="language.types.string.parsing.complex">
-     複雑な (波括弧) 構文</link></entry>
+     <entry>
+      <link linkend="language.types.string.parsing.basic">単純な</link>
+      変数の文字列補間
+     </entry>
     </row>
     <row xml:id="constant.t-double-arrow">
      <entry><constant>T_DOUBLE_ARROW</constant></entry>
@@ -668,7 +671,7 @@ defined('T_FN') || define('T_FN', 10001);
     <row xml:id="constant.t-paamayim-nekudotayim">
      <entry><constant>T_PAAMAYIM_NEKUDOTAYIM</constant></entry>
      <entry>::</entry>
-     <entry><link linkend="language.oop5.paamayim-nekudotayim">::</link>. <constant>T_DOUBLE_COLON</constant>としても定義されています。
+     <entry><link linkend="language.oop5.paamayim-nekudotayim">スコープ定義演算子</link>。<constant>T_DOUBLE_COLON</constant>としても定義されています。
       </entry>
     </row>
     <row xml:id="constant.t-plus-equal">
@@ -703,6 +706,13 @@ defined('T_FN') || define('T_FN', 10001);
       <link linkend="language.oop5">クラスとオブジェクト</link>
      </entry>
     </row>
+    <row xml:id="constant.t-private-set">
+     <entry><constant>T_PRIVATE_SET</constant></entry>
+     <entry>private(set)</entry>
+     <entry>
+      プロパティフック (PHP 8.4.0 以降で利用可能)
+     </entry>
+    </row>
     <row xml:id="constant.t-protected">
      <entry><constant>T_PROTECTED</constant></entry>
      <entry>protected</entry>
@@ -710,11 +720,25 @@ defined('T_FN') || define('T_FN', 10001);
       <link linkend="language.oop5">クラスとオブジェクト</link>
      </entry>
     </row>
+    <row xml:id="constant.t-protected-set">
+     <entry><constant>T_PROTECTED_SET</constant></entry>
+     <entry>protected(set)</entry>
+     <entry>
+      プロパティフック (PHP 8.4.0 以降で利用可能)
+     </entry>
+    </row>
     <row xml:id="constant.t-public">
      <entry><constant>T_PUBLIC</constant></entry>
      <entry>public</entry>
      <entry>
       <link linkend="language.oop5">クラスとオブジェクト</link>
+     </entry>
+    </row>
+    <row xml:id="constant.t-public-set">
+     <entry><constant>T_PUBLIC_SET</constant></entry>
+     <entry>public(set)</entry>
+     <entry>
+      プロパティフック (PHP 8.4.0 以降で利用可能)
      </entry>
     </row>
     <row xml:id="constant.t-readonly">
@@ -798,8 +822,10 @@ defined('T_FN') || define('T_FN', 10001);
     <row xml:id="constant.t-string-varname">
      <entry><constant>T_STRING_VARNAME</constant></entry>
      <entry>"${a</entry>
-     <entry><link linkend="language.types.string.parsing.complex">
-     複雑な (波括弧) 構文</link></entry>
+     <entry>
+      <link linkend="language.variables.variable">可変変数</link>
+      の文字列補間
+     </entry>
     </row>
     <row xml:id="constant.t-switch">
      <entry><constant>T_SWITCH</constant></entry>
